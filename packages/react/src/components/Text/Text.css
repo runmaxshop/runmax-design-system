@@ -1,0 +1,60 @@
+/* Tipografía -------------------------------------------------------------- */
+
+.rmx-heading {
+  margin: 0;
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-semibold);
+  line-height: var(--rmx-font-line-height-display);
+  text-wrap: balance;
+}
+
+.rmx-heading--56 { font-size: var(--rmx-font-size-56); }
+.rmx-heading--40 { font-size: var(--rmx-font-size-40); }
+.rmx-heading--30 { font-size: var(--rmx-font-size-30); }
+.rmx-heading--24 { font-size: var(--rmx-font-size-24); }
+.rmx-heading--18 { font-size: var(--rmx-font-size-18); }
+
+.rmx-text {
+  margin: 0;
+  font-family: var(--rmx-font-family-body);
+  line-height: var(--rmx-font-line-height-normal);
+}
+
+.rmx-text--18 { font-size: var(--rmx-font-size-18); }
+.rmx-text--17 { font-size: var(--rmx-font-size-17); }
+.rmx-text--16 { font-size: var(--rmx-font-size-16); }
+.rmx-text--14 { font-size: var(--rmx-font-size-14); }
+.rmx-text--13 { font-size: var(--rmx-font-size-13); line-height: var(--rmx-font-line-height-relaxed); }
+
+/* Tonos, compartidos por Heading y Text */
+
+.rmx-tone--default    { color: var(--rmx-text-default); }
+.rmx-tone--strong     { color: var(--rmx-text-strong); }
+.rmx-tone--deep       { color: var(--rmx-text-deep); }
+.rmx-tone--muted      { color: var(--rmx-text-muted); }
+.rmx-tone--subtle     { color: var(--rmx-text-subtle); }
+.rmx-tone--danger     { color: var(--rmx-text-danger); }
+.rmx-tone--on-inverse { color: var(--rmx-text-on-inverse); }
+
+.rmx-weight--regular  { font-weight: var(--rmx-font-weight-regular); }
+.rmx-weight--medium   { font-weight: var(--rmx-font-weight-medium); }
+.rmx-weight--semibold { font-weight: var(--rmx-font-weight-semibold); }
+
+.rmx-align--start  { text-align: left; }
+.rmx-align--center { text-align: center; }
+.rmx-align--end    { text-align: right; }
+
+/* Oculto a la vista, presente para lectores de pantalla. El clip de 1px es el
+   patrón estándar: `display:none` lo sacaría también del árbol accesible. */
+.rmx-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

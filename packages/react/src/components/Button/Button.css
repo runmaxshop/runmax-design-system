@@ -1,0 +1,113 @@
+/* Button ------------------------------------------------------------------ */
+
+.rmx-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--rmx-space-8);
+  border: 0;
+  font-family: var(--rmx-font-family-body);
+  font-weight: var(--rmx-font-weight-medium);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--rmx-duration-base) var(--rmx-easing-standard),
+    color var(--rmx-duration-base) var(--rmx-easing-standard),
+    transform var(--rmx-duration-fast) var(--rmx-easing-standard);
+}
+
+.rmx-button:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.rmx-button:focus-visible {
+  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
+  outline-offset: var(--rmx-focus-offset-lg);
+}
+
+.rmx-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Variantes */
+
+.rmx-button--inverse {
+  background: var(--rmx-surface-inverse);
+  color: var(--rmx-text-on-inverse);
+}
+.rmx-button--inverse:hover:not(:disabled) {
+  background: var(--rmx-surface-inverse-hover);
+}
+
+.rmx-button--brand {
+  background: var(--rmx-surface-brand);
+  color: var(--rmx-text-on-brand);
+}
+.rmx-button--brand:hover:not(:disabled) {
+  background: var(--rmx-surface-brand-hover);
+}
+
+.rmx-button--subtle {
+  background: var(--rmx-surface-field);
+  color: var(--rmx-text-strong);
+}
+.rmx-button--subtle:hover:not(:disabled) {
+  background: var(--rmx-surface-field-hover);
+}
+
+.rmx-button--ghost {
+  background: transparent;
+  color: var(--rmx-text-strong);
+}
+.rmx-button--ghost:hover:not(:disabled) {
+  background: var(--rmx-surface-field);
+}
+
+/* Tamaños */
+
+.rmx-button--sm {
+  height: var(--rmx-control-height-sm);
+  padding: 0 var(--rmx-space-22);
+  font-size: var(--rmx-font-size-14);
+  line-height: var(--rmx-font-line-height-display);
+}
+
+.rmx-button--md {
+  height: var(--rmx-control-height-md);
+  padding: 0 var(--rmx-space-26);
+  font-size: var(--rmx-font-size-16);
+  line-height: var(--rmx-font-line-height-display);
+}
+
+.rmx-button--lg {
+  height: var(--rmx-control-height-lg);
+  padding: 0 var(--rmx-space-32);
+  font-size: var(--rmx-font-size-18);
+  line-height: var(--rmx-font-line-height-display);
+}
+
+/* Formas */
+
+.rmx-button--pill {
+  border-radius: var(--rmx-radius-pill);
+}
+
+.rmx-button--rounded {
+  border-radius: var(--rmx-radius-md);
+}
+
+.rmx-button--full {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmx-button {
+    transition: none;
+  }
+  .rmx-button:active:not(:disabled) {
+    transform: none;
+  }
+}

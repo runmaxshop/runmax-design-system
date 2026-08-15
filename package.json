@@ -1,0 +1,20 @@
+{
+  "name": "runmax-design-system",
+  "version": "0.1.0",
+  "description": "Sistema de diseño de RunMax: tokens y componentes compartidos entre la web y, a futuro, la app móvil.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "workspaces": ["packages/*"],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build -w @runmax/tokens && npm run build -w @runmax/react",
+    "check:contrast": "npm run check:contrast -w @runmax/tokens",
+    "typecheck": "npm run typecheck -w @runmax/react",
+    "storybook": "npm run build && npm run storybook -w @runmax/react",
+    "build:storybook": "npm run build && npm run build:storybook -w @runmax/react",
+    "verify": "npm run build && npm run check:contrast && npm run typecheck"
+  }
+}

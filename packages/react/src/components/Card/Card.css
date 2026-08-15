@@ -1,0 +1,22 @@
+/* Card -------------------------------------------------------------------- */
+
+.rmx-card {
+  border-radius: var(--rmx-radius-xl);
+  background: var(--rmx-surface-default);
+}
+
+.rmx-card--elevated {
+  box-shadow: var(--rmx-elevation-md);
+}
+
+.rmx-card--outlined {
+  border: var(--rmx-border-width-thin) solid var(--rmx-border-default);
+}
+
+.rmx-card--plain {
+  background: transparent;
+}
+
+.rmx-card--pad-none { padding: 0; }
+.rmx-card--pad-md   { padding: var(--rmx-space-22); }
+.rmx-card--pad-lg   { padding: var(--rmx-space-32); }

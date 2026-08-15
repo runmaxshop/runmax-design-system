@@ -1,0 +1,37 @@
+{
+  "name": "@runmax/react",
+  "version": "0.1.0",
+  "description": "Componentes de interfaz de RunMax para web.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "files": ["src", "dist"],
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./dist/styles.css"
+  },
+  "scripts": {
+    "build": "node scripts/build-styles.mjs",
+    "typecheck": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006",
+    "build:storybook": "npm run build && storybook build -o storybook-static"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^9.1.10",
+    "@storybook/addon-docs": "^9.1.10",
+    "@storybook/react-vite": "^9.1.10",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.0.4",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "storybook": "^9.1.10",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9"
+  }
+}

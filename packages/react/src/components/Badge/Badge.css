@@ -1,0 +1,38 @@
+/* Badge ------------------------------------------------------------------- */
+
+.rmx-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--rmx-space-4) var(--rmx-space-12);
+  border-radius: var(--rmx-radius-pill);
+  font-family: var(--rmx-font-family-body);
+  font-weight: var(--rmx-font-weight-medium);
+  font-size: var(--rmx-font-size-13);
+  line-height: var(--rmx-font-line-height-snug);
+  white-space: nowrap;
+}
+
+.rmx-badge--neutral {
+  background: var(--rmx-surface-field);
+  color: var(--rmx-text-subtle);
+}
+
+.rmx-badge--brand {
+  background: var(--rmx-surface-brand);
+  color: var(--rmx-text-on-brand);
+}
+
+.rmx-badge--success {
+  background: var(--rmx-color-success-50);
+  color: var(--rmx-color-success-500);
+}
+
+.rmx-badge--warning {
+  background: var(--rmx-color-warning-50);
+  color: var(--rmx-color-warning-500);
+}
+
+.rmx-badge--danger {
+  background: var(--rmx-color-danger-50);
+  color: var(--rmx-color-danger-500);
+}

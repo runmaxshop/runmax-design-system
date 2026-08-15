@@ -1,0 +1,16 @@
+/**
+ * Fuentes SOLO para Storybook.
+ *
+ * La librería no importa fuentes (ver src/styles/base.css): eso es cosa de la
+ * aplicación anfitriona. Pero la documentación tiene que verse con la
+ * tipografía real de la marca, así que aquí sí se cargan desde Google Fonts.
+ *
+ * No copies este fichero a la app: en Next se usa `next/font`, que las sirve
+ * desde el propio dominio y evita el salto de layout al cargar.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Barlow', system-ui, sans-serif;
+}

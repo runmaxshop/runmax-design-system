@@ -1,0 +1,47 @@
+/* Chip -------------------------------------------------------------------- */
+
+.rmx-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rmx-space-8);
+}
+
+.rmx-chip {
+  padding: var(--rmx-space-8) var(--rmx-space-14);
+  border: 0;
+  border-radius: var(--rmx-radius-pill);
+  background: var(--rmx-surface-field);
+  font-family: var(--rmx-font-family-body);
+  font-size: var(--rmx-font-size-14);
+  line-height: var(--rmx-font-line-height-snug);
+  color: var(--rmx-text-subtle);
+  cursor: pointer;
+  transition:
+    background-color var(--rmx-duration-base) var(--rmx-easing-standard),
+    color var(--rmx-duration-base) var(--rmx-easing-standard);
+}
+
+.rmx-chip:hover:not(:disabled) {
+  background: var(--rmx-surface-field-hover);
+}
+
+.rmx-chip:focus-visible {
+  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
+  outline-offset: var(--rmx-focus-offset);
+}
+
+.rmx-chip[aria-pressed='true'] {
+  background: var(--rmx-surface-inverse);
+  color: var(--rmx-text-on-inverse);
+}
+
+.rmx-chip:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmx-chip {
+    transition: none;
+  }
+}

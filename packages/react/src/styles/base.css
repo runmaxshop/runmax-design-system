@@ -1,0 +1,30 @@
+/* Base --------------------------------------------------------------------
+ *
+ * Deliberadamente NO es un reset global. Una librería de diseño que se instala
+ * en una app existente no tiene derecho a tocar los estilos de esa app: todo lo
+ * de aquí está acotado a los componentes `rmx-*`.
+ *
+ * Las fuentes tampoco se importan aquí. Barlow y Barlow Condensed las carga la
+ * aplicación anfitriona (en Next, con `next/font`), porque es ella la que sabe
+ * qué pesos necesita y cómo evitar el salto de layout al cargarlas. La librería
+ * solo las declara en los tokens.
+ */
+
+[class^='rmx-'],
+[class*=' rmx-'],
+[class^='rmx-'] *,
+[class*=' rmx-'] * {
+  box-sizing: border-box;
+}
+
+/* Respeta la preferencia del sistema de forma global para los componentes:
+   cada uno además apaga su propia transición, pero esto cubre lo que se escape. */
+@media (prefers-reduced-motion: reduce) {
+  [class^='rmx-'],
+  [class*=' rmx-'] {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

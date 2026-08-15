@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Fundamentos/Introducción" />
+
+<div style={{ maxWidth: 760, fontFamily: 'Barlow, system-ui, sans-serif', lineHeight: 1.6 }}>
+
+<div style={{
+  background: '#AAFF00',
+  color: '#252324',
+  padding: '32px 28px',
+  borderRadius: 24,
+  marginBottom: 40,
+}}>
+  <h1 style={{
+    fontFamily: 'Barlow Condensed, sans-serif',
+    fontSize: 56,
+    lineHeight: 1.088,
+    margin: 0,
+  }}>
+    Sistema de diseño de RunMax
+  </h1>
+  <p style={{ fontSize: 18, margin: '12px 0 0', maxWidth: 520 }}>
+    Una sola fuente de verdad para el color, la tipografía y los componentes de RunMax.
+    Hoy la web; mañana también la app móvil.
+  </p>
+</div>
+
+## Por qué existe
+
+Antes de esto, la marca vivía repartida por el código. Una auditoría del repo del frontend
+encontró **113 colores hexadecimales distintos escritos a mano** y **cuatro verdes de marca**
+compitiendo entre ellos:
+
+| Verde | Archivos | Dónde estaba |
+| --- | --- | --- |
+| `#AAFF00` | 38 | el más extendido en la app |
+| `#88CC00` | 22 | usado como hover |
+| `#C5E500` | 6 | el que la documentación declaraba oficial |
+| `#B8CE00` | 1 | el de la landing en producción |
+
+Ninguno estaba mal a propósito. Simplemente no había un sitio donde mirar. Este repositorio
+es ese sitio: **`#AAFF00` es el verde de RunMax**, y está escrito una sola vez.
+
+## Cómo está organizado
+
+- **`@runmax/tokens`** — las decisiones de diseño en JSON neutro (formato
+  [DTCG](https://tr.designtokens.org/), el estándar del W3C). De ahí se compilan
+  automáticamente las variables CSS, un objeto de TypeScript y una versión para React Native.
+- **`@runmax/react`** — los componentes de web, que consumen esos tokens y nada más.
+
+Esa separación es la que permite que la app móvil comparta la marca sin compartir el HTML:
+cuando llegue, importará los mismos tokens y pintará sus propios componentes nativos. Los
+colores, los tamaños y los radios serán exactamente los mismos porque salen del mismo fichero.
+
+## Las tres reglas
+
+1. **Nunca escribas un color, un tamaño o un radio a mano.** Si no existe el token,
+   la conversación es sobre añadir el token, no sobre escapar del sistema.
+2. **Usa los tokens semánticos, no los primitivos.** `text.muted`, no `color.neutral.600`.
+   El semántico dice para qué sirve; el primitivo solo dice cómo es.
+3. **La accesibilidad no es una fase posterior.** Cada par de texto y fondo está verificado
+   contra WCAG 2.1 por un script que corre en CI, y cada historia de esta documentación se
+   audita con axe en el propio navegador (pestaña **Accessibility**, abajo).
+
+## Por dónde empezar
+
+- **Fundamentos → Colores** y **Tipografía**: el vocabulario.
+- **Componentes**: cada uno con sus variantes y controles en vivo para trastear con las props.
+- **Fundamentos → Ejemplo · Formulario del waitlist**: el formulario que hoy está en
+  producción, reconstruido usando solo la librería. Es la prueba de que esto cubre pantallas
+  reales y no solo ejemplos de demo.
+
+</div>

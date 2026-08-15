@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Compila tokens y estilos, verifica el contraste WCAG de los 16 pares
+      # declarados y pasa TypeScript en estricto. Si el contraste falla, el
+      # build falla: es la puerta que impide que un cambio de color rompa la
+      # legibilidad sin que nadie se entere.
+      - run: npm run verify
+
+      # Que la documentación compile es parte de que la librería funcione.
+      - run: npm run build:storybook

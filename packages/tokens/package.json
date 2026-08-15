@@ -1,0 +1,20 @@
+{
+  "name": "@runmax/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens de RunMax. Fuente única de color, tipografía, espaciado y movimiento, compilada a CSS, TypeScript y React Native.",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "files": ["dist"],
+  "exports": {
+    ".": "./dist/index.ts",
+    "./native": "./dist/native.ts",
+    "./css": "./dist/tokens.css",
+    "./json": "./dist/tokens.json"
+  },
+  "scripts": {
+    "build": "node scripts/build-tokens.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "test": "npm run build && npm run check:contrast"
+  }
+}

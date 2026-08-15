@@ -1,0 +1,81 @@
+/* Field + Input ----------------------------------------------------------- */
+
+.rmx-field + .rmx-field {
+  margin-top: var(--rmx-space-22);
+}
+
+.rmx-field__label {
+  display: block;
+  margin-bottom: var(--rmx-space-8);
+  font-family: var(--rmx-font-family-body);
+  font-weight: var(--rmx-font-weight-medium);
+  font-size: var(--rmx-font-size-14);
+  line-height: var(--rmx-font-line-height-snug);
+  color: var(--rmx-text-deep);
+}
+
+.rmx-field__optional {
+  font-weight: var(--rmx-font-weight-regular);
+  color: var(--rmx-text-muted);
+}
+
+.rmx-field__hint,
+.rmx-field__error {
+  margin: var(--rmx-space-8) 0 0;
+  font-family: var(--rmx-font-family-body);
+  font-size: var(--rmx-font-size-13);
+  line-height: var(--rmx-font-line-height-normal);
+}
+
+.rmx-field__hint {
+  color: var(--rmx-text-muted);
+}
+
+.rmx-field__error {
+  color: var(--rmx-text-danger);
+}
+
+.rmx-input {
+  width: 100%;
+  height: var(--rmx-control-height-md);
+  padding: 0 var(--rmx-space-16);
+  border: var(--rmx-border-width-thin) solid transparent;
+  border-radius: var(--rmx-radius-md);
+  background: var(--rmx-surface-field);
+  font-family: var(--rmx-font-family-body);
+  font-size: var(--rmx-font-size-16);
+  color: var(--rmx-text-strong);
+  transition:
+    border-color var(--rmx-duration-base) var(--rmx-easing-standard),
+    background-color var(--rmx-duration-base) var(--rmx-easing-standard);
+}
+
+/* `opacity: 1` porque Firefox aclara el placeholder por su cuenta y tumbaría
+   el contraste que este color garantiza (4.69:1 sobre el relleno del campo). */
+.rmx-input::placeholder {
+  color: var(--rmx-text-placeholder);
+  opacity: 1;
+}
+
+.rmx-input:focus {
+  outline: none;
+  background: var(--rmx-surface-default);
+  border-color: var(--rmx-border-focus);
+}
+
+/* El foco no puede depender solo del color: se refuerza con un anillo para
+   quien no distinga el cambio de borde. */
+.rmx-input:focus-visible {
+  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
+  outline-offset: var(--rmx-focus-offset);
+}
+
+.rmx-input--invalid {
+  border-color: var(--rmx-border-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmx-input {
+    transition: none;
+  }
+}

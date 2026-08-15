@@ -1,0 +1,26 @@
+{
+  "$description": "Pares texto/fondo que la librería promete que son legibles. `npm run check:contrast` los verifica contra WCAG 2.1 y falla el build si alguno baja del mínimo. Esto existe porque el CSS del waitlist ya arrastraba correcciones de contraste hechas a mano (un placeholder a 2.28:1, una nota a 4.06:1): la única forma de que no vuelvan a colarse es que una máquina lo revise en cada cambio.",
+  "$levels": {
+    "AA-normal": 4.5,
+    "AA-large": 3.0,
+    "AAA-normal": 7.0
+  },
+  "pairs": [
+    { "text": "text.default", "background": "surface.default", "min": 7.0, "note": "Texto corrido principal. Se le exige AAA porque puede." },
+    { "text": "text.strong", "background": "surface.default", "min": 7.0 },
+    { "text": "text.deep", "background": "surface.default", "min": 7.0 },
+    { "text": "text.muted", "background": "surface.default", "min": 4.5, "note": "Notas y textos de apoyo." },
+    { "text": "text.subtle", "background": "surface.default", "min": 4.5 },
+    { "text": "text.muted", "background": "surface.field", "min": 4.5 },
+    { "text": "text.subtle", "background": "surface.field", "min": 4.5, "note": "Texto del chip sin seleccionar." },
+    { "text": "text.placeholder", "background": "surface.field", "min": 4.5, "note": "El placeholder del input de correo: es el campo que define la conversión, tiene que leerse." },
+    { "text": "text.strong", "background": "surface.field", "min": 4.5 },
+    { "text": "text.on-inverse", "background": "surface.inverse", "min": 4.5, "note": "Botón oscuro y chip seleccionado." },
+    { "text": "text.on-inverse", "background": "surface.inverse-hover", "min": 4.5 },
+    { "text": "text.on-brand", "background": "surface.brand", "min": 4.5, "note": "Texto oscuro sobre el verde de marca. En blanco daría 1.4:1." },
+    { "text": "text.deep", "background": "surface.brand-subtle", "min": 4.5 },
+    { "text": "text.strong", "background": "surface.brand-subtle", "min": 4.5 },
+    { "text": "text.danger", "background": "surface.default", "min": 4.5, "note": "Mensajes de error del formulario." },
+    { "text": "text.link", "background": "surface.default", "min": 4.5 }
+  ]
+}
