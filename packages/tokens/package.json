@@ -5,10 +5,18 @@
   "license": "UNLICENSED",
   "private": true,
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": "./dist/index.ts",
-    "./native": "./dist/native.ts",
+    ".": {
+      "types": "./dist/index.ts",
+      "default": "./dist/index.ts"
+    },
+    "./native": {
+      "types": "./dist/native.ts",
+      "default": "./dist/native.ts"
+    },
     "./css": "./dist/tokens.css",
     "./json": "./dist/tokens.json"
   },
@@ -16,5 +24,7 @@
     "build": "node scripts/build-tokens.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
     "test": "npm run build && npm run check:contrast"
-  }
+  },
+  "main": "./dist/index.ts",
+  "types": "./dist/index.ts"
 }
