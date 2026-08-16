@@ -20,6 +20,10 @@ Ninguno estaba mal a propósito: no había un sitio donde mirar. Este repositori
 **El verde de RunMax es `#AAFF00`**, decidido por el equipo el 2026-08-15, y está escrito
 una sola vez.
 
+> ¿Primera vez que ves este repo? [`docs/presentacion.html`](docs/presentacion.html) lo cuenta
+> entero en 18 diapositivas: arquitectura, cómo se crea un componente, cómo se publica y quién
+> tiene acceso a qué. Se abre en el navegador, sin instalar nada.
+
 ## Arranque rápido
 
 ```bash
