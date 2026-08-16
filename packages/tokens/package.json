@@ -3,8 +3,16 @@
   "version": "0.1.0",
   "description": "Design tokens de RunMax. Fuente única de color, tipografía, espaciado y movimiento, compilada a CSS, TypeScript y React Native.",
   "license": "UNLICENSED",
-  "private": true,
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runmaxshop/runmax-design-system.git",
+    "directory": "packages/tokens"
+  },
+  "homepage": "https://github.com/runmaxshop/runmax-design-system#readme",
   "files": [
     "dist"
   ],
@@ -23,7 +31,8 @@
   "scripts": {
     "build": "node scripts/build-tokens.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
-    "test": "npm run build && npm run check:contrast"
+    "test": "npm run build && npm run check:contrast",
+    "prepublishOnly": "npm run build && npm run check:contrast"
   },
   "main": "./dist/index.ts",
   "types": "./dist/index.ts"

@@ -3,10 +3,19 @@
   "version": "0.1.0",
   "description": "Componentes de interfaz de RunMax para web.",
   "license": "UNLICENSED",
-  "private": true,
   "type": "module",
   "sideEffects": ["*.css"],
-  "files": ["src", "dist"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runmaxshop/runmax-design-system.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/runmaxshop/runmax-design-system#readme",
+  "//files": "Se publica el codigo fuente TS: quien nos instale lo transpila (en Next, con transpilePackages). Fuera del tarball van las stories y foundations/, porque importan @runmax/tokens y Storybook, que no son dependencias de quien consume la libreria.",
+  "files": ["src", "dist", "!src/foundations", "!src/**/*.stories.tsx"],
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -20,7 +29,9 @@
     "build": "node scripts/build-styles.mjs",
     "typecheck": "tsc --noEmit",
     "storybook": "storybook dev -p 6006",
-    "build:storybook": "npm run build && storybook build -o storybook-static"
+    "build:storybook": "npm run build && storybook build -o storybook-static",
+    "//prepublishOnly": "Los tokens se recompilan antes que los estilos porque build-styles.mjs concatena tokens.css, y dist/ no esta versionado. Se invoca el script por ruta y no con `npm -w`, que solo funciona desde la raiz del monorepo.",
+    "prepublishOnly": "node ../tokens/scripts/build-tokens.mjs && npm run build && npm run typecheck"
   },
   "peerDependencies": {
     "react": ">=18",
