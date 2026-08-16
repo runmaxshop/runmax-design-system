@@ -2,12 +2,12 @@
 
 ## 1. Configurar Next para transpilar el paquete
 
-`@runmax/react` se distribuye como TypeScript sin compilar, así que Next tiene que
+`@runmaxshop/react` se distribuye como TypeScript sin compilar, así que Next tiene que
 transpilarlo. En `next.config.ts`:
 
 ```ts
 const nextConfig = {
-  transpilePackages: ['@runmax/react', '@runmax/tokens'],
+  transpilePackages: ['@runmaxshop/react', '@runmaxshop/tokens'],
 }
 ```
 
@@ -20,7 +20,7 @@ En `src/app/layout.tsx`:
 
 ```tsx
 import { Barlow, Barlow_Condensed } from 'next/font/google'
-import '@runmax/react/styles.css'
+import '@runmaxshop/react/styles.css'
 
 const barlow = Barlow({
   subsets: ['latin'],
@@ -44,7 +44,7 @@ variables `--rmx-*` en toda la app.
 ## 3. Usarla
 
 ```tsx
-import { Button, Field, Input, Chip, ChipGroup } from '@runmax/react'
+import { Button, Field, Input, Chip, ChipGroup } from '@runmaxshop/react'
 ```
 
 ## 4. Convivencia con lo que ya existe
@@ -68,7 +68,7 @@ Durante el desarrollo local se puede enlazar el paquete con una ruta de fichero:
 
 ```jsonc
 // package.json del frontend — SOLO desarrollo local
-"@runmax/react": "file:../runmax-design-system/packages/react"
+"@runmaxshop/react": "file:../runmax-design-system/packages/react"
 ```
 
 Pero **eso rompe el build en Vercel**: Vercel solo clona el repo del frontend, y la ruta
@@ -93,7 +93,7 @@ Registro privado de npm, incluido en el plan de GitHub que ya se usa para los re
 ### B. Dependencia de git
 
 ```jsonc
-"@runmax/react": "github:runmaxshop/runmax-design-system"
+"@runmaxshop/react": "github:runmaxshop/runmax-design-system"
 ```
 
 - **A favor**: no hace falta registro ni token nuevo si Vercel ya tiene acceso al repo.

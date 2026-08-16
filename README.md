@@ -5,9 +5,9 @@ Hoy alimenta la web; está construido para alimentar también la app móvil sin 
 
 ```
 packages/
-  tokens/   @runmax/tokens   Las decisiones de diseño en JSON neutro (formato DTCG del W3C).
+  tokens/   @runmaxshop/tokens   Las decisiones de diseño en JSON neutro (formato DTCG del W3C).
                              Se compilan a CSS, TypeScript y React Native.
-  react/    @runmax/react    Los componentes de web. Consumen los tokens y nada más.
+  react/    @runmaxshop/react    Los componentes de web. Consumen los tokens y nada más.
 ```
 
 ## Por qué existe
@@ -51,7 +51,7 @@ píxeles de navegador. Un script (`scripts/build-tokens.mjs`) los compila a tres
 | `dist/native.ts` | La versión de React Native: dimensiones como número, sin sombras CSS. |
 
 **Esa separación es la que hace posible la app móvil.** Cuando llegue, importará
-`@runmax/tokens/native` y pintará sus propios componentes nativos. El verde, los radios y los
+`@runmaxshop/tokens/native` y pintará sus propios componentes nativos. El verde, los radios y los
 tamaños serán idénticos a los de la web porque salen del mismo fichero. Lo que no se comparte
 es el HTML, que en móvil no existe — y forzar componentes universales para compartirlo
 habría obligado a reescribir la web entera con peor resultado.
@@ -89,7 +89,7 @@ Además, cada historia de Storybook se audita con axe-core en el navegador
 
 ### Cero dependencias de runtime
 
-`@runmax/react` no arrastra ninguna dependencia a quien lo instale. El helper `cn` son seis
+`@runmaxshop/react` no arrastra ninguna dependencia a quien lo instale. El helper `cn` son seis
 líneas en vez de `clsx`, y los estilos son CSS plano con variables en vez de una librería de
 CSS-en-JS. Una librería de diseño que rompe la app por una dependencia transitiva es una
 librería que nadie quiere mantener.
@@ -98,10 +98,10 @@ librería que nadie quiere mantener.
 
 ```tsx
 // una sola vez, en el layout raíz
-import '@runmax/react/styles.css'
+import '@runmaxshop/react/styles.css'
 
 // donde haga falta
-import { Button, Field, Input } from '@runmax/react'
+import { Button, Field, Input } from '@runmaxshop/react'
 
 <Field label="Tu correo">
   {({ id, describedBy, invalid }) => (

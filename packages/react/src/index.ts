@@ -1,9 +1,9 @@
 /**
- * @runmax/react — componentes de interfaz de RunMax.
+ * @runmaxshop/react — componentes de interfaz de RunMax.
  *
  * Uso:
- *   import { Button, Field, Input } from '@runmax/react'
- *   import '@runmax/react/styles.css'   // una sola vez, en la raíz de la app
+ *   import { Button, Field, Input } from '@runmaxshop/react'
+ *   import '@runmaxshop/react/styles.css'   // una sola vez, en la raíz de la app
  */
 
 export { Button, buttonClassName } from './components/Button/Button'

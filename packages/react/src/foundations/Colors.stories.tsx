@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import tokens from '@runmax/tokens/json'
+import tokens from '@runmaxshop/tokens/json'
 
 const meta: Meta = {
   title: 'Fundamentos/Colores',

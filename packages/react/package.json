@@ -1,10 +1,12 @@
 {
-  "name": "@runmax/react",
-  "version": "0.1.0",
+  "name": "@runmaxshop/react",
+  "version": "0.1.1",
   "description": "Componentes de interfaz de RunMax para web.",
   "license": "UNLICENSED",
   "type": "module",
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -14,8 +16,13 @@
     "directory": "packages/react"
   },
   "homepage": "https://github.com/runmaxshop/runmax-design-system#readme",
-  "//files": "Se publica el codigo fuente TS: quien nos instale lo transpila (en Next, con transpilePackages). Fuera del tarball van las stories y foundations/, porque importan @runmax/tokens y Storybook, que no son dependencias de quien consume la libreria.",
-  "files": ["src", "dist", "!src/foundations", "!src/**/*.stories.tsx"],
+  "//files": "Se publica el codigo fuente TS: quien nos instale lo transpila (en Next, con transpilePackages). Fuera del tarball van las stories y foundations/, porque importan @runmaxshop/tokens y Storybook, que no son dependencias de quien consume la libreria.",
+  "files": [
+    "src",
+    "dist",
+    "!src/foundations",
+    "!src/**/*.stories.tsx"
+  ],
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

@@ -1,5 +1,7 @@
-import type { ElementType, HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '../../lib/cn'
+
+type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 export type HeadingSize = '56' | '40' | '30' | '24' | '18'
 export type TextSize = '18' | '17' | '16' | '14' | '13'
@@ -26,7 +28,13 @@ export function Heading({
   children,
   ...rest
 }: HeadingProps) {
-  const Tag = `h${level}` as ElementType
+  // La union concreta de los seis encabezados, no `ElementType`. Con
+  // `ElementType` a secas TypeScript tiene que contemplar tambien componentes
+  // que no aceptan hijos, y quien nos instala se come un error de tipos
+  // ("children expects type 'never'"). Aqui no saltaba porque cada version de
+  // TypeScript y de @types/react resuelve esa union de forma distinta: el bug
+  // solo aparecia del lado del consumidor.
+  const Tag: HeadingTag = `h${level}`
   return (
     <Tag
       {...rest}

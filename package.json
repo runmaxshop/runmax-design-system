@@ -10,11 +10,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "npm run build -w @runmax/tokens && npm run build -w @runmax/react",
-    "check:contrast": "npm run check:contrast -w @runmax/tokens",
-    "typecheck": "npm run typecheck -w @runmax/react",
-    "storybook": "npm run build && npm run storybook -w @runmax/react",
-    "build:storybook": "npm run build && npm run build:storybook -w @runmax/react",
+    "build": "npm run build -w @runmaxshop/tokens && npm run build -w @runmaxshop/react",
+    "check:contrast": "npm run check:contrast -w @runmaxshop/tokens",
+    "typecheck": "npm run typecheck -w @runmaxshop/react",
+    "storybook": "npm run build && npm run storybook -w @runmaxshop/react",
+    "build:storybook": "npm run build && npm run build:storybook -w @runmaxshop/react",
     "verify": "npm run build && npm run check:contrast && npm run typecheck"
   }
 }

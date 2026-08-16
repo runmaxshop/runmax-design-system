@@ -43,10 +43,10 @@ es ese sitio: **`#AAFF00` es el verde de RunMax**, y está escrito una sola vez.
 
 ## Cómo está organizado
 
-- **`@runmax/tokens`** — las decisiones de diseño en JSON neutro (formato
+- **`@runmaxshop/tokens`** — las decisiones de diseño en JSON neutro (formato
   [DTCG](https://tr.designtokens.org/), el estándar del W3C). De ahí se compilan
   automáticamente las variables CSS, un objeto de TypeScript y una versión para React Native.
-- **`@runmax/react`** — los componentes de web, que consumen esos tokens y nada más.
+- **`@runmaxshop/react`** — los componentes de web, que consumen esos tokens y nada más.
 
 Esa separación es la que permite que la app móvil comparta la marca sin compartir el HTML:
 cuando llegue, importará los mismos tokens y pintará sus propios componentes nativos. Los

@@ -8,10 +8,10 @@ Primera versión. Extrae el lenguaje visual de la landing del waitlist a una lib
 
 ### Añadido
 
-- **`@runmax/tokens`**: 118 tokens en formato DTCG (color, tipografía, espaciado, radios,
+- **`@runmaxshop/tokens`**: 118 tokens en formato DTCG (color, tipografía, espaciado, radios,
   alturas de control, foco, movimiento, elevación y breakpoints), compilados a CSS, TypeScript
   y React Native.
-- **`@runmax/react`**: `Button`, `Field`, `Input`, `Chip`, `ChipGroup`, `SegmentedControl`,
+- **`@runmaxshop/react`**: `Button`, `Field`, `Input`, `Chip`, `ChipGroup`, `SegmentedControl`,
   `Accordion`, `Card`, `Badge`, `Heading`, `Text` y `VisuallyHidden`.
 - Verificador de contraste WCAG 2.1 sobre 16 pares declarados de texto/fondo, integrado en CI.
 - Documentación interactiva en Storybook con auditoría de accesibilidad por historia.

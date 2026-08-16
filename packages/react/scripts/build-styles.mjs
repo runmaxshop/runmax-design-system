@@ -17,12 +17,12 @@ const DIST = join(HERE, '..', 'dist')
 const TOKENS_CSS = join(HERE, '..', '..', 'tokens', 'dist', 'tokens.css')
 
 if (!existsSync(TOKENS_CSS)) {
-  console.error('Faltan los tokens compilados. Ejecuta antes: npm run build -w @runmax/tokens')
+  console.error('Faltan los tokens compilados. Ejecuta antes: npm run build -w @runmaxshop/tokens')
   process.exit(1)
 }
 
 const parts = [
-  '/**\n * @runmax/react — hoja de estilos completa.\n * GENERADO por scripts/build-styles.mjs — no editar a mano.\n */\n',
+  '/**\n * @runmaxshop/react — hoja de estilos completa.\n * GENERADO por scripts/build-styles.mjs — no editar a mano.\n */\n',
   readFileSync(TOKENS_CSS, 'utf8'),
   readFileSync(join(SRC, 'styles', 'base.css'), 'utf8'),
 ]

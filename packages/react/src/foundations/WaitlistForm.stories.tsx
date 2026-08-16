@@ -21,7 +21,7 @@ const meta: Meta = {
     docs: {
       description: {
         component:
-          'Reconstrucción del formulario que hoy está en producción, montado únicamente con componentes de `@runmax/react`. Sirve de prueba de cobertura: si una pantalla real no se puede armar desde la librería, la librería está incompleta.',
+          'Reconstrucción del formulario que hoy está en producción, montado únicamente con componentes de `@runmaxshop/react`. Sirve de prueba de cobertura: si una pantalla real no se puede armar desde la librería, la librería está incompleta.',
       },
     },
   },
