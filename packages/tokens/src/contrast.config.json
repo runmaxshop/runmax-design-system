@@ -1,26 +1,45 @@
 {
-  "$description": "Pares texto/fondo que la librería promete que son legibles. `npm run check:contrast` los verifica contra WCAG 2.1 y falla el build si alguno baja del mínimo. Esto existe porque el CSS del waitlist ya arrastraba correcciones de contraste hechas a mano (un placeholder a 2.28:1, una nota a 4.06:1): la única forma de que no vuelvan a colarse es que una máquina lo revise en cada cambio.",
+  "$description": "Pares texto/fondo que la librería promete que son legibles. `npm run check:contrast` los verifica contra WCAG 2.1 y falla el build si alguno baja del mínimo. Esto existe porque los valores heredados ya arrastraban correcciones hechas a mano: la única forma de que no vuelvan a colarse es que una máquina lo revise en cada cambio. Un color sin par declarado es un color sin verificar: si añadís uno, añadí su par.",
   "$levels": {
     "AA-normal": 4.5,
     "AA-large": 3.0,
+    "AA-non-text": 3.0,
     "AAA-normal": 7.0
   },
+  "$known-gaps": "1) `border.default` (#D5D2CB) sobre `bg.surface` no llega al 3:1 que pide WCAG 1.4.11 para el contorno de un control. Hoy el input no depende de su borde para identificarse —tiene relleno propio (`bg.subtle`) distinto del fondo de página— así que no está declarado como par. Si algún control pasa a depender solo del borde, hay que oscurecer el token o darle `border.strong`. 2) `scrim.media` es un degradado y no puede verificarse como par de colores.",
   "pairs": [
-    { "text": "text.default", "background": "surface.default", "min": 7.0, "note": "Texto corrido principal. Se le exige AAA porque puede." },
-    { "text": "text.strong", "background": "surface.default", "min": 7.0 },
-    { "text": "text.deep", "background": "surface.default", "min": 7.0 },
-    { "text": "text.muted", "background": "surface.default", "min": 4.5, "note": "Notas y textos de apoyo." },
-    { "text": "text.subtle", "background": "surface.default", "min": 4.5 },
-    { "text": "text.muted", "background": "surface.field", "min": 4.5 },
-    { "text": "text.subtle", "background": "surface.field", "min": 4.5, "note": "Texto del chip sin seleccionar." },
-    { "text": "text.placeholder", "background": "surface.field", "min": 4.5, "note": "El placeholder del input de correo: es el campo que define la conversión, tiene que leerse." },
-    { "text": "text.strong", "background": "surface.field", "min": 4.5 },
-    { "text": "text.on-inverse", "background": "surface.inverse", "min": 4.5, "note": "Botón oscuro y chip seleccionado." },
-    { "text": "text.on-inverse", "background": "surface.inverse-hover", "min": 4.5 },
-    { "text": "text.on-brand", "background": "surface.brand", "min": 4.5, "note": "Texto oscuro sobre el verde de marca. En blanco daría 1.4:1." },
-    { "text": "text.deep", "background": "surface.brand-subtle", "min": 4.5 },
-    { "text": "text.strong", "background": "surface.brand-subtle", "min": 4.5 },
-    { "text": "text.danger", "background": "surface.default", "min": 4.5, "note": "Mensajes de error del formulario." },
-    { "text": "text.link", "background": "surface.default", "min": 4.5 }
+    { "text": "text.primary", "background": "bg.page", "min": 7.0, "note": "Texto corrido principal sobre el fondo de página. Se le exige AAA porque puede." },
+    { "text": "text.secondary", "background": "bg.page", "min": 7.0 },
+    { "text": "text.tertiary", "background": "bg.page", "min": 4.5, "note": "Meta, breadcrumb, conteo. Es el par que obligó a bajar de #757575 a #6B6660." },
+
+    { "text": "text.primary", "background": "bg.surface", "min": 7.0 },
+    { "text": "text.secondary", "background": "bg.surface", "min": 7.0 },
+    { "text": "text.tertiary", "background": "bg.surface", "min": 4.5 },
+
+    { "text": "text.primary", "background": "bg.subtle", "min": 7.0 },
+    { "text": "text.secondary", "background": "bg.subtle", "min": 4.5, "note": "Texto del chip sin seleccionar." },
+    { "text": "text.placeholder", "background": "bg.subtle", "min": 4.5, "note": "El placeholder del campo de correo: es el campo que define la conversión, tiene que leerse." },
+    { "text": "text.secondary", "background": "bg.field-hover", "min": 4.5 },
+
+    { "text": "text.inverse", "background": "bg.inverse", "min": 7.0, "note": "Botón primario y chip de talla activa: la acción es negra." },
+    { "text": "text.inverse", "background": "bg.inverse-hover", "min": 7.0 },
+    { "text": "text.accent", "background": "bg.inverse", "min": 4.5, "note": "El lima como tinta, que es su único uso legítimo como texto. Sobre claro daría 1.8:1." },
+    { "text": "text.accent", "background": "bg.inverse-hover", "min": 4.5 },
+
+    { "text": "text.primary", "background": "bg.highlight", "min": 7.0, "note": "Badge «Más vendido»: negro sobre lima/100." },
+    { "text": "text.secondary", "background": "bg.highlight", "min": 4.5 },
+
+    { "text": "text.danger", "background": "bg.page", "min": 4.5, "note": "Mensajes de error del formulario." },
+    { "text": "text.danger", "background": "bg.surface", "min": 4.5 },
+    { "text": "text.danger", "background": "bg.danger-subtle", "min": 4.5 },
+    { "text": "text.success", "background": "bg.page", "min": 4.5 },
+    { "text": "text.success", "background": "bg.success-subtle", "min": 4.5 },
+    { "text": "text.warning", "background": "bg.page", "min": 4.5 },
+    { "text": "text.warning", "background": "bg.warning-subtle", "min": 4.5 },
+
+    { "text": "border.focus", "background": "bg.page", "min": 3.0, "note": "Indicador de foco: WCAG 1.4.11 pide 3:1 contra lo que lo rodea." },
+    { "text": "border.focus", "background": "bg.surface", "min": 3.0 },
+    { "text": "border.focus", "background": "bg.subtle", "min": 3.0 },
+    { "text": "border.focus-inverse", "background": "bg.inverse", "min": 3.0, "note": "El foco sobre oscuro sí es lima: negro sobre negro no se ve." }
   ]
 }

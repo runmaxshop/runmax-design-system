@@ -1,88 +1,96 @@
 {
-  "$description": "Colores de RunMax. Formato DTCG (w3c design tokens). Los primitivos son la paleta cruda; nadie los usa directamente en un componente — se usan los semánticos, que son los que dan significado y los que se podrían re-mapear para un tema oscuro sin tocar un solo componente.",
+  "$description": "Colores de RunMax. Formato DTCG (w3c design tokens). Derivados por auditoría de las mesas de Figma «Componentes site» y «Principales» (306 nodos). Dos capas: primitivos (la paleta cruda, no se usa nunca directo) y semánticos (lo único que consumen los componentes). Cambiar el tema mañana es reasignar la capa semántica, no repintar pantallas.",
+
   "color": {
-    "lime": {
-      "$description": "Verde de marca. El 500 es el verde oficial (#AAFF00, confirmado por el equipo el 2026-08-15) y el 600 es el hover que ya vivía en 22 archivos de la app.",
-      "50": { "$type": "color", "$value": "#F5FFDB" },
-      "100": { "$type": "color", "$value": "#EBFFB8" },
-      "200": { "$type": "color", "$value": "#DDFF8A" },
-      "300": { "$type": "color", "$value": "#CCFF52" },
-      "400": { "$type": "color", "$value": "#BBFF29" },
-      "500": { "$type": "color", "$value": "#AAFF00" },
-      "600": { "$type": "color", "$value": "#88CC00" },
-      "700": { "$type": "color", "$value": "#669900" },
-      "800": { "$type": "color", "$value": "#4D7300" },
-      "900": { "$type": "color", "$value": "#334D00" },
-      "mist": {
-        "$type": "color",
-        "$value": "#D7EFAB",
-        "$description": "Verde pálido desaturado del fondo de la sección de registro. No está en la rampa principal porque no es una luminancia del mismo tono; se conserva porque producción depende de él."
-      }
-    },
     "neutral": {
-      "$description": "Grises. Varios de estos valores llevan una comprobación de contraste detrás — ver contrast.config.json y `npm run check:contrast`.",
-      "0": { "$type": "color", "$value": "#FFFFFF" },
-      "50": { "$type": "color", "$value": "#F2F2EE" },
-      "100": { "$type": "color", "$value": "#E8E8E2" },
-      "200": { "$type": "color", "$value": "#DEDEDE" },
-      "300": { "$type": "color", "$value": "#A8A69C" },
-      "400": { "$type": "color", "$value": "#757575" },
-      "500": { "$type": "color", "$value": "#6E6C64" },
-      "600": { "$type": "color", "$value": "#5C5A54" },
-      "700": { "$type": "color", "$value": "#4A4841" },
-      "800": { "$type": "color", "$value": "#252324" },
-      "900": { "$type": "color", "$value": "#151515" },
-      "950": { "$type": "color", "$value": "#000000" }
+      "$description": "Escala cálida. La temperatura sale de los dos valores intencionales de las mesas: #EFEEEC (fondo de página) y #252324 (tinta cálida). Los grises puros que estaban sueltos se reencuadran sobre ese mismo eje para que el texto no se vea frío sobre el fondo cálido.",
+      "0": { "$type": "color", "$value": "#FFFFFF", "$description": "Superficie de card, texto inverso." },
+      "50": { "$type": "color", "$value": "#FAF9F7", "$description": "Relleno sutil, hover sobre blanco." },
+      "100": { "$type": "color", "$value": "#EFEEEC", "$description": "Fondo de página. Absorbe el #F2F2F2 duplicado: misma luminancia, distinta temperatura." },
+      "200": { "$type": "color", "$value": "#E4E2DD", "$description": "Divisor suave, hover sobre off-white." },
+      "300": { "$type": "color", "$value": "#D5D2CB", "$description": "Borde por defecto. Reemplaza #D9D9D9." },
+      "400": { "$type": "color", "$value": "#BAB6AE", "$description": "Disabled. Reemplaza #C1C1C1." },
+      "500": { "$type": "color", "$value": "#918C84", "$description": "Iconografía inactiva. NO es color de texto: sobre el relleno de campo da 3.17:1." },
+      "600": { "$type": "color", "$value": "#6B6660", "$description": "Texto terciario. Reemplaza #757575, que sobre el fondo de página daba 3.97:1 y fallaba AA." },
+      "700": { "$type": "color", "$value": "#4A4643", "$description": "Texto secundario. Absorbe #4D4D4D y #444444, tres luminancias indistinguibles del mismo rol." },
+      "800": { "$type": "color", "$value": "#35322F", "$description": "Reemplaza #353535." },
+      "900": { "$type": "color", "$value": "#252324", "$description": "Tinta cálida, bloques oscuros grandes." },
+      "1000": { "$type": "color", "$value": "#000000", "$description": "Texto primario, botón primario, wordmark. En estas mesas la acción es negra." }
     },
+
+    "lime": {
+      "$description": "Acento de marca. Las dos limas de las mesas son el mismo color en dos roles: #F1F7B8 es superficie (badge «Más vendido») y #B8CE00 es tinta sobre oscuro (subheader del banner). La rampa se completa para tener estados. No hay lime/300: no hacía falta ningún paso ahí.",
+      "100": { "$type": "color", "$value": "#F1F7B8", "$description": "Fondo de badge highlight." },
+      "200": { "$type": "color", "$value": "#E6F080", "$description": "Hover del badge." },
+      "400": { "$type": "color", "$value": "#CDE329", "$description": "Acento sobre oscuro, foco sobre oscuro." },
+      "500": { "$type": "color", "$value": "#B8CE00", "$description": "Acento base de marca." },
+      "600": { "$type": "color", "$value": "#9AAC00", "$description": "Pressed sobre oscuro." }
+    },
+
     "danger": {
+      "$description": "Estados de sistema. NO salen de las mesas de Figma: no hay ningún nodo de error, éxito o aviso dibujado. Son provisionales, verificados contra el fondo de página, y se reemplazan cuando existan en el archivo.",
       "500": { "$type": "color", "$value": "#C0392B" },
       "50": { "$type": "color", "$value": "#FEF2F2" }
     },
     "success": {
-      "500": { "$type": "color", "$value": "#15803D" },
+      "500": { "$type": "color", "$value": "#126B33", "$description": "Oscurecido desde #15803D, que sobre el fondo de página daba 4.33:1 y no llegaba a AA." },
       "50": { "$type": "color", "$value": "#F0FDF4" }
     },
     "warning": {
-      "500": { "$type": "color", "$value": "#B45309" },
+      "500": { "$type": "color", "$value": "#9A4708", "$description": "Oscurecido desde #B45309 por la misma razón: 4.33:1 sobre el fondo de página." },
       "50": { "$type": "color", "$value": "#FFFBEB" }
     }
   },
 
-  "text": {
-    "$description": "Color de texto por rol. Nunca uses un primitivo para texto: usa uno de estos.",
-    "default": { "$type": "color", "$value": "{color.neutral.950}" },
-    "strong": { "$type": "color", "$value": "{color.neutral.800}" },
-    "deep": { "$type": "color", "$value": "{color.neutral.900}" },
-    "muted": { "$type": "color", "$value": "{color.neutral.600}" },
-    "subtle": { "$type": "color", "$value": "{color.neutral.700}" },
-    "placeholder": { "$type": "color", "$value": "{color.neutral.500}" },
-    "on-inverse": { "$type": "color", "$value": "{color.neutral.0}" },
-    "on-brand": {
-      "$type": "color",
-      "$value": "{color.neutral.800}",
-      "$description": "Sobre el verde de marca el texto va oscuro. Blanco sobre #AAFF00 da 1.4:1 y es ilegible."
-    },
-    "danger": { "$type": "color", "$value": "{color.danger.500}" },
-    "link": { "$type": "color", "$value": "{color.neutral.900}" }
+  "bg": {
+    "$description": "Superficies. Nombres alineados con la colección Semantic de Figma.",
+    "page": { "$type": "color", "$value": "{color.neutral.100}", "$description": "Fondo de todas las páginas. Off-white cálido, no blanco." },
+    "surface": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Cards, navbar, megamenú, modales." },
+    "subtle": { "$type": "color", "$value": "{color.neutral.50}", "$description": "Relleno de input, filas alternas." },
+    "field-hover": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Hover de campos y chips. Un paso más oscuro, dentro de la rampa cálida." },
+    "inverse": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Botón primario, chip de talla activa. La acción es negra." },
+    "inverse-hover": { "$type": "color", "$value": "{color.neutral.900}", "$description": "Hover del negro: aclara a la tinta cálida en vez de oscurecer, que ya no se puede." },
+    "highlight": { "$type": "color", "$value": "{color.lime.100}", "$description": "Badge «Más vendido», destacados. El lima es superficie, no acción." },
+    "highlight-hover": { "$type": "color", "$value": "{color.lime.200}" },
+    "danger-subtle": { "$type": "color", "$value": "{color.danger.50}" },
+    "success-subtle": { "$type": "color", "$value": "{color.success.50}" },
+    "warning-subtle": { "$type": "color", "$value": "{color.warning.50}" }
   },
 
-  "surface": {
-    "default": { "$type": "color", "$value": "{color.neutral.0}" },
-    "subtle": { "$type": "color", "$value": "{color.neutral.50}" },
-    "field": { "$type": "color", "$value": "{color.neutral.50}" },
-    "field-hover": { "$type": "color", "$value": "{color.neutral.100}" },
-    "inverse": { "$type": "color", "$value": "{color.neutral.800}" },
-    "inverse-hover": { "$type": "color", "$value": "#3A3739" },
-    "brand": { "$type": "color", "$value": "{color.lime.500}" },
-    "brand-hover": { "$type": "color", "$value": "{color.lime.600}" },
-    "brand-subtle": { "$type": "color", "$value": "{color.lime.mist}" },
-    "danger-subtle": { "$type": "color", "$value": "{color.danger.50}" }
+  "text": {
+    "$description": "Color de texto por rol. Nunca uses un primitivo para texto: usa uno de estos.",
+    "primary": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Títulos, precio, nombre de producto." },
+    "secondary": { "$type": "color", "$value": "{color.neutral.700}", "$description": "Descripción, copy de apoyo." },
+    "tertiary": { "$type": "color", "$value": "{color.neutral.600}", "$description": "Meta, breadcrumb, conteo de productos." },
+    "placeholder": { "$type": "color", "$value": "{color.neutral.600}", "$description": "El placeholder es texto y le aplica el 4.5:1. neutral/500 —el valor que sugería la auditoría para este rol— da 3.17:1 sobre el relleno del campo y no entra." },
+    "disabled": { "$type": "color", "$value": "{color.neutral.400}", "$description": "Exento del mínimo de contraste por WCAG 1.4.3, pero se declara para que nadie invente un gris nuevo." },
+    "inverse": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Texto sobre negro o sobre foto." },
+    "accent": {
+      "$type": "color",
+      "$value": "{color.lime.500}",
+      "$description": "SOLO sobre fondo oscuro. Sobre blanco da 1.8:1. El lima no es color de texto sobre claro — es la regla que más fácil se rompe y por eso está escrita."
+    },
+    "danger": { "$type": "color", "$value": "{color.danger.500}" },
+    "success": { "$type": "color", "$value": "{color.success.500}" },
+    "warning": { "$type": "color", "$value": "{color.warning.500}" }
   },
 
   "border": {
-    "default": { "$type": "color", "$value": "{color.neutral.200}" },
-    "strong": { "$type": "color", "$value": "{color.neutral.800}" },
-    "focus": { "$type": "color", "$value": "{color.neutral.800}" },
+    "subtle": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Divisores internos de card." },
+    "default": { "$type": "color", "$value": "{color.neutral.300}", "$description": "Inputs, contenedores." },
+    "strong": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Botón secundario, botón circular, chip." },
+    "inverse": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Controles sobre foto." },
+    "focus": {
+      "$type": "color",
+      "$value": "{color.neutral.1000}",
+      "$description": "El anillo de foco sobre claro es negro: 18.11:1 sobre el fondo de página. En lima daría 1.5:1 y un indicador de foco necesita 3:1 (WCAG 1.4.11)."
+    },
+    "focus-inverse": { "$type": "color", "$value": "{color.lime.400}", "$description": "El anillo de foco sobre oscuro: 14.62:1 sobre negro." },
     "danger": { "$type": "color", "$value": "{color.danger.500}" }
+  },
+
+  "scrim": {
+    "$description": "Velos sobre contenido. scrim/media —el degradado para legibilidad sobre foto— no vive aquí: es un degradado, y ni las variables de Figma ni un token de color pueden contenerlo. Va como estilo en el componente que lo necesita (MediaCard).",
+    "solid": { "$type": "color", "$value": "rgba(0, 0, 0, 0.6)", "$description": "Overlay de modal y drawer." }
   }
 }

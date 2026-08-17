@@ -3,16 +3,16 @@
 .rmx-segmented__label {
   display: block;
   margin-bottom: var(--rmx-space-8);
-  font-family: var(--rmx-font-family-body);
+  font-family: var(--rmx-font-family-display);
   font-weight: var(--rmx-font-weight-medium);
-  font-size: var(--rmx-font-size-14);
-  line-height: var(--rmx-font-line-height-snug);
-  color: var(--rmx-text-deep);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-primary);
 }
 
 /* Columnas iguales. El gap es de 8px y no de 10: a 340px de ancho de tarjeta
    —el mínimo de la columna del formulario— con 10px la palabra más larga
-   quedaba pegada a sus bordes. */
+   quedaba pegada a sus bordes. El 10 tampoco existe ya en la escala. */
 .rmx-segmented__track {
   display: grid;
   gap: var(--rmx-space-8);
@@ -39,21 +39,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--rmx-control-height-md);
-  border-radius: var(--rmx-radius-md);
-  background: var(--rmx-surface-field);
-  font-family: var(--rmx-font-family-body);
+  height: var(--rmx-control-height-m);
+  border: var(--rmx-border-width-thin) solid var(--rmx-border-strong);
+  border-radius: var(--rmx-radius-m);
+  background: transparent;
+  font-family: var(--rmx-font-family-display);
   font-weight: var(--rmx-font-weight-medium);
-  font-size: var(--rmx-font-size-16);
-  color: var(--rmx-text-strong);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-primary);
   transition:
     background-color var(--rmx-duration-base) var(--rmx-easing-standard),
     color var(--rmx-duration-base) var(--rmx-easing-standard);
 }
 
 .rmx-segmented__option input:checked + span {
-  background: var(--rmx-surface-inverse);
-  color: var(--rmx-text-on-inverse);
+  background: var(--rmx-bg-inverse);
+  border-color: var(--rmx-bg-inverse);
+  color: var(--rmx-text-inverse);
 }
 
 .rmx-segmented__option input:focus-visible + span {

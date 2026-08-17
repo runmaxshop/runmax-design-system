@@ -3,9 +3,23 @@ import { cn } from '../../lib/cn'
 
 type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
-export type HeadingSize = '56' | '40' | '30' | '24' | '18'
-export type TextSize = '18' | '17' | '16' | '14' | '13'
-export type TextTone = 'default' | 'strong' | 'deep' | 'muted' | 'subtle' | 'danger' | 'on-inverse'
+/**
+ * Los nombres son roles de la escala, no medidas. `display-l` sigue siendo
+ * `display-l` el día que mida 44px en vez de 40, y dos roles que hoy miden lo
+ * mismo (`heading-m` y `display-s`, ambos 24px) pueden separarse sin renombrar
+ * nada en las aplicaciones.
+ */
+export type HeadingSize =
+  | 'display-xl'
+  | 'display-l'
+  | 'display-m'
+  | 'display-s'
+  | 'heading-m'
+  | 'heading-s'
+
+export type TextSize = 'body-l' | 'body-m' | 'body-s' | 'label-m' | 'price-m' | 'overline-m'
+
+export type TextTone = 'primary' | 'secondary' | 'tertiary' | 'inverse' | 'accent' | 'danger'
 
 export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   /**
@@ -19,11 +33,18 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   children: ReactNode
 }
 
-/** Titular en Barlow Condensed, la tipografía de display de RunMax. */
+/**
+ * Titular en Barlow Condensed.
+ *
+ * Los roles `display-*` salen en ExtraBold Italic y mayúsculas —la voz de la
+ * marca en las mesas—; los `heading-*` son titulares de sección en Bold, sin
+ * transformar. La diferencia es de tono, no de tamaño: `display-s` y
+ * `heading-m` miden ambos 24px.
+ */
 export function Heading({
   level = 2,
-  size = '30',
-  tone = 'deep',
+  size = 'display-m',
+  tone = 'primary',
   className,
   children,
   ...rest
@@ -49,17 +70,27 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
   as?: 'p' | 'span' | 'div' | 'li'
   size?: TextSize
   tone?: TextTone
-  weight?: 'regular' | 'medium' | 'semibold'
+  /**
+   * Sin valor, manda el peso del rol: `label-m` sale en Medium y `overline-m`
+   * en Bold sin pedirlo. Pasarlo es una excepción explícita, no el caso normal.
+   */
+  weight?: 'regular' | 'medium' | 'semibold' | 'bold'
   align?: 'start' | 'center' | 'end'
   children: ReactNode
 }
 
-/** Texto corrido en Barlow. */
+/**
+ * Texto corrido en Barlow.
+ *
+ * Los roles `label-m`, `price-m` y `overline-m` salen en la condensada: son
+ * interfaz, no lectura. El cuerpo largo va en Barlow porque una condensada a
+ * 14px en párrafos de varias líneas es el uso para el que menos está pensada.
+ */
 export function Text({
   as: Tag = 'p',
-  size = '16',
-  tone = 'default',
-  weight = 'regular',
+  size = 'body-l',
+  tone = 'primary',
+  weight,
   align,
   className,
   children,
@@ -72,7 +103,7 @@ export function Text({
         'rmx-text',
         `rmx-text--${size}`,
         `rmx-tone--${tone}`,
-        `rmx-weight--${weight}`,
+        weight && `rmx-weight--${weight}`,
         align && `rmx-align--${align}`,
         className,
       )}

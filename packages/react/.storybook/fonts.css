@@ -9,8 +9,15 @@
  * desde el propio dominio y evita el salto de layout al cargar.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&display=swap');
+/* Barlow Condensed necesita el 800 y su itálica: los roles `display-*` van en
+   ExtraBold Italic, que es la voz de la marca en las mesas. Sin ellos el
+   navegador finge el peso y la inclinación, y la documentación miente. */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap');
 
+/* El fondo de página del sistema es un off-white cálido, no blanco. Revisar los
+   componentes sobre blanco puro daría una idea equivocada de su contraste. */
 body {
   font-family: 'Barlow', system-ui, sans-serif;
+  background: var(--rmx-bg-page);
+  color: var(--rmx-text-primary);
 }

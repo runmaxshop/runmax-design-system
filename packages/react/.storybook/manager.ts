@@ -15,7 +15,7 @@ addons.setConfig({
     brandTarget: '_blank',
 
     colorPrimary: '#252324',
-    colorSecondary: '#88CC00',
+    colorSecondary: '#B8CE00',
 
     appBg: '#F2F2EE',
     appContentBg: '#FFFFFF',

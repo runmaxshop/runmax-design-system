@@ -1,12 +1,16 @@
-/* Card -------------------------------------------------------------------- */
+/* Card --------------------------------------------------------------------
+ *
+ * Esquina viva por defecto: las mesas son mayoritariamente de radio 0 y eso es
+ * parte del carácter del sistema. La separación se hace con borde y superficie,
+ * no con sombra — `elevated` es la excepción para lo que flota de verdad. */
 
 .rmx-card {
-  border-radius: var(--rmx-radius-xl);
-  background: var(--rmx-surface-default);
+  border-radius: var(--rmx-radius-none);
+  background: var(--rmx-bg-surface);
 }
 
 .rmx-card--elevated {
-  box-shadow: var(--rmx-elevation-md);
+  box-shadow: var(--rmx-shadow-overlay);
 }
 
 .rmx-card--outlined {
@@ -18,5 +22,5 @@
 }
 
 .rmx-card--pad-none { padding: 0; }
-.rmx-card--pad-md   { padding: var(--rmx-space-22); }
+.rmx-card--pad-md   { padding: var(--rmx-space-24); }
 .rmx-card--pad-lg   { padding: var(--rmx-space-32); }

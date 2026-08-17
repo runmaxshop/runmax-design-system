@@ -7,14 +7,15 @@
 }
 
 .rmx-chip {
-  padding: var(--rmx-space-8) var(--rmx-space-14);
-  border: 0;
-  border-radius: var(--rmx-radius-pill);
-  background: var(--rmx-surface-field);
-  font-family: var(--rmx-font-family-body);
-  font-size: var(--rmx-font-size-14);
-  line-height: var(--rmx-font-line-height-snug);
-  color: var(--rmx-text-subtle);
+  padding: var(--rmx-space-8) var(--rmx-space-12);
+  border: var(--rmx-border-width-thin) solid var(--rmx-border-strong);
+  border-radius: var(--rmx-radius-full);
+  background: transparent;
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-medium);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-primary);
   cursor: pointer;
   transition:
     background-color var(--rmx-duration-base) var(--rmx-easing-standard),
@@ -22,7 +23,7 @@
 }
 
 .rmx-chip:hover:not(:disabled) {
-  background: var(--rmx-surface-field-hover);
+  background: var(--rmx-bg-field-hover);
 }
 
 .rmx-chip:focus-visible {
@@ -30,9 +31,12 @@
   outline-offset: var(--rmx-focus-offset);
 }
 
+/* Seleccionado = fondo negro y tinta inversa, igual que el chip de talla del
+   PDP en las mesas. */
 .rmx-chip[aria-pressed='true'] {
-  background: var(--rmx-surface-inverse);
-  color: var(--rmx-text-on-inverse);
+  background: var(--rmx-bg-inverse);
+  border-color: var(--rmx-bg-inverse);
+  color: var(--rmx-text-inverse);
 }
 
 .rmx-chip:disabled {

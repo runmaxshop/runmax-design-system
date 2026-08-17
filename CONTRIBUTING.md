@@ -4,7 +4,7 @@
 
 1. **Nunca escribas un color, un tamaño o un radio a mano.** Si el token no existe, la
    conversación es sobre añadir el token, no sobre escapar del sistema.
-2. **Usa los tokens semánticos, no los primitivos.** `var(--rmx-text-muted)`, no
+2. **Usa los tokens semánticos, no los primitivos.** `var(--rmx-text-tertiary)`, no
    `var(--rmx-color-neutral-600)`. El semántico dice para qué sirve; el primitivo, cómo es.
 3. **La accesibilidad va en el componente, no en quien lo usa.** Si un componente puede
    cablear su propio `aria-*`, lo cablea él.

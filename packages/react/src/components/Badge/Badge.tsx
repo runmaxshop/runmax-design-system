@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
 
-export type BadgeTone = 'neutral' | 'brand' | 'success' | 'warning' | 'danger'
+export type BadgeTone = 'neutral' | 'brand' | 'inverse' | 'success' | 'warning' | 'danger'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   tone?: BadgeTone

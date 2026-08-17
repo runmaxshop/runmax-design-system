@@ -18,7 +18,7 @@ jobs:
 
       - run: npm ci
 
-      # Compila tokens y estilos, verifica el contraste WCAG de los 16 pares
+      # Compila tokens y estilos, verifica el contraste WCAG de los 27 pares
       # declarados y pasa TypeScript en estricto. Si el contraste falla, el
       # build falla: es la puerta que impide que un cambio de color rompa la
       # legibilidad sin que nadie se entere.

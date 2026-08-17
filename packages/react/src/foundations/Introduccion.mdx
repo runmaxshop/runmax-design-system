@@ -5,21 +5,23 @@ import { Meta } from '@storybook/addon-docs/blocks'
 <div style={{ maxWidth: 760, fontFamily: 'Barlow, system-ui, sans-serif', lineHeight: 1.6 }}>
 
 <div style={{
-  background: '#AAFF00',
-  color: '#252324',
-  padding: '32px 28px',
-  borderRadius: 24,
+  background: '#000000',
+  color: '#FFFFFF',
+  padding: '40px 32px',
   marginBottom: 40,
 }}>
   <h1 style={{
     fontFamily: 'Barlow Condensed, sans-serif',
-    fontSize: 56,
-    lineHeight: 1.088,
+    fontSize: 64,
+    lineHeight: 1,
+    fontWeight: 800,
+    fontStyle: 'italic',
+    textTransform: 'uppercase',
     margin: 0,
   }}>
     Sistema de diseño de RunMax
   </h1>
-  <p style={{ fontSize: 18, margin: '12px 0 0', maxWidth: 520 }}>
+  <p style={{ fontSize: 16, lineHeight: 1.5, margin: '16px 0 0', maxWidth: 520, color: '#B8CE00' }}>
     Una sola fuente de verdad para el color, la tipografía y los componentes de RunMax.
     Hoy la web; mañana también la app móvil.
   </p>
@@ -27,19 +29,25 @@ import { Meta } from '@storybook/addon-docs/blocks'
 
 ## Por qué existe
 
-Antes de esto, la marca vivía repartida por el código. Una auditoría del repo del frontend
-encontró **113 colores hexadecimales distintos escritos a mano** y **cuatro verdes de marca**
-compitiendo entre ellos:
+Antes de esto, la marca vivía repartida por el código: **113 colores hexadecimales escritos a
+mano** y cuatro verdes distintos compitiendo entre ellos, ninguno mal a propósito. Simplemente
+no había un sitio donde mirar.
 
-| Verde | Archivos | Dónde estaba |
-| --- | --- | --- |
-| `#AAFF00` | 38 | el más extendido en la app |
-| `#88CC00` | 22 | usado como hover |
-| `#C5E500` | 6 | el que la documentación declaraba oficial |
-| `#B8CE00` | 1 | el de la landing en producción |
+Ese sitio ahora es Figma. Los valores de este repositorio salen de una auditoría de las mesas
+**Componentes site** y **Principales** —306 nodos— y no al revés: si un token tiene que
+cambiar, cambia primero en Figma.
 
-Ninguno estaba mal a propósito. Simplemente no había un sitio donde mirar. Este repositorio
-es ese sitio: **`#AAFF00` es el verde de RunMax**, y está escrito una sola vez.
+De esa auditoría salen las dos decisiones que más se notan:
+
+- **El lima de marca es `#B8CE00`**, el de la landing en producción.
+- **El lima no es la acción: la acción es negra.** En el código el lima era
+  `--color-primary`; en las mesas el botón primario es negro y el lima es un acento de
+  destaque. No es un cambio de valor, es un cambio de rol — y por eso el token se llama
+  `text.accent` y no `text.primary`.
+
+La regla que lo protege: **el lima nunca es color de texto sobre claro.** Sobre blanco da
+1.8:1, muy por debajo del 4.5:1 de WCAG AA. Es superficie (`bg.highlight`) o tinta sobre
+oscuro (`text.accent`).
 
 ## Cómo está organizado
 
@@ -56,7 +64,7 @@ colores, los tamaños y los radios serán exactamente los mismos porque salen de
 
 1. **Nunca escribas un color, un tamaño o un radio a mano.** Si no existe el token,
    la conversación es sobre añadir el token, no sobre escapar del sistema.
-2. **Usa los tokens semánticos, no los primitivos.** `text.muted`, no `color.neutral.600`.
+2. **Usa los tokens semánticos, no los primitivos.** `text.tertiary`, no `color.neutral.600`.
    El semántico dice para qué sirve; el primitivo solo dice cómo es.
 3. **La accesibilidad no es una fase posterior.** Cada par de texto y fondo está verificado
    contra WCAG 2.1 por un script que corre en CI, y cada historia de esta documentación se
