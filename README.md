@@ -13,12 +13,17 @@ packages/
 ## Por qué existe
 
 Una auditoría del repo del frontend encontró **113 colores hexadecimales escritos a mano** y
-**cuatro verdes de marca** compitiendo: `#AAFF00` (38 archivos), `#88CC00` (22), `#C5E500`
-(el que la documentación declaraba oficial, 6) y `#B8CE00` (el de la landing en producción, 1).
+cuatro verdes de marca compitiendo. Ninguno estaba mal a propósito: no había un sitio donde
+mirar.
 
-Ninguno estaba mal a propósito: no había un sitio donde mirar. Este repositorio es ese sitio.
-**El verde de RunMax es `#AAFF00`**, decidido por el equipo el 2026-08-15, y está escrito
-una sola vez.
+Ese sitio es Figma. Los valores de este repositorio salen de una auditoría de las mesas
+**Componentes site** y **Principales** (306 nodos), y el flujo va en un solo sentido: si un
+token tiene que cambiar, cambia primero en Figma.
+
+**El lima de marca es `#B8CE00`** — y no es la acción. En las mesas el botón primario es
+negro y el lima es un acento de destaque, así que el token se llama `bg.highlight` y
+`text.accent`, nunca `primary`. La regla que lo protege: **el lima no es color de texto sobre
+claro** (1.8:1 sobre blanco). Es superficie, o tinta sobre oscuro.
 
 > ¿Primera vez que ves este repo? [`docs/presentacion.html`](docs/presentacion.html) lo cuenta
 > entero en 18 diapositivas: arquitectura, cómo se crea un componente, cómo se publica y quién
@@ -50,7 +55,7 @@ píxeles de navegador. Un script (`scripts/build-tokens.mjs`) los compila a tres
 
 | Salida | Para qué |
 | --- | --- |
-| `dist/tokens.css` | Variables CSS (`--rmx-surface-brand`) que consumen los componentes web. |
+| `dist/tokens.css` | Variables CSS (`--rmx-bg-highlight`) que consumen los componentes web. |
 | `dist/index.ts` | Objeto de TypeScript tipado, para interpolar valores en código. |
 | `dist/native.ts` | La versión de React Native: dimensiones como número, sin sombras CSS. |
 
@@ -68,10 +73,10 @@ algún día conviene.
 
 ```jsonc
 // primitivo: dice CÓMO es
-"color.lime.500": "#AAFF00"
+"color.lime.500": "#B8CE00"
 
 // semántico: dice PARA QUÉ sirve
-"surface.brand": "{color.lime.500}"
+"bg.highlight": "{color.lime.100}"
 ```
 
 Los componentes usan **solo semánticos**. Los alias se compilan a `var()` encadenados, así que
@@ -86,7 +91,7 @@ build** si alguno baja del mínimo.
 
 Existe porque el CSS del waitlist ya arrastraba correcciones hechas a mano — un placeholder que
 estaba en 2.28:1, una nota en 4.06:1. La única forma de que eso no vuelva a colarse es que lo
-revise una máquina en cada cambio. Hoy pasan los 16 pares.
+revise una máquina en cada cambio. Hoy pasan los 27 pares.
 
 Además, cada historia de Storybook se audita con axe-core en el navegador
 (addon `@storybook/addon-a11y`), así que los fallos se ven mientras se diseña.

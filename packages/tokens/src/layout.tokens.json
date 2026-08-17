@@ -1,54 +1,55 @@
 {
-  "$description": "Espaciado, radios, alturas de control, bordes y movimiento. Igual que en las tipografías, el nombre del token ES su valor en px: `space.16` son 16px. Se prefiere eso a una escala t-shirt porque elimina la traducción mental y hace evidente cuándo alguien está inventando un valor nuevo.",
+  "$description": "Espaciado, radios, alturas de control, bordes, elevación y movimiento. El nombre del token ES su valor en px: `space.16` son 16px. Se prefiere a una escala t-shirt porque elimina la traducción mental y hace evidente cuándo alguien está inventando un valor nuevo.",
 
   "space": {
+    "$description": "Base 4. La auditoría encontró 41 usos de un gap de 10px fuera de escala: van a 8 en agrupaciones apretadas (icono + texto, chips) y a 12 en el stack de contenido de la card (marca → nombre → precio). También caen el 6 (→8, lo que lleva el botón circular de 28 a 32px y lo mete en la grilla) y el 5 (→4).",
     "0": { "$type": "dimension", "$value": "0px" },
     "2": { "$type": "dimension", "$value": "2px" },
     "4": { "$type": "dimension", "$value": "4px" },
     "8": { "$type": "dimension", "$value": "8px" },
-    "10": { "$type": "dimension", "$value": "10px" },
     "12": { "$type": "dimension", "$value": "12px" },
-    "14": { "$type": "dimension", "$value": "14px" },
     "16": { "$type": "dimension", "$value": "16px" },
-    "18": { "$type": "dimension", "$value": "18px" },
-    "22": { "$type": "dimension", "$value": "22px" },
-    "26": { "$type": "dimension", "$value": "26px" },
+    "20": { "$type": "dimension", "$value": "20px" },
+    "24": { "$type": "dimension", "$value": "24px" },
     "32": { "$type": "dimension", "$value": "32px" },
     "40": { "$type": "dimension", "$value": "40px" },
     "48": { "$type": "dimension", "$value": "48px" },
+    "56": { "$type": "dimension", "$value": "56px" },
     "64": { "$type": "dimension", "$value": "64px" },
     "80": { "$type": "dimension", "$value": "80px" }
   },
 
   "radius": {
-    "sm": { "$type": "dimension", "$value": "8px" },
-    "md": {
-      "$type": "dimension",
-      "$value": "10px",
-      "$description": "El radio de inputs y del toggle en el waitlist."
-    },
-    "lg": { "$type": "dimension", "$value": "16px" },
-    "xl": { "$type": "dimension", "$value": "24px" },
-    "pill": { "$type": "dimension", "$value": "999px" },
-    "circle": { "$type": "dimension", "$value": "50%" }
+    "$description": "De 6 valores observados (2, 5, 8, 20, 40, 75) a 5 tokens. El 20, el 40 y el 75 colapsan en `full` porque en todos los casos se aplican a elementos que quedan completamente redondeados: botones circulares de 40px, la barra de búsqueda de Max y las pills. `none` es el valor por defecto de cards e imágenes — las mesas son mayoritariamente de esquina viva y eso es parte del carácter del sistema.",
+    "none": { "$type": "dimension", "$value": "0px" },
+    "xs": { "$type": "dimension", "$value": "2px" },
+    "s": { "$type": "dimension", "$value": "4px" },
+    "m": { "$type": "dimension", "$value": "8px" },
+    "full": { "$type": "dimension", "$value": "999px" }
   },
 
   "control": {
-    "$description": "Alturas de los elementos interactivos. El mínimo es 44px, que es el área táctil mínima recomendada por WCAG 2.1 (2.5.5 Target Size).",
+    "$description": "Alturas de los elementos interactivos, tomadas de los tres tamaños de botón de las mesas. ATENCIÓN: el tamaño `s` (32px) cumple WCAG 2.5.8 (AA, 24×24) pero no 2.5.5 (AAA, 44×44). Es una decisión de diseño consciente, no un descuido: si un control `s` va a ser el único destino táctil de una acción importante en móvil, usá `m` o dale área con padding alrededor.",
     "height": {
-      "sm": { "$type": "dimension", "$value": "44px" },
-      "md": { "$type": "dimension", "$value": "52px" },
-      "lg": {
-        "$type": "dimension",
-        "$value": "56px",
-        "$description": "Normaliza los 56px del botón de bloque y los 57px del botón del hero. La diferencia de 1px no era intencional."
-      }
+      "s": { "$type": "dimension", "$value": "32px" },
+      "m": { "$type": "dimension", "$value": "40px" },
+      "l": { "$type": "dimension", "$value": "48px" }
     }
   },
 
   "border-width": {
-    "thin": { "$type": "dimension", "$value": "1px" },
-    "focus": { "$type": "dimension", "$value": "2px" }
+    "thin": { "$type": "dimension", "$value": "1px", "$description": "Todo por defecto — 16 usos observados." },
+    "thick": { "$type": "dimension", "$value": "2px", "$description": "Énfasis y estado activo — 2 usos observados." }
+  },
+
+  "shadow": {
+    "$description": "No hay una sola sombra en las dos mesas: la separación se hace con borde y superficie. Que no haya sombras no es un olvido, es el carácter del sistema —plano, editorial, de hairline— y está escrito para que no se filtren las sombras suaves que traen las librerías por defecto.",
+    "none": { "$type": "shadow", "$value": "none" },
+    "overlay": {
+      "$type": "shadow",
+      "$value": "0 8px 24px rgba(0, 0, 0, 0.12)",
+      "$description": "Única excepción: megamenú, drawer, modal y toast, que flotan sobre contenido y necesitan despegarse."
+    }
   },
 
   "focus": {
@@ -70,17 +71,11 @@
     "out": { "$type": "cubicBezier", "$value": [0, 0, 0.2, 1] }
   },
 
-  "elevation": {
-    "none": { "$type": "shadow", "$value": "none" },
-    "sm": { "$type": "shadow", "$value": "0 1px 2px rgba(21, 21, 21, 0.06)" },
-    "md": { "$type": "shadow", "$value": "0 4px 16px rgba(21, 21, 21, 0.08)" },
-    "lg": { "$type": "shadow", "$value": "0 12px 40px rgba(21, 21, 21, 0.12)" }
-  },
-
   "breakpoint": {
-    "sm": { "$type": "dimension", "$value": "480px" },
+    "$description": "Alineados con docs/design-system/responsive.md del frontend. El rango soportado es 320–1920px: 320 es el piso real, no hay breakpoint debajo, así que todo componente tiene que sobrevivir ahí por diseño fluido. Recordá que estos son de viewport y solo los usa un componente transformacional (T); un componente de contenedor (C) usa @container.",
+    "sm": { "$type": "dimension", "$value": "640px" },
     "md": { "$type": "dimension", "$value": "768px" },
     "lg": { "$type": "dimension", "$value": "1024px" },
-    "xl": { "$type": "dimension", "$value": "1280px" }
+    "xl": { "$type": "dimension", "$value": "1440px" }
   }
 }

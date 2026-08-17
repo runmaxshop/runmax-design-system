@@ -47,9 +47,9 @@ export const Tamanos: Story = {
   name: 'Tamaños',
   render: (args) => (
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-      <Button {...args} size="sm">Small · 44px</Button>
-      <Button {...args} size="md">Medium · 52px</Button>
-      <Button {...args} size="lg">Large · 56px</Button>
+      <Button {...args} size="sm">Small · 32px</Button>
+      <Button {...args} size="md">Medium · 40px</Button>
+      <Button {...args} size="lg">Large · 48px</Button>
     </div>
   ),
 }

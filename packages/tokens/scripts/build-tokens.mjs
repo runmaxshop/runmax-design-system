@@ -173,7 +173,7 @@ export type Tokens = typeof tokens
 
 /**
  * Nombre de la variable CSS de un token, para interpolarla en estilos:
- *   \`color: var(\${cssVar('text.muted')})\`
+ *   \`color: var(\${cssVar('text.tertiary')})\`
  */
 export function cssVar(path: string): string {
   return '--${PREFIX}-' + path.split('.').join('-')

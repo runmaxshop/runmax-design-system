@@ -1,44 +1,122 @@
-/* Tipografía -------------------------------------------------------------- */
+/* Tipografía --------------------------------------------------------------
+ *
+ * Las clases son los roles de la escala, no tamaños. Cada rol trae tamaño,
+ * interlineado, peso y tracking juntos: es lo que evita que alguien elija un
+ * 24px con el interlineado de un párrafo. */
+
+/* Display — titulares. ExtraBold Italic en mayúsculas, como en las mesas. */
 
 .rmx-heading {
   margin: 0;
   font-family: var(--rmx-font-family-display);
-  font-weight: var(--rmx-font-weight-semibold);
-  line-height: var(--rmx-font-line-height-display);
   text-wrap: balance;
 }
 
-.rmx-heading--56 { font-size: var(--rmx-font-size-56); }
-.rmx-heading--40 { font-size: var(--rmx-font-size-40); }
-.rmx-heading--30 { font-size: var(--rmx-font-size-30); }
-.rmx-heading--24 { font-size: var(--rmx-font-size-24); }
-.rmx-heading--18 { font-size: var(--rmx-font-size-18); }
+.rmx-heading--display-xl,
+.rmx-heading--display-l,
+.rmx-heading--display-m,
+.rmx-heading--display-s {
+  font-weight: var(--rmx-font-weight-extrabold);
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: var(--rmx-font-tracking-none);
+}
+
+.rmx-heading--display-xl {
+  font-size: var(--rmx-font-size-display-xl);
+  line-height: var(--rmx-font-line-height-display-xl);
+}
+.rmx-heading--display-l {
+  font-size: var(--rmx-font-size-display-l);
+  line-height: var(--rmx-font-line-height-display-l);
+}
+.rmx-heading--display-m {
+  font-size: var(--rmx-font-size-display-m);
+  line-height: var(--rmx-font-line-height-display-m);
+}
+.rmx-heading--display-s {
+  font-size: var(--rmx-font-size-display-s);
+  line-height: var(--rmx-font-line-height-display-s);
+}
+
+/* Heading — titulares de sección, sin la carga del display. */
+
+.rmx-heading--heading-m,
+.rmx-heading--heading-s {
+  font-weight: var(--rmx-font-weight-bold);
+}
+
+.rmx-heading--heading-m {
+  font-size: var(--rmx-font-size-heading-m);
+  line-height: var(--rmx-font-line-height-heading-m);
+}
+.rmx-heading--heading-s {
+  font-size: var(--rmx-font-size-heading-s);
+  line-height: var(--rmx-font-line-height-heading-s);
+}
+
+/* Cuerpo y roles de interfaz */
 
 .rmx-text {
   margin: 0;
   font-family: var(--rmx-font-family-body);
-  line-height: var(--rmx-font-line-height-normal);
 }
 
-.rmx-text--18 { font-size: var(--rmx-font-size-18); }
-.rmx-text--17 { font-size: var(--rmx-font-size-17); }
-.rmx-text--16 { font-size: var(--rmx-font-size-16); }
-.rmx-text--14 { font-size: var(--rmx-font-size-14); }
-.rmx-text--13 { font-size: var(--rmx-font-size-13); line-height: var(--rmx-font-line-height-relaxed); }
+.rmx-text--body-l {
+  font-size: var(--rmx-font-size-body-l);
+  line-height: var(--rmx-font-line-height-body-l);
+}
+.rmx-text--body-m {
+  font-size: var(--rmx-font-size-body-m);
+  line-height: var(--rmx-font-line-height-body-m);
+}
+.rmx-text--body-s {
+  font-size: var(--rmx-font-size-body-s);
+  line-height: var(--rmx-font-line-height-body-s);
+}
+
+/* Label, price y overline van en la condensada: son interfaz, no lectura. */
+
+.rmx-text--label-m {
+  font-family: var(--rmx-font-family-display);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  font-weight: var(--rmx-font-weight-medium);
+}
+
+.rmx-text--price-m {
+  font-family: var(--rmx-font-family-display);
+  font-size: var(--rmx-font-size-price-m);
+  line-height: var(--rmx-font-line-height-price-m);
+  font-weight: var(--rmx-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.rmx-text--overline-m {
+  font-family: var(--rmx-font-family-display);
+  font-size: var(--rmx-font-size-overline-m);
+  line-height: var(--rmx-font-line-height-overline-m);
+  font-weight: var(--rmx-font-weight-bold);
+  letter-spacing: var(--rmx-font-tracking-overline);
+  text-transform: uppercase;
+}
 
 /* Tonos, compartidos por Heading y Text */
 
-.rmx-tone--default    { color: var(--rmx-text-default); }
-.rmx-tone--strong     { color: var(--rmx-text-strong); }
-.rmx-tone--deep       { color: var(--rmx-text-deep); }
-.rmx-tone--muted      { color: var(--rmx-text-muted); }
-.rmx-tone--subtle     { color: var(--rmx-text-subtle); }
-.rmx-tone--danger     { color: var(--rmx-text-danger); }
-.rmx-tone--on-inverse { color: var(--rmx-text-on-inverse); }
+.rmx-tone--primary   { color: var(--rmx-text-primary); }
+.rmx-tone--secondary { color: var(--rmx-text-secondary); }
+.rmx-tone--tertiary  { color: var(--rmx-text-tertiary); }
+.rmx-tone--inverse   { color: var(--rmx-text-inverse); }
+.rmx-tone--danger    { color: var(--rmx-text-danger); }
 
-.rmx-weight--regular  { font-weight: var(--rmx-font-weight-regular); }
-.rmx-weight--medium   { font-weight: var(--rmx-font-weight-medium); }
-.rmx-weight--semibold { font-weight: var(--rmx-font-weight-semibold); }
+/* El lima solo es legible sobre oscuro: 1.8:1 sobre blanco, 11.9:1 sobre negro.
+   El tono existe para los bloques oscuros; no lo pongas sobre el fondo claro. */
+.rmx-tone--accent    { color: var(--rmx-text-accent); }
+
+.rmx-weight--regular   { font-weight: var(--rmx-font-weight-regular); }
+.rmx-weight--medium    { font-weight: var(--rmx-font-weight-medium); }
+.rmx-weight--semibold  { font-weight: var(--rmx-font-weight-semibold); }
+.rmx-weight--bold      { font-weight: var(--rmx-font-weight-bold); }
 
 .rmx-align--start  { text-align: left; }
 .rmx-align--center { text-align: center; }

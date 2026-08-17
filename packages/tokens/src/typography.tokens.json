@@ -1,45 +1,63 @@
 {
-  "$description": "Tipografía. Dos familias, como en el waitlist: Barlow Condensed para titulares y Barlow para texto corrido.",
+  "$description": "Tipografía. La escala es por ROL, no por tamaño: `body-m` dice para qué sirve, `14` solo dice cuánto mide, y dos roles distintos que hoy miden lo mismo mañana no tienen por qué seguir midiéndolo. Cada rol trae su tamaño, su interlineado y su tracking resueltos — es el arreglo de mayor impacto visual de la auditoría: 73 de 74 segmentos de las mesas estaban en line-height AUTO, que en Barlow Condensed cae en ~1.21 sin importar el tamaño. Sirve para un titular de 64px, aprieta un párrafo de 14 y deja demasiado aire en un label.",
+
   "font": {
     "family": {
       "display": {
         "$type": "fontFamily",
-        "$value": ["Barlow Condensed", "Barlow", "system-ui", "sans-serif"]
+        "$value": ["Barlow Condensed", "Barlow", "system-ui", "sans-serif"],
+        "$description": "Display, labels, navegación, precios y badges: donde la compresión es una virtud."
       },
       "body": {
         "$type": "fontFamily",
-        "$value": ["Barlow", "system-ui", "sans-serif"]
+        "$value": ["Barlow", "system-ui", "sans-serif"],
+        "$description": "Cuerpo de texto. Una condensada a 14px en párrafos de varias líneas es el uso para el que menos está pensada, y la descripción del PDP es justo donde el usuario decide la compra. Barlow ya aparecía en las mesas, así que no es un tipo ajeno al sistema."
       }
     },
+
     "weight": {
       "regular": { "$type": "fontWeight", "$value": 400 },
       "medium": { "$type": "fontWeight", "$value": 500 },
       "semibold": { "$type": "fontWeight", "$value": 600 },
-      "bold": { "$type": "fontWeight", "$value": 700 }
+      "bold": { "$type": "fontWeight", "$value": 700 },
+      "extrabold": { "$type": "fontWeight", "$value": 800, "$description": "Solo display: en las mesas los titulares son ExtraBold Italic en mayúsculas." }
     },
+
     "size": {
-      "$description": "El nombre es el tamaño en px, para que nadie tenga que memorizar a qué equivale una 'md'.",
-      "13": { "$type": "dimension", "$value": "13px" },
-      "14": { "$type": "dimension", "$value": "14px" },
-      "16": { "$type": "dimension", "$value": "16px" },
-      "17": { "$type": "dimension", "$value": "17px" },
-      "18": { "$type": "dimension", "$value": "18px" },
-      "24": { "$type": "dimension", "$value": "24px" },
-      "30": { "$type": "dimension", "$value": "30px" },
-      "40": { "$type": "dimension", "$value": "40px" },
-      "56": { "$type": "dimension", "$value": "56px" }
+      "display-xl": { "$type": "dimension", "$value": "64px" },
+      "display-l": { "$type": "dimension", "$value": "40px" },
+      "display-m": { "$type": "dimension", "$value": "32px" },
+      "display-s": { "$type": "dimension", "$value": "24px" },
+      "heading-m": { "$type": "dimension", "$value": "24px" },
+      "heading-s": { "$type": "dimension", "$value": "20px" },
+      "body-l": { "$type": "dimension", "$value": "16px" },
+      "body-m": { "$type": "dimension", "$value": "14px" },
+      "body-s": { "$type": "dimension", "$value": "12px" },
+      "label-m": { "$type": "dimension", "$value": "14px" },
+      "price-m": { "$type": "dimension", "$value": "16px" },
+      "overline-m": { "$type": "dimension", "$value": "12px" }
     },
+
     "line-height": {
-      "display": {
-        "$type": "number",
-        "$value": 1.088,
-        "$description": "El interlineado exacto de los titulares del waitlist. Se conserva tal cual para no mover el diseño ya aprobado."
-      },
-      "tight": { "$type": "number", "$value": 1.2 },
-      "snug": { "$type": "number", "$value": 1.3 },
-      "normal": { "$type": "number", "$value": 1.4 },
-      "relaxed": { "$type": "number", "$value": 1.45 },
-      "loose": { "$type": "number", "$value": 1.6 }
+      "$description": "Ceñido en display (1.00–1.08), holgado en cuerpo (1.33–1.50). Van como número sin unidad para que hereden bien al anidar.",
+      "display-xl": { "$type": "number", "$value": 1 },
+      "display-l": { "$type": "number", "$value": 1.05 },
+      "display-m": { "$type": "number", "$value": 1.06 },
+      "display-s": { "$type": "number", "$value": 1.08 },
+      "heading-m": { "$type": "number", "$value": 1.17 },
+      "heading-s": { "$type": "number", "$value": 1.2 },
+      "body-l": { "$type": "number", "$value": 1.5 },
+      "body-m": { "$type": "number", "$value": 1.43 },
+      "body-s": { "$type": "number", "$value": 1.33 },
+      "label-m": { "$type": "number", "$value": 1.29 },
+      "price-m": { "$type": "number", "$value": 1.25 },
+      "overline-m": { "$type": "number", "$value": 1.33 }
+    },
+
+    "tracking": {
+      "$description": "El tracking de 60% que aparece en 2 nodos de las mesas es el lettering del wordmark, no un estilo de texto, y por eso no está aquí.",
+      "none": { "$type": "dimension", "$value": "0em" },
+      "overline": { "$type": "dimension", "$value": "0.1em", "$description": "El overline de marca: «ON CLOUD», «MÁS VENDIDO»." }
     }
   }
 }

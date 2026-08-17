@@ -57,7 +57,7 @@ export const Completo: StoryObj = {
 
     return (
       <Card style={{ width: 380, maxWidth: '100%' }}>
-        <Heading level={2} size="30" style={{ marginBottom: 22 }}>
+        <Heading level={2} size="display-m" style={{ marginBottom: 24 }}>
           Aparta tu lugar
         </Heading>
 
@@ -126,7 +126,7 @@ export const Completo: StoryObj = {
             </Button>
           </div>
 
-          <Text size="13" tone="muted" align="center" style={{ marginTop: 14 }}>
+          <Text size="body-s" tone="tertiary" align="center" style={{ marginTop: 16 }}>
             Al unirte, autorizas el uso de tus datos para enviarte tu invitación y novedades
             exclusivas.
           </Text>

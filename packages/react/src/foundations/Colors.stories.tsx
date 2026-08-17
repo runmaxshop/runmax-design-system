@@ -76,8 +76,13 @@ export const Semanticos: StoryObj = {
         prefix="text."
         note="Color de texto por rol. Todos los pares texto/fondo de esta página están verificados contra WCAG 2.1 por `npm run check:contrast`, que corre en CI."
       />
-      <Group title="Superficies" prefix="surface." />
+      <Group
+        title="Superficies"
+        prefix="bg."
+        note="`bg.page` es un off-white cálido, no blanco: el blanco queda para las superficies que se levantan sobre la página (cards, navbar, modales). `bg.inverse` es negro y es la acción; `bg.highlight` es el lima y es destaque."
+      />
       <Group title="Bordes" prefix="border." />
+      <Group title="Velos" prefix="scrim." />
     </>
   ),
 }
@@ -87,9 +92,9 @@ export const Primitivos: StoryObj = {
   render: () => (
     <>
       <Group
-        title="Lime — verde de marca"
+        title="Lime — acento de marca"
         prefix="color.lime"
-        note="El 500 (#AAFF00) es el verde oficial de RunMax. El 600 es el hover. `lime.mist` es el verde pálido del fondo de la sección de registro: no está en la rampa porque no es una luminancia del mismo tono, pero producción depende de él."
+        note="El 500 (#B8CE00) es el lima de marca, tomado de las mesas de Figma. Es **acento, no acción**: sobre blanco da 1.8:1 y no se puede usar como texto sobre claro. El 100 es la superficie del badge de destaque; el 400 es la tinta y el foco sobre oscuro."
       />
       <Group title="Neutrales" prefix="color.neutral" />
       <Group title="Feedback" prefix="color.danger" />

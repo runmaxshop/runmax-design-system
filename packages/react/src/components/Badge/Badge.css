@@ -1,38 +1,52 @@
-/* Badge ------------------------------------------------------------------- */
+/* Badge -------------------------------------------------------------------
+ *
+ * El badge usa el rol `overline`: 12px bold en mayúsculas con tracking. En las
+ * mesas todos los badges están así («MÁS VENDIDO», «NUEVO», la marca sobre la
+ * ProductCard), y la escala por rol ya no tiene un tamaño suelto de 13px al que
+ * caer. */
 
 .rmx-badge {
   display: inline-flex;
   align-items: center;
-  padding: var(--rmx-space-4) var(--rmx-space-12);
-  border-radius: var(--rmx-radius-pill);
-  font-family: var(--rmx-font-family-body);
-  font-weight: var(--rmx-font-weight-medium);
-  font-size: var(--rmx-font-size-13);
-  line-height: var(--rmx-font-line-height-snug);
+  padding: var(--rmx-space-4) var(--rmx-space-8);
+  border: var(--rmx-border-width-thin) solid transparent;
+  border-radius: var(--rmx-radius-none);
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-bold);
+  font-size: var(--rmx-font-size-overline-m);
+  line-height: var(--rmx-font-line-height-overline-m);
+  letter-spacing: var(--rmx-font-tracking-overline);
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .rmx-badge--neutral {
-  background: var(--rmx-surface-field);
-  color: var(--rmx-text-subtle);
+  background: var(--rmx-bg-surface);
+  border-color: var(--rmx-border-strong);
+  color: var(--rmx-text-primary);
 }
 
 .rmx-badge--brand {
-  background: var(--rmx-surface-brand);
-  color: var(--rmx-text-on-brand);
+  background: var(--rmx-bg-highlight);
+  color: var(--rmx-text-primary);
+}
+
+.rmx-badge--inverse {
+  background: var(--rmx-bg-inverse);
+  color: var(--rmx-text-inverse);
 }
 
 .rmx-badge--success {
-  background: var(--rmx-color-success-50);
-  color: var(--rmx-color-success-500);
+  background: var(--rmx-bg-success-subtle);
+  color: var(--rmx-text-success);
 }
 
 .rmx-badge--warning {
-  background: var(--rmx-color-warning-50);
-  color: var(--rmx-color-warning-500);
+  background: var(--rmx-bg-warning-subtle);
+  color: var(--rmx-text-warning);
 }
 
 .rmx-badge--danger {
-  background: var(--rmx-color-danger-50);
-  color: var(--rmx-color-danger-500);
+  background: var(--rmx-bg-danger-subtle);
+  color: var(--rmx-text-danger);
 }
