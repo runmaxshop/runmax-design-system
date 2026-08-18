@@ -50,6 +50,7 @@
     "field-hover": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Hover de campos y chips. Un paso más oscuro, dentro de la rampa cálida." },
     "inverse": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Botón primario, chip de talla activa. La acción es negra." },
     "inverse-hover": { "$type": "color", "$value": "{color.neutral.900}", "$description": "Hover del negro: aclara a la tinta cálida en vez de oscurecer, que ya no se puede." },
+    "disabled": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Relleno de control inactivo. Comparte valor con `field-hover` y `border.subtle`: son tres roles distintos que hoy caen en el mismo gris, y el nombre dice cuál es cuál." },
     "highlight": { "$type": "color", "$value": "{color.lime.100}", "$description": "Badge «Más vendido», destacados. El lima es superficie, no acción." },
     "highlight-hover": { "$type": "color", "$value": "{color.lime.200}" },
     "danger-subtle": { "$type": "color", "$value": "{color.danger.50}" },
@@ -79,6 +80,11 @@
     "subtle": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Divisores internos de card." },
     "default": { "$type": "color", "$value": "{color.neutral.300}", "$description": "Inputs, contenedores." },
     "strong": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Botón secundario, botón circular, chip." },
+    "hover": {
+      "$type": "color",
+      "$value": "{color.neutral.600}",
+      "$description": "Borde de control en hover. El escalón que faltaba: `default` da 1.43:1 sobre el relleno del campo —apenas se insinúa— y el foco es negro. Este da 5.40:1 sobre el relleno y 4.90:1 sobre el fondo de página, los dos por encima del 3:1 de WCAG 1.4.11. `neutral.500` se descartó: 2.88:1 sobre el fondo de página, no llega."
+    },
     "inverse": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Controles sobre foto." },
     "focus": {
       "$type": "color",

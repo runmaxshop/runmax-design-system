@@ -2,6 +2,34 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.4.0] — 2026-08-18
+
+Le toca al `Input`, y con el mismo criterio que al `Button`: primero se construyó el
+componente en Figma —que no existía— y después se trajo el código a lo que dice el archivo.
+
+### Añadido
+
+- **`border.hover` (`neutral.600`, #6B6660)**, el escalón que faltaba. En reposo el campo lleva
+  `border.default`, que da 1.43:1 sobre su relleno y apenas se insinúa; el foco es negro. Sin
+  nada en medio, el hover no tenía dónde caer. Este da **5.40:1** sobre el relleno y **4.90:1**
+  sobre el fondo de página, los dos por encima del 3:1 que pide WCAG 1.4.11. `neutral.500`
+  —más parecido al gris de la referencia— se descartó por 2.88:1 sobre el fondo de página.
+- **`bg.disabled` (`neutral.200`)**, relleno de control inactivo. Comparte valor con
+  `bg.field-hover` y `border.subtle`: tres roles distintos que hoy caen en el mismo gris.
+- **Estado hover y estado deshabilitado en el campo**, que no existían.
+- Los dos pares de `border.hover` entran en `contrast.config.json`. Son 29 pares verificados.
+
+### Cambiado — roturas
+
+- **El campo mide 48, no 40.** Pasa de `control.height.m` a `control.height.l`. El motivo es
+  que un campo de texto necesita más aire que un botón, y es el alto con el que está dibujado.
+- **Esquina viva**: `radius.none` en vez de `radius.m`. La esquina viva es el carácter del
+  sistema y es lo que pide el archivo de diseño.
+- **En reposo el borde se ve.** Antes era `1px solid transparent`; ahora es `border.default`.
+- **El botón que alinea con un campo pasa de `m` a `l`.** Es consecuencia directa de lo
+  anterior, y corrige lo que decía la documentación de `Button` en 0.3.0: mientras el campo
+  midió 40, el que alineaba era `m`.
+
 ## [0.3.0] — 2026-08-17
 
 `Button` pasa a decir lo mismo que Figma, y la escala de alturas de control queda escrita como

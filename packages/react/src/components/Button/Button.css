@@ -69,8 +69,9 @@
 /* Tamaños
  *
  * El alto sale de `control.height` —32 · 40 · 48— y no de la suma del padding
- * vertical: es lo que mantiene el botón `m` alineado con un input, que mide lo
- * mismo. El padding vertical es 0 a propósito; centra el flexbox. */
+ * vertical: es lo que mantiene el botón alineado con un input, que sale de la
+ * misma escala y mide 48. El padding vertical es 0 a propósito; centra el
+ * flexbox. */
 
 .rmx-button--s {
   height: var(--rmx-control-height-s);
