@@ -72,11 +72,19 @@
   border-color: var(--rmx-border-focus);
 }
 
-/* El foco no puede depender solo del color: se refuerza con un anillo para
-   quien no distinga el cambio de borde. */
-.rmx-input:focus-visible {
-  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
-  outline-offset: var(--rmx-focus-offset);
+/* Sin anillo a propósito: el foco es el borde negro y nada más, igual que en
+ * Figma. El anillo tenía sentido cuando el borde en reposo era transparente;
+ * con un borde visible en reposo se leía como un segundo contorno. La
+ * contrapartida está anotada en `$known-gaps` de contrast.config.json.
+ *
+ * En modo de colores forzados sí vuelve: ahí el sistema pisa todos los colores,
+ * el negro del foco pasa a ser el mismo que el del reposo y el borde deja de
+ * señalar nada. */
+@media (forced-colors: active) {
+  .rmx-input:focus-visible {
+    outline: var(--rmx-focus-width) solid Highlight;
+    outline-offset: var(--rmx-focus-offset);
+  }
 }
 
 /* Después del foco a propósito: en un campo con error, el error manda. */

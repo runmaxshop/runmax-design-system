@@ -2,6 +2,21 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.4.1] — 2026-08-18
+
+### Cambiado
+
+- **El campo enfocado deja de dibujar el anillo de foco.** El foco es ahora el borde negro y
+  nada más, que es lo que muestra Figma. El anillo tenía sentido cuando el borde en reposo era
+  transparente —el foco era «aparece un borde»—; desde 0.4.0 el borde se ve en reposo, así que
+  el foco pasó a ser un cambio de color y el anillo encima se leía como un segundo contorno.
+- **Es una decisión consciente con un costo, anotado en `$known-gaps`.** El contraste entre
+  enfocado y reposo sobra (#D5D2CB → #000000), pero WCAG 2.2 (2.4.11, *Focus Appearance*) pide
+  además que el indicador ocupe al menos el equivalente a un perímetro de 2px, y 1px no llega.
+- **El `Button` conserva su anillo**, porque ahí es el único indicador de foco que existe.
+- En modo de colores forzados el anillo del campo vuelve: ahí el sistema pisa todos los colores,
+  el negro del foco pasa a ser el mismo que el del reposo y el borde dejaría de señalar nada.
+
 ## [0.4.0] — 2026-08-18
 
 Le toca al `Input`, y con el mismo criterio que al `Button`: primero se construyó el
