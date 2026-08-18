@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Button } from '../components/Button/Button'
 import { Card } from '../components/Card/Card'
 import { Chip, ChipGroup } from '../components/Chip/Chip'
-import { Field, Input } from '../components/Field/Field'
+import { TextField, Input } from '../components/TextField/TextField'
 import { Heading, Text } from '../components/Text/Text'
 import { SegmentedControl } from '../components/SegmentedControl/SegmentedControl'
 
@@ -69,7 +69,7 @@ export const Completo: StoryObj = {
             onChange={setIntent}
           />
 
-          <Field label="Tu correo" error={error}>
+          <TextField label="Tu correo" error={error}>
             {({ id, describedBy, invalid }) => (
               <Input
                 id={id}
@@ -85,9 +85,9 @@ export const Completo: StoryObj = {
                 }}
               />
             )}
-          </Field>
+          </TextField>
 
-          <Field label="¿Qué deporte practicas?" optionalText="(opcional)">
+          <TextField label="¿Qué deporte practicas?" optionalText="(opcional)">
             {({ id }) => (
               <>
                 <Input
@@ -112,7 +112,7 @@ export const Completo: StoryObj = {
                 </div>
               </>
             )}
-          </Field>
+          </TextField>
 
           <div style={{ marginTop: 26 }}>
             <Button

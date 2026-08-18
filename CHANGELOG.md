@@ -2,6 +2,25 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.5.0] — 2026-08-18
+
+Las dos cosas salieron de probar el componente en Storybook, no de leerlo.
+
+### Cambiado — roturas
+
+- **`Field` pasa a llamarse `TextField`.** Con él, el tipo `FieldProps` → `TextFieldProps`, las
+  clases `rmx-field*` → `rmx-textfield*` y la ruta del módulo. `Input` no cambia. Los ficheros
+  se movieron con `git mv`, así que el historial de cada uno sigue entero. En Figma la capa
+  interna del componente se renombró igual, para que las dos partes se llamen lo mismo.
+- **`border.hover` pasa de `neutral.600` (#6B6660) a `neutral.500` (#918C84).** A 1px, el
+  #6B6660 y el negro del foco se leían idénticos: el hover no informaba de nada. Ahora es un
+  gris claramente por debajo del negro.
+- **Ese cambio tiene un costo declarado.** `neutral.500` da 3.17:1 sobre el relleno del campo y
+  3.34:1 sobre blanco —los dos por encima del 3:1 de WCAG 1.4.11—, pero **2.88:1 sobre el fondo
+  de página**, que no llega. El par contra `bg.page` se retira de `contrast.config.json` y pasa
+  a `$known-gaps`. Se prefirió que hover y foco se distingan a ganar los 0.12 que faltaban:
+  un hover indistinguible del foco no informa de nada, por mucho contraste que tenga.
+
 ## [0.4.1] — 2026-08-18
 
 ### Cambiado

@@ -44,7 +44,7 @@ variables `--rmx-*` en toda la app.
 ## 3. Usarla
 
 ```tsx
-import { Button, Field, Input, Chip, ChipGroup } from '@runmaxshop/react'
+import { Button, TextField, Input, Chip, ChipGroup } from '@runmaxshop/react'
 ```
 
 ## 4. Convivencia con lo que ya existe

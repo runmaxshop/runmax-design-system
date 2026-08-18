@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import { Button } from '../Button/Button'
-import { Field, Input } from './Field'
+import { TextField, Input } from './TextField'
 
 const meta = {
-  title: 'Componentes/Field',
-  component: Field,
+  title: 'Componentes/TextField',
+  component: TextField,
   parameters: {
     layout: 'padded',
     docs: {
       description: {
         component:
-          '`Field` conecta la etiqueta, la pista y el error con el campo (`htmlFor`, `aria-describedby`, `aria-invalid`) para que nadie tenga que acordarse de hacerlo a mano. Por eso `children` es una función: recibe el `id` que genera el propio componente, y así no hay forma de cablearlo mal.',
+          '`TextField` conecta la etiqueta, la pista y el error con el campo (`htmlFor`, `aria-describedby`, `aria-invalid`) para que nadie tenga que acordarse de hacerlo a mano. Por eso `children` es una función: recibe el `id` que genera el propio componente, y así no hay forma de cablearlo mal.',
       },
     },
   },
-} satisfies Meta<typeof Field>
+} satisfies Meta<typeof TextField>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -25,7 +25,7 @@ export const Basico: Story = {
   args: { label: 'Tu correo', children: () => null },
   render: (args) => (
     <div style={{ maxWidth: 380 }}>
-      <Field {...args} label="Tu correo">
+      <TextField {...args} label="Tu correo">
         {({ id, describedBy, invalid }) => (
           <Input
             id={id}
@@ -36,7 +36,7 @@ export const Basico: Story = {
             autoComplete="email"
           />
         )}
-      </Field>
+      </TextField>
     </div>
   ),
 }
@@ -46,7 +46,7 @@ export const ConOpcionalYPista: Story = {
   args: { label: '', children: () => null },
   render: () => (
     <div style={{ maxWidth: 380 }}>
-      <Field
+      <TextField
         label="¿Qué deporte practicas?"
         optionalText="(opcional)"
         hint="Escríbelo a tu manera, no hay lista cerrada."
@@ -54,7 +54,7 @@ export const ConOpcionalYPista: Story = {
         {({ id, describedBy }) => (
           <Input id={id} aria-describedby={describedBy} placeholder="Running, trail, hyrox…" />
         )}
-      </Field>
+      </TextField>
     </div>
   ),
 }
@@ -65,7 +65,7 @@ export const ConError: Story = {
   args: { label: '', children: () => null },
   render: () => (
     <div style={{ maxWidth: 380 }}>
-      <Field label="Tu correo" error="Escribe un correo válido para unirte a la lista.">
+      <TextField label="Tu correo" error="Escribe un correo válido para unirte a la lista.">
         {({ id, describedBy, invalid }) => (
           <Input
             id={id}
@@ -75,7 +75,7 @@ export const ConError: Story = {
             defaultValue="nombre@"
           />
         )}
-      </Field>
+      </TextField>
     </div>
   ),
 }
@@ -90,7 +90,7 @@ export const Interactivo: Story = {
 
     return (
       <div style={{ maxWidth: 380 }}>
-        <Field label="Tu correo" error={error}>
+        <TextField label="Tu correo" error={error}>
           {({ id, describedBy, invalid }) => (
             <Input
               id={id}
@@ -103,7 +103,7 @@ export const Interactivo: Story = {
               onBlur={() => setTouched(true)}
             />
           )}
-        </Field>
+        </TextField>
       </div>
     )
   },
@@ -123,19 +123,19 @@ export const Estados: Story = {
   args: { label: '', children: () => null },
   render: () => (
     <div style={{ display: 'grid', gap: 24, maxWidth: 380 }}>
-      <Field label="Rest — pasa el ratón para ver el hover">
+      <TextField label="Rest — pasa el ratón para ver el hover">
         {({ id }) => <Input id={id} placeholder="Correo electrónico" />}
-      </Field>
+      </TextField>
 
-      <Field label="Error" error="Escribe un correo válido para unirte a la lista.">
+      <TextField label="Error" error="Escribe un correo válido para unirte a la lista.">
         {({ id, describedBy, invalid }) => (
           <Input id={id} aria-describedby={describedBy} invalid={invalid} defaultValue="nombre@" />
         )}
-      </Field>
+      </TextField>
 
-      <Field label="Disabled">
+      <TextField label="Disabled">
         {({ id }) => <Input id={id} placeholder="Correo electrónico" disabled />}
-      </Field>
+      </TextField>
     </div>
   ),
 }
@@ -150,9 +150,9 @@ export const AlineadoConUnBoton: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end', maxWidth: 460 }}>
       <div style={{ flex: 1 }}>
-        <Field label="Tu correo">
+        <TextField label="Tu correo">
           {({ id }) => <Input id={id} type="email" placeholder="nombre@correo.com" />}
-        </Field>
+        </TextField>
       </div>
       <Button size="l">Unirme</Button>
     </div>
