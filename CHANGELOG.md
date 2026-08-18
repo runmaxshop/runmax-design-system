@@ -18,8 +18,11 @@ el token.
   atado a ella: el número dejó de estar suelto en el archivo de diseño.
 - **`font.size.label-s` (12px) y `font.size.label-l` (16px)**, con sus interlineados
   (1.33 y 1.25). La rampa de label tenía un solo escalón y el botón necesitaba los tres.
-- **Variante `secondary`**: blanca con borde de 1px. Estaba dibujada en Figma y no existía
-  en código.
+- **Variante `secondary`**: solo relleno blanco, sin contorno. Estaba dibujada en Figma y no
+  existía en código. Se apoya en su relleno igual que el input, así que **no va sobre
+  `bg.surface`**: blanco sobre blanco no se distingue. Sobre `bg.page` da 1.16:1, por debajo
+  del 3:1 que pide WCAG 1.4.11 para el contorno de un control — queda anotado en
+  `$known-gaps`.
 
 ### Cambiado — roturas
 

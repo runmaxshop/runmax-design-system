@@ -48,9 +48,10 @@
   background: var(--rmx-bg-inverse-hover);
 }
 
+/* Sin contorno: se apoya solo en su relleno, igual que el input. Blanco sobre
+ * el fondo de página da 1.16:1, así que no va sobre `bg.surface`. */
 .rmx-button--secondary {
   background: var(--rmx-bg-surface);
-  border-color: var(--rmx-border-strong);
   color: var(--rmx-text-primary);
 }
 .rmx-button--secondary:hover:not(:disabled) {

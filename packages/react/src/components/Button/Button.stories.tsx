@@ -11,7 +11,7 @@ const meta = {
       description: {
         component:
           'El botón de RunMax. `primary` es negro —la acción en RunMax es negra, no lima— ' +
-          '`secondary` lleva borde de 1px y `ghost` no tiene contenedor. `rect` va en ' +
+          '`secondary` es solo relleno blanco y `ghost` no tiene contenedor. `rect` va en ' +
           'formularios y PDP; `pill`, sobre foto.',
       },
     },

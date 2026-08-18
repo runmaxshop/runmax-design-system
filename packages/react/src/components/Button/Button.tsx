@@ -13,7 +13,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * `primary` es negro: en RunMax la acción es negra, no lima —el lima es un
    * acento de superficie y por eso no hay variante de marca aquí. `secondary`
-   * es blanco con borde de 1px, `ghost` no tiene contenedor.
+   * es solo relleno blanco, sin contorno —por eso no va sobre `bg.surface`:
+   * blanco sobre blanco no se distingue—. `ghost` no tiene contenedor.
    */
   variant?: ButtonVariant
   /**
