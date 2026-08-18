@@ -2,15 +2,15 @@
  * @runmaxshop/react — componentes de interfaz de RunMax.
  *
  * Uso:
- *   import { Button, Field, Input } from '@runmaxshop/react'
+ *   import { Button, TextField, Input } from '@runmaxshop/react'
  *   import '@runmaxshop/react/styles.css'   // una sola vez, en la raíz de la app
  */
 
 export { Button, buttonClassName } from './components/Button/Button'
 export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from './components/Button/Button'
 
-export { Field, Input } from './components/Field/Field'
-export type { FieldProps, InputProps } from './components/Field/Field'
+export { TextField, Input } from './components/TextField/TextField'
+export type { TextFieldProps, InputProps } from './components/TextField/TextField'
 
 export { Chip, ChipGroup } from './components/Chip/Chip'
 export type { ChipProps } from './components/Chip/Chip'

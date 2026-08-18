@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, within } from 'storybook/test'
-import { Input } from '../Field/Field'
+import { Input } from '../TextField/TextField'
 import { Button } from './Button'
 
 const meta = {

@@ -3,7 +3,7 @@
 import { forwardRef, useId, type InputHTMLAttributes, type ReactNode } from 'react'
 import { cn } from '../../lib/cn'
 
-export interface FieldProps {
+export interface TextFieldProps {
   label: ReactNode
   /** Se pinta en gris junto a la etiqueta, como el "(opcional)" del waitlist. */
   optionalText?: string
@@ -22,35 +22,35 @@ export interface FieldProps {
  * porque el propio campo necesita el `id` y el `describedBy` que genera este
  * componente, y así no hay forma de conectarlos mal.
  */
-export function Field({
+export function TextField({
   label,
   optionalText,
   hint,
   error,
   children,
   className,
-}: FieldProps) {
+}: TextFieldProps) {
   const id = useId()
   const hintId = `${id}-hint`
   const errorId = `${id}-error`
   const describedBy = cn(hint && hintId, error && errorId) || undefined
 
   return (
-    <div className={cn('rmx-field', className)}>
-      <label className="rmx-field__label" htmlFor={id}>
+    <div className={cn('rmx-textfield', className)}>
+      <label className="rmx-textfield__label" htmlFor={id}>
         {label}
-        {optionalText && <span className="rmx-field__optional"> {optionalText}</span>}
+        {optionalText && <span className="rmx-textfield__optional"> {optionalText}</span>}
       </label>
 
       {children({ id, describedBy, invalid: Boolean(error) })}
 
       {hint && !error && (
-        <p className="rmx-field__hint" id={hintId}>
+        <p className="rmx-textfield__hint" id={hintId}>
           {hint}
         </p>
       )}
       {error && (
-        <p className="rmx-field__error" id={errorId} role="alert">
+        <p className="rmx-textfield__error" id={errorId} role="alert">
           {error}
         </p>
       )}

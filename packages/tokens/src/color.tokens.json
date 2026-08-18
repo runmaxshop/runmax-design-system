@@ -82,8 +82,8 @@
     "strong": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Botón secundario, botón circular, chip." },
     "hover": {
       "$type": "color",
-      "$value": "{color.neutral.600}",
-      "$description": "Borde de control en hover. El escalón que faltaba: `default` da 1.43:1 sobre el relleno del campo —apenas se insinúa— y el foco es negro. Este da 5.40:1 sobre el relleno y 4.90:1 sobre el fondo de página, los dos por encima del 3:1 de WCAG 1.4.11. `neutral.500` se descartó: 2.88:1 sobre el fondo de página, no llega."
+      "$value": "{color.neutral.500}",
+      "$description": "Borde de control en hover. Tiene que quedar claramente por debajo del negro del foco: con `neutral.600` los dos se leían igual a 1px. Da 3.17:1 sobre el relleno del campo y 3.34:1 sobre blanco, por encima del 3:1 de WCAG 1.4.11 — pero 2.88:1 sobre el fondo de página, que no llega. Es una decisión consciente y está anotada en `$known-gaps`: se prefiere que hover y foco se distingan a que el hover gane 0.12 de contraste."
     },
     "inverse": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Controles sobre foto." },
     "focus": {
