@@ -2,6 +2,39 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.3.0] — 2026-08-17
+
+`Button` pasa a decir lo mismo que Figma, y la escala de alturas de control queda escrita como
+regla en los dos lados. El disparador fue un choque real: el componente de Figma estaba
+construido por padding y daba 32 · 42 · 52, mientras `control.height` decía 32 · 40 · 48. Los
+dos declaraban venir de las mesas. Se resolvió a favor de la escala —es la que hace que un
+botón `m` alinee con un input, que también mide 40— y **se corrigió el archivo de Figma**, no
+el token.
+
+### Añadido
+
+- **`control/height/s|m|l` existe ahora también como variable de Figma**, en la colección
+  `3 · Scale`, junto a `space/*` y `radius/*`. Las 18 variantes de `Button` tienen el alto
+  atado a ella: el número dejó de estar suelto en el archivo de diseño.
+- **`font.size.label-s` (12px) y `font.size.label-l` (16px)**, con sus interlineados
+  (1.33 y 1.25). La rampa de label tenía un solo escalón y el botón necesitaba los tres.
+- **Variante `secondary`**: blanca con borde de 1px. Estaba dibujada en Figma y no existía
+  en código.
+
+### Cambiado — roturas
+
+- **`Button` renombra sus tres props para que se lean igual que el archivo de diseño.**
+  `variant`: `inverse` → `primary`, y entra `secondary`. `size`: `sm|md|lg` → `s|m|l`, los
+  nombres de `control.height`. `shape`: `rounded` → `rect`.
+- **Se van las variantes `brand` y `subtle`.** `brand` era un botón lima, justo lo que el
+  sistema dice no hacer: la acción es negra y el lima es acento. Ninguna de las dos está
+  dibujada en Figma.
+- **El defecto de `shape` pasa de `pill` a `rect`**, y el de `size` de `md` a `m` (mismo alto).
+  La esquina viva es el carácter del sistema y es el defecto del componente de Figma; `pill`
+  queda para lo que va sobre foto. El botón del waitlist ahora pasa `shape="pill"` explícito.
+- **El alto del botón deja de derivarse del padding.** Sale de `control.height` y el padding
+  vertical es 0; centra el flexbox. En Figma se hizo el mismo cambio.
+
 ## [0.2.0] — 2026-08-17
 
 Los tokens pasan a salir de Figma. Los valores de 0.1.0 se habían extraído del CSS de la

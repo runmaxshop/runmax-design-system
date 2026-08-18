@@ -117,7 +117,8 @@ export const Completo: StoryObj = {
           <div style={{ marginTop: 26 }}>
             <Button
               type="submit"
-              size="lg"
+              size="l"
+              shape="pill"
               fullWidth
               loading={sending}
               loadingText="Apartando tu lugar…"
