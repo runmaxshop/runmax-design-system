@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { expect, userEvent, within } from 'storybook/test'
 import { Accordion } from './Accordion'
 
 const meta = {
@@ -52,6 +53,35 @@ export const FaqDelWaitlist: Story = {
       <Accordion {...args} />
     </div>
   ),
+  // Comprueba el contrato de `mode: 'single'`: abrir una cierra la anterior. Es
+  // el estado que no se ve en una captura y el que se rompe sin que nadie mire.
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const primera = canvas.getByRole('button', { name: /¿Qué es RunMaxShop\?/ })
+    const segunda = canvas.getByRole('button', { name: /¿Cuándo abren\?/ })
+
+    await step('arranca todo cerrado', async () => {
+      await expect(primera).toHaveAttribute('aria-expanded', 'false')
+      await expect(segunda).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    await step('abrir la primera la expande', async () => {
+      await userEvent.click(primera)
+      await expect(primera).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    await step('abrir la segunda cierra la primera', async () => {
+      await userEvent.click(segunda)
+      await expect(segunda).toHaveAttribute('aria-expanded', 'true')
+      await expect(primera).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    await step('cada pregunta apunta a su panel', async () => {
+      const panelId = segunda.getAttribute('aria-controls')
+      await expect(panelId).toBeTruthy()
+      await expect(canvasElement.querySelector(`#${panelId}`)).toBeInTheDocument()
+    })
+  },
 }
 
 export const VariasAbiertas: Story = {
@@ -62,4 +92,16 @@ export const VariasAbiertas: Story = {
       <Accordion {...args} />
     </div>
   ),
+  // El contrario del anterior: aquí las dos tienen que poder quedar abiertas.
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const primera = canvas.getByRole('button', { name: /¿Qué es RunMaxShop\?/ })
+    const segunda = canvas.getByRole('button', { name: /¿Cuándo abren\?/ })
+
+    await userEvent.click(primera)
+    await userEvent.click(segunda)
+
+    await expect(primera).toHaveAttribute('aria-expanded', 'true')
+    await expect(segunda).toHaveAttribute('aria-expanded', 'true')
+  },
 }
