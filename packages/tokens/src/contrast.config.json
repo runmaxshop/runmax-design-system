@@ -6,7 +6,7 @@
     "AA-non-text": 3.0,
     "AAA-normal": 7.0
   },
-  "$known-gaps": "1) `border.default` (#D5D2CB) sobre `bg.surface` no llega al 3:1 que pide WCAG 1.4.11 para el contorno de un control. Hoy el input no depende de su borde para identificarse —tiene relleno propio (`bg.subtle`) distinto del fondo de página— así que no está declarado como par. Si algún control pasa a depender solo del borde, hay que oscurecer el token o darle `border.strong`. 2) `scrim.media` es un degradado y no puede verificarse como par de colores. 3) El boton `secondary` no tiene contorno y se apoya solo en su relleno: `bg.surface` (#FFFFFF) sobre `bg.page` (#EFEEEC) da 1.16:1, muy por debajo del 3:1 de WCAG 1.4.11. Es una decision de diseno tomada a sabiendas y no esta declarado como par porque no lo pasaria. La consecuencia practica es que `secondary` no puede ir sobre `bg.surface`, donde desaparece del todo.",
+  "$known-gaps": "1) `border.default` (#D5D2CB) sobre `bg.surface` no llega al 3:1 que pide WCAG 1.4.11 para el contorno de un control. Hoy el input no depende de su borde para identificarse —tiene relleno propio (`bg.subtle`) distinto del fondo de página— así que no está declarado como par. Si algún control pasa a depender solo del borde, hay que oscurecer el token o darle `border.strong`. 2) `scrim.media` es un degradado y no puede verificarse como par de colores. 3) El boton `secondary` no tiene contorno EN REPOSO y ahi se apoya solo en su relleno: `bg.surface` (#FFFFFF) sobre `bg.page` (#EFEEEC) da 1.16:1, muy por debajo del 3:1 de WCAG 1.4.11. Es una decision de diseno tomada a sabiendas y ese estado no esta declarado como par porque no lo pasaria. La consecuencia practica es que `secondary` no puede ir sobre `bg.surface`, donde desaparece del todo. En hover si aparece un contorno (`border.hover`, 5.68:1 sobre blanco) y ese par si esta declarado.",
   "pairs": [
     { "text": "text.primary", "background": "bg.page", "min": 7.0, "note": "Texto corrido principal sobre el fondo de página. Se le exige AAA porque puede." },
     { "text": "text.secondary", "background": "bg.page", "min": 7.0 },
@@ -39,6 +39,7 @@
 
     { "text": "border.hover", "background": "bg.subtle", "min": 3.0, "note": "Borde del campo en hover: el reposo no llega al 3:1 y este sí, así que el hover es el primer estado con contorno verificable." },
     { "text": "border.hover", "background": "bg.page", "min": 3.0 },
+    { "text": "border.hover", "background": "bg.surface", "min": 3.0, "note": "El borde que aparece al hacer hover sobre el botón `secondary`, que en reposo no tiene contorno." },
     { "text": "border.focus", "background": "bg.page", "min": 3.0, "note": "Indicador de foco: WCAG 1.4.11 pide 3:1 contra lo que lo rodea." },
     { "text": "border.focus", "background": "bg.surface", "min": 3.0 },
     { "text": "border.focus", "background": "bg.subtle", "min": 3.0 },

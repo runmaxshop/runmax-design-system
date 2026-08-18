@@ -17,6 +17,11 @@ componente en Figma —que no existía— y después se trajo el código a lo qu
 - **`bg.disabled` (`neutral.200`)**, relleno de control inactivo. Comparte valor con
   `bg.field-hover` y `border.subtle`: tres roles distintos que hoy caen en el mismo gris.
 - **Estado hover y estado deshabilitado en el campo**, que no existían.
+- **El botón `secondary` recupera un contorno al hacer hover.** Desde que se le quitó el borde
+  en 0.3.0, su único hover era pasar de blanco a `bg.subtle`: 1.03:1, imperceptible, y encima
+  era la única señal de que el botón era interactivo. Ahora el borde aparece en hover con
+  `border.hover` —5.68:1 sobre blanco—. En reposo sigue sin contorno, que es como se pidió, y
+  no hay salto de layout porque la clase base ya reservaba 1px transparente.
 - Los dos pares de `border.hover` entran en `contrast.config.json`. Son 29 pares verificados.
 
 ### Cambiado — roturas
