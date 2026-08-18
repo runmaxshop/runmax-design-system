@@ -33,7 +33,9 @@
       "body-l": { "$type": "dimension", "$value": "16px" },
       "body-m": { "$type": "dimension", "$value": "14px" },
       "body-s": { "$type": "dimension", "$value": "12px" },
+      "label-s": { "$type": "dimension", "$value": "12px" },
       "label-m": { "$type": "dimension", "$value": "14px" },
+      "label-l": { "$type": "dimension", "$value": "16px" },
       "price-m": { "$type": "dimension", "$value": "16px" },
       "overline-m": { "$type": "dimension", "$value": "12px" }
     },
@@ -49,7 +51,9 @@
       "body-l": { "$type": "number", "$value": 1.5 },
       "body-m": { "$type": "number", "$value": 1.43 },
       "body-s": { "$type": "number", "$value": 1.33 },
+      "label-s": { "$type": "number", "$value": 1.33 },
       "label-m": { "$type": "number", "$value": 1.29 },
+      "label-l": { "$type": "number", "$value": 1.25 },
       "price-m": { "$type": "number", "$value": 1.25 },
       "overline-m": { "$type": "number", "$value": 1.33 }
     },

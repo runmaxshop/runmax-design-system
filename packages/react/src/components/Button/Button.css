@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--rmx-space-8);
+  /* El borde va en las tres variantes, transparente donde no se ve: así el alto
+   * total es el token exacto y `primary` alinea con `secondary` al pixel. */
   border: var(--rmx-border-width-thin) solid transparent;
   font-family: var(--rmx-font-family-display);
   font-weight: var(--rmx-font-weight-medium);
@@ -34,32 +36,25 @@
 
 /* Variantes
  *
- * La acción es negra, no lima. El lima es un acento de destaque —superficie o
- * tinta sobre oscuro— y por eso `brand` es una variante de realce, no el botón
- * primario. Sobre lima el texto va negro: 18.74:1. En blanco daría 1.8:1. */
+ * Las tres del archivo de Figma. La acción es negra, no lima: el lima es un
+ * acento de superficie (`bg.highlight`) y tinta sobre oscuro (`text.accent`),
+ * así que no existe un botón de marca. Sobre blanco el lima da 1.8:1. */
 
-.rmx-button--inverse {
+.rmx-button--primary {
   background: var(--rmx-bg-inverse);
   color: var(--rmx-text-inverse);
 }
-.rmx-button--inverse:hover:not(:disabled) {
+.rmx-button--primary:hover:not(:disabled) {
   background: var(--rmx-bg-inverse-hover);
 }
 
-.rmx-button--brand {
-  background: var(--rmx-bg-highlight);
+.rmx-button--secondary {
+  background: var(--rmx-bg-surface);
+  border-color: var(--rmx-border-strong);
   color: var(--rmx-text-primary);
 }
-.rmx-button--brand:hover:not(:disabled) {
-  background: var(--rmx-bg-highlight-hover);
-}
-
-.rmx-button--subtle {
+.rmx-button--secondary:hover:not(:disabled) {
   background: var(--rmx-bg-subtle);
-  color: var(--rmx-text-primary);
-}
-.rmx-button--subtle:hover:not(:disabled) {
-  background: var(--rmx-bg-field-hover);
 }
 
 .rmx-button--ghost {
@@ -70,37 +65,41 @@
   background: var(--rmx-bg-subtle);
 }
 
-/* Tamaños — 32 · 40 · 48, los tres que aparecen en las mesas. */
+/* Tamaños
+ *
+ * El alto sale de `control.height` —32 · 40 · 48— y no de la suma del padding
+ * vertical: es lo que mantiene el botón `m` alineado con un input, que mide lo
+ * mismo. El padding vertical es 0 a propósito; centra el flexbox. */
 
-.rmx-button--sm {
+.rmx-button--s {
   height: var(--rmx-control-height-s);
-  padding: 0 var(--rmx-space-16);
-  font-size: var(--rmx-font-size-label-m);
-  line-height: var(--rmx-font-line-height-label-m);
+  padding: 0 var(--rmx-space-12);
+  font-size: var(--rmx-font-size-label-s);
+  line-height: var(--rmx-font-line-height-label-s);
 }
 
-.rmx-button--md {
+.rmx-button--m {
   height: var(--rmx-control-height-m);
   padding: 0 var(--rmx-space-20);
   font-size: var(--rmx-font-size-label-m);
   line-height: var(--rmx-font-line-height-label-m);
 }
 
-.rmx-button--lg {
+.rmx-button--l {
   height: var(--rmx-control-height-l);
   padding: 0 var(--rmx-space-24);
-  font-size: var(--rmx-font-size-body-l);
-  line-height: var(--rmx-font-line-height-body-l);
+  font-size: var(--rmx-font-size-label-l);
+  line-height: var(--rmx-font-line-height-label-l);
 }
 
-/* Formas */
+/* Formas — esquina viva por defecto, que es el carácter del sistema. */
+
+.rmx-button--rect {
+  border-radius: var(--rmx-radius-none);
+}
 
 .rmx-button--pill {
   border-radius: var(--rmx-radius-full);
-}
-
-.rmx-button--rounded {
-  border-radius: var(--rmx-radius-m);
 }
 
 .rmx-button--full {

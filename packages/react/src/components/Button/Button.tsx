@@ -1,21 +1,30 @@
 'use client'
 
+/** Button — F (fluido). No tiene versión móvil: tiene `size` y `fullWidth`. */
+
 import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { cn } from '../../lib/cn'
 
-export type ButtonVariant = 'inverse' | 'brand' | 'subtle' | 'ghost'
-export type ButtonSize = 'sm' | 'md' | 'lg'
-export type ButtonShape = 'pill' | 'rounded'
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost'
+export type ButtonSize = 's' | 'm' | 'l'
+export type ButtonShape = 'rect' | 'pill'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * `inverse` es el botón oscuro por defecto de RunMax (el de "Quiero mi acceso
-   * anticipado"). `brand` es el verde y se reserva para un único acento por
-   * pantalla: si todo es verde, nada destaca.
+   * `primary` es negro: en RunMax la acción es negra, no lima —el lima es un
+   * acento de superficie y por eso no hay variante de marca aquí. `secondary`
+   * es blanco con borde de 1px, `ghost` no tiene contenedor.
    */
   variant?: ButtonVariant
-  /** `sm` son 44px, el área táctil mínima que pide WCAG 2.1. */
+  /**
+   * 32 · 40 · 48, la escala `control.height`. `m` es la de un input, así que es
+   * la que hace que un botón alinee con un campo en la misma fila.
+   *
+   * OJO con `s`: cumple WCAG 2.5.8 (AA, 24×24) pero no 2.5.5 (AAA, 44×44). Si
+   * va a ser el único destino táctil de una acción importante en móvil, usá `m`.
+   */
   size?: ButtonSize
+  /** `rect` en formularios y PDP; `pill` sobre foto. */
   shape?: ButtonShape
   fullWidth?: boolean
   /**
@@ -29,9 +38,9 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 /** Las clases del botón, sueltas, para poder vestir un `<a>` con el mismo aspecto. */
 export function buttonClassName({
-  variant = 'inverse',
-  size = 'md',
-  shape = 'pill',
+  variant = 'primary',
+  size = 'm',
+  shape = 'rect',
   fullWidth = false,
   className,
 }: Pick<ButtonProps, 'variant' | 'size' | 'shape' | 'fullWidth' | 'className'> = {}): string {
@@ -47,9 +56,9 @@ export function buttonClassName({
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
   {
-    variant = 'inverse',
-    size = 'md',
-    shape = 'pill',
+    variant = 'primary',
+    size = 'm',
+    shape = 'rect',
     fullWidth = false,
     loading = false,
     loadingText,
