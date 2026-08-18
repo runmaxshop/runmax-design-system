@@ -37,10 +37,12 @@
 
 .rmx-input {
   width: 100%;
-  height: var(--rmx-control-height-m);
+  /* 48, no 40: el campo es `control.height.l`. El botón que alinea con él en
+   * una misma fila es, por tanto, `size="l"`. */
+  height: var(--rmx-control-height-l);
   padding: 0 var(--rmx-space-16);
-  border: var(--rmx-border-width-thin) solid transparent;
-  border-radius: var(--rmx-radius-m);
+  border: var(--rmx-border-width-thin) solid var(--rmx-border-default);
+  border-radius: var(--rmx-radius-none);
   background: var(--rmx-bg-subtle);
   font-family: var(--rmx-font-family-body);
   font-size: var(--rmx-font-size-body-l);
@@ -57,6 +59,13 @@
   opacity: 1;
 }
 
+/* Los tres bordes son una escalera, todos del mismo grosor: `default` en
+ * reposo apenas se insinúa (1.43:1) y quien identifica el campo es su relleno;
+ * `hover` es el primer contorno que supera el 3:1; el foco es negro. */
+.rmx-input:hover:not(:disabled) {
+  border-color: var(--rmx-border-hover);
+}
+
 .rmx-input:focus {
   outline: none;
   background: var(--rmx-bg-surface);
@@ -70,8 +79,21 @@
   outline-offset: var(--rmx-focus-offset);
 }
 
-.rmx-input--invalid {
+/* Después del foco a propósito: en un campo con error, el error manda. */
+.rmx-input--invalid,
+.rmx-input--invalid:hover:not(:disabled) {
   border-color: var(--rmx-border-danger);
+}
+
+.rmx-input:disabled {
+  background: var(--rmx-bg-disabled);
+  border-color: var(--rmx-border-subtle);
+  color: var(--rmx-text-disabled);
+  cursor: not-allowed;
+}
+
+.rmx-input:disabled::placeholder {
+  color: var(--rmx-text-disabled);
 }
 
 @media (prefers-reduced-motion: reduce) {

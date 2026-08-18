@@ -62,7 +62,7 @@ export const Tamanos: Story = {
 }
 
 /**
- * `m` mide lo mismo que un input, y por eso los dos alinean sin ayuda de nadie.
+ * El input mide 48, así que `l` es el que alinea con él sin ayuda de nadie.
  * Es la razón por la que el alto sale del token y no de la suma del padding.
  */
 export const AlineadoConUnCampo: Story = {
@@ -70,7 +70,7 @@ export const AlineadoConUnCampo: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
       <Input placeholder="tu@email.com" style={{ width: 220 }} aria-label="Email" />
-      <Button {...args} size="m">Unirme</Button>
+      <Button {...args} size="l">Unirme</Button>
     </div>
   ),
 }

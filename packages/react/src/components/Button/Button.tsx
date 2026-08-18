@@ -13,13 +13,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * `primary` es negro: en RunMax la acción es negra, no lima —el lima es un
    * acento de superficie y por eso no hay variante de marca aquí. `secondary`
-   * es solo relleno blanco, sin contorno —por eso no va sobre `bg.surface`:
-   * blanco sobre blanco no se distingue—. `ghost` no tiene contenedor.
+   * es solo relleno blanco en reposo —por eso no va sobre `bg.surface`: blanco
+   * sobre blanco no se distingue—, y el contorno le aparece al hacer hover.
+   * `ghost` no tiene contenedor.
    */
   variant?: ButtonVariant
   /**
-   * 32 · 40 · 48, la escala `control.height`. `m` es la de un input, así que es
-   * la que hace que un botón alinee con un campo en la misma fila.
+   * 32 · 40 · 48, la escala `control.height`. El input mide 48, así que `l` es
+   * el tamaño que alinea con un campo en la misma fila.
    *
    * OJO con `s`: cumple WCAG 2.5.8 (AA, 24×24) pero no 2.5.5 (AAA, 44×44). Si
    * va a ser el único destino táctil de una acción importante en móvil, usá `m`.

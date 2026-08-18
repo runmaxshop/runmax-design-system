@@ -54,8 +54,13 @@
   background: var(--rmx-bg-surface);
   color: var(--rmx-text-primary);
 }
+/* Sin contorno en reposo, el relleno no puede señalar el hover: de blanco a
+ * `bg.subtle` hay 1.03:1 y no se percibe. Quien lo señala es el borde, que
+ * aparece —la clase base ya reserva 1px transparente, así que no hay salto—.
+ * 5.68:1 sobre blanco. */
 .rmx-button--secondary:hover:not(:disabled) {
   background: var(--rmx-bg-subtle);
+  border-color: var(--rmx-border-hover);
 }
 
 .rmx-button--ghost {
@@ -69,8 +74,9 @@
 /* Tamaños
  *
  * El alto sale de `control.height` —32 · 40 · 48— y no de la suma del padding
- * vertical: es lo que mantiene el botón `m` alineado con un input, que mide lo
- * mismo. El padding vertical es 0 a propósito; centra el flexbox. */
+ * vertical: es lo que mantiene el botón alineado con un input, que sale de la
+ * misma escala y mide 48. El padding vertical es 0 a propósito; centra el
+ * flexbox. */
 
 .rmx-button--s {
   height: var(--rmx-control-height-s);
