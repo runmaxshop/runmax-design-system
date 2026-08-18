@@ -6,7 +6,7 @@
     "AA-non-text": 3.0,
     "AAA-normal": 7.0
   },
-  "$known-gaps": "1) `border.default` (#D5D2CB) sobre `bg.surface` no llega al 3:1 que pide WCAG 1.4.11 para el contorno de un control. Hoy el input no depende de su borde para identificarse —tiene relleno propio (`bg.subtle`) distinto del fondo de página— así que no está declarado como par. Si algún control pasa a depender solo del borde, hay que oscurecer el token o darle `border.strong`. 2) `scrim.media` es un degradado y no puede verificarse como par de colores.",
+  "$known-gaps": "1) `border.default` (#D5D2CB) sobre `bg.surface` no llega al 3:1 que pide WCAG 1.4.11 para el contorno de un control. Hoy el input no depende de su borde para identificarse —tiene relleno propio (`bg.subtle`) distinto del fondo de página— así que no está declarado como par. Si algún control pasa a depender solo del borde, hay que oscurecer el token o darle `border.strong`. 2) `scrim.media` es un degradado y no puede verificarse como par de colores. 3) El boton `secondary` no tiene contorno y se apoya solo en su relleno: `bg.surface` (#FFFFFF) sobre `bg.page` (#EFEEEC) da 1.16:1, muy por debajo del 3:1 de WCAG 1.4.11. Es una decision de diseno tomada a sabiendas y no esta declarado como par porque no lo pasaria. La consecuencia practica es que `secondary` no puede ir sobre `bg.surface`, donde desaparece del todo.",
   "pairs": [
     { "text": "text.primary", "background": "bg.page", "min": 7.0, "note": "Texto corrido principal sobre el fondo de página. Se le exige AAA porque puede." },
     { "text": "text.secondary", "background": "bg.page", "min": 7.0 },
