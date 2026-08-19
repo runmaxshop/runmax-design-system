@@ -1,0 +1,393 @@
+/* Navbar ------------------------------------------------------------------
+ *
+ * Componente T. La única media query de la librería vive aquí, y es la
+ * frontera entre la barra horizontal y el cajón. Por debajo de `md` cambia
+ * qué se ve; el DOM no se toca.
+ *
+ * La altura de la barra no está escrita en ningún sitio: sale del ítem (18px
+ * de interlineado + 8 de padding arriba y abajo = 34) más los 8 de padding de
+ * la barra, que son los 50px de Figma. Eso hace que crezca sola si algún día
+ * el label cambia de tamaño.
+ */
+
+.rmx-navbar {
+  position: relative;
+  background: var(--rmx-bg-page);
+  transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
+}
+
+/* Se vuelve blanca al abrir para fundirse con el panel que le cae debajo. */
+.rmx-navbar[data-open] {
+  background: var(--rmx-bg-surface);
+}
+
+.rmx-navbar__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--rmx-space-16);
+  padding: var(--rmx-space-8) var(--rmx-space-24);
+}
+
+.rmx-navbar__brand {
+  display: flex;
+  flex: none;
+  align-items: center;
+  color: var(--rmx-text-primary);
+  text-decoration: none;
+}
+
+.rmx-navbar__brand > * {
+  display: block;
+  max-width: 100%;
+}
+
+.rmx-navbar__brand:focus-visible,
+.rmx-navbar__toggle:focus-visible,
+.rmx-navbar__trigger:focus-visible,
+.rmx-navbar__link:focus-visible,
+.rmx-navbar__view-all:focus-visible {
+  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
+  outline-offset: var(--rmx-focus-offset);
+}
+
+/* La navegación ocupa el hueco entre el logo y los iconos y se centra dentro
+   de él. Es lo que hace Figma: los ítems no están centrados en la barra, sino
+   en el espacio que sobra. */
+.rmx-navbar__nav {
+  flex: 1;
+  min-width: 0;
+}
+
+.rmx-navbar__items {
+  display: flex;
+  justify-content: center;
+  gap: var(--rmx-space-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* El panel se posiciona contra la barra, no contra el ítem: es de ancho
+   completo. Por eso el `<li>` se queda estático a propósito. */
+.rmx-navbar__item {
+  position: static;
+}
+
+.rmx-navbar__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--rmx-space-8);
+  padding: var(--rmx-space-8) var(--rmx-space-12);
+  border: 0;
+  border-radius: var(--rmx-radius-m);
+  background: none;
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-medium);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-primary);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
+}
+
+.rmx-navbar__trigger:hover {
+  background: var(--rmx-bg-subtle);
+}
+
+/* Abierto: subrayado. Es el estado `Type=Active` de Figma y dice «este menú
+   está desplegado», no «estás en esta sección». */
+.rmx-navbar__trigger[aria-expanded='true'] {
+  text-decoration: underline;
+  text-decoration-thickness: var(--rmx-border-width-thin);
+  text-underline-offset: var(--rmx-space-4);
+}
+
+/* Sección actual: peso, no subrayado. Los dos estados pueden coincidir en el
+   mismo ítem y tienen que poder distinguirse. */
+.rmx-navbar__trigger[aria-current='page'] {
+  font-weight: var(--rmx-font-weight-semibold);
+}
+
+/* El chevron solo tiene sentido dentro del cajón, donde el panel se pliega
+   como un acordeón. En la barra el subrayado ya dice lo mismo. */
+.rmx-navbar__chevron {
+  display: none;
+}
+
+.rmx-navbar__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--rmx-space-16);
+}
+
+/* Panel del mega menú ------------------------------------------------------ */
+
+.rmx-navbar__panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background: var(--rmx-bg-surface);
+  border-radius: var(--rmx-radius-none);
+  /* La única sombra del sistema, y está escrita para justo esto: algo que
+     flota sobre el contenido de la página. */
+  box-shadow: var(--rmx-shadow-overlay);
+}
+
+/* `hidden` lo pone el navegador con menos peso que una clase de autor, así
+   que sin esta línea el panel se vería aunque esté cerrado. */
+.rmx-navbar__panel[hidden] {
+  display: none;
+}
+
+.rmx-navbar__panel-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--rmx-space-24);
+  padding: var(--rmx-space-40) var(--rmx-space-24);
+}
+
+.rmx-navbar__columns {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--rmx-space-24);
+}
+
+.rmx-navbar__column-heading {
+  margin: 0 0 var(--rmx-space-16);
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-bold);
+  font-size: var(--rmx-font-size-heading-xs);
+  line-height: var(--rmx-font-line-height-heading-xs);
+  color: var(--rmx-text-primary);
+}
+
+.rmx-navbar__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rmx-space-8);
+  margin: 0 0 var(--rmx-space-16);
+  padding: 0;
+  list-style: none;
+}
+
+.rmx-navbar__link {
+  font-family: var(--rmx-font-family-body);
+  font-weight: var(--rmx-font-weight-regular);
+  font-size: var(--rmx-font-size-body-m);
+  line-height: var(--rmx-font-line-height-body-m);
+  color: var(--rmx-text-secondary);
+  text-decoration: none;
+}
+
+.rmx-navbar__link:hover,
+.rmx-navbar__link[aria-current='page'] {
+  color: var(--rmx-text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: var(--rmx-border-width-thin);
+  text-underline-offset: var(--rmx-space-4);
+}
+
+.rmx-navbar__view-all {
+  display: inline-block;
+  font-family: var(--rmx-font-family-display);
+  font-weight: var(--rmx-font-weight-medium);
+  font-size: var(--rmx-font-size-label-m);
+  line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: var(--rmx-border-width-thin);
+  text-underline-offset: var(--rmx-space-4);
+}
+
+/* El tamaño lo trae lo que se pase dentro: la librería no sabe si es una
+   imagen, un vídeo o una card. */
+.rmx-navbar__promo {
+  flex: none;
+}
+
+/* Hamburguesa -------------------------------------------------------------- */
+
+/* En escritorio no existe. `display: none` y no `visibility` porque tiene que
+   salir también del orden de tabulación. */
+.rmx-navbar__toggle {
+  display: none;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--rmx-control-height-m);
+  height: var(--rmx-control-height-m);
+  padding: 0;
+  border: 0;
+  border-radius: var(--rmx-radius-m);
+  background: none;
+  color: var(--rmx-icon-primary);
+  cursor: pointer;
+}
+
+/* Tres barras hechas con pseudo-elementos, como el «+» del Accordion: no
+   merece un SVG, y así hereda `currentColor` sin depender de nada. */
+.rmx-navbar__burger {
+  position: relative;
+  width: var(--rmx-icon-size-m);
+  height: var(--rmx-border-width-thick);
+  background: currentColor;
+  transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
+}
+
+.rmx-navbar__burger::before,
+.rmx-navbar__burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+  transition: transform var(--rmx-duration-base) var(--rmx-easing-standard);
+}
+
+.rmx-navbar__burger::before {
+  transform: translateY(calc(var(--rmx-space-8) * -1));
+}
+
+.rmx-navbar__burger::after {
+  transform: translateY(var(--rmx-space-8));
+}
+
+/* Abierta se convierte en una «×»: la barra del medio desaparece y las otras
+   dos se cruzan sobre ella. */
+.rmx-navbar[data-drawer] .rmx-navbar__burger {
+  background: transparent;
+}
+
+.rmx-navbar[data-drawer] .rmx-navbar__burger::before {
+  transform: rotate(45deg);
+}
+
+.rmx-navbar[data-drawer] .rmx-navbar__burger::after {
+  transform: rotate(-45deg);
+}
+
+/* Cajón ------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  .rmx-navbar__toggle {
+    display: flex;
+  }
+
+  /* La barra pasa a poder tener dos filas: la de siempre y el cajón debajo. */
+  .rmx-navbar__bar {
+    flex-wrap: wrap;
+  }
+
+  /* La navegación deja de ser un elemento de la barra y pasa a ser el cajón.
+     Mismo nodo, misma lista, otro sitio.
+
+     Va EN FLUJO, no flotando sobre la página. Un cajón absoluto más alto que
+     la pantalla se sale por abajo sin forma de llegar a lo último, y obliga a
+     inventar un `max-height` en unidades de viewport que ningún token tiene.
+     En flujo empuja el contenido, hereda el blanco de la barra abierta y la
+     página scrollea sola. */
+  .rmx-navbar__nav {
+    display: none;
+    flex: 0 0 100%;
+    order: 1;
+    padding-bottom: var(--rmx-space-16);
+  }
+
+  .rmx-navbar[data-drawer] .rmx-navbar__nav {
+    display: block;
+  }
+
+  .rmx-navbar__items {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--rmx-space-0);
+  }
+
+  .rmx-navbar__item {
+    border-bottom: var(--rmx-border-width-thin) solid var(--rmx-border-subtle);
+  }
+
+  .rmx-navbar__item:last-child {
+    border-bottom: 0;
+  }
+
+  /* En el cajón el ítem es una fila completa y necesita área táctil: 16 de
+     padding sobre un interlineado de 18 lo deja por encima de los 44px de
+     WCAG 2.5.5, que es lo que hay que cumplir en móvil. */
+  .rmx-navbar__trigger {
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--rmx-space-16) var(--rmx-space-0);
+    border-radius: var(--rmx-radius-none);
+    font-size: var(--rmx-font-size-label-l);
+    line-height: var(--rmx-font-line-height-label-l);
+  }
+
+  .rmx-navbar__trigger:hover {
+    background: none;
+  }
+
+  /* Dentro del cajón el subrayado del ítem abierto sobra: lo que se ve es que
+     el acordeón se ha desplegado, y el chevron ya lo dice. */
+  .rmx-navbar__trigger[aria-expanded='true'] {
+    text-decoration: none;
+  }
+
+  /* Chevron: medio cuadrado girado 45°, que apunta abajo y sube al abrir. */
+  .rmx-navbar__chevron {
+    display: block;
+    flex: none;
+    width: var(--rmx-space-8);
+    height: var(--rmx-space-8);
+    border-right: var(--rmx-border-width-thick) solid currentColor;
+    border-bottom: var(--rmx-border-width-thick) solid currentColor;
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform var(--rmx-duration-base) var(--rmx-easing-standard);
+  }
+
+  .rmx-navbar__item[data-open] .rmx-navbar__chevron {
+    transform: translateY(25%) rotate(-135deg);
+  }
+
+  /* El panel deja de flotar: es el contenido del acordeón. */
+  .rmx-navbar__panel {
+    position: static;
+    box-shadow: var(--rmx-shadow-none);
+  }
+
+  .rmx-navbar__panel-inner {
+    display: block;
+    padding: var(--rmx-space-0) var(--rmx-space-0) var(--rmx-space-16);
+  }
+
+  .rmx-navbar__columns {
+    grid-auto-flow: row;
+    gap: var(--rmx-space-24);
+  }
+
+  /* La pieza gráfica se cae en móvil: dentro del cajón empujaría los enlaces
+     fuera de la pantalla, que es justo lo que la persona vino a buscar. */
+  .rmx-navbar__promo {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmx-navbar,
+  .rmx-navbar__trigger,
+  .rmx-navbar__burger,
+  .rmx-navbar__burger::before,
+  .rmx-navbar__burger::after,
+  .rmx-navbar__chevron {
+    transition: none;
+  }
+}

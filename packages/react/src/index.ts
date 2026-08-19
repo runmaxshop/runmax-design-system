@@ -30,6 +30,15 @@ export type { CardProps } from './components/Card/Card'
 export { Badge } from './components/Badge/Badge'
 export type { BadgeProps, BadgeTone } from './components/Badge/Badge'
 
+export { Navbar } from './components/Navbar/Navbar'
+export type {
+  NavbarProps,
+  NavbarItem,
+  NavbarColumn,
+  NavbarLink,
+  NavbarLinkRenderProps,
+} from './components/Navbar/Navbar'
+
 export { Heading, Text, VisuallyHidden } from './components/Text/Text'
 export type { HeadingProps, TextProps, TextTone } from './components/Text/Text'
 

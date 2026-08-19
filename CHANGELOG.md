@@ -2,6 +2,65 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.7.0] — 2026-08-19
+
+Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **T**
+(transformacional) de la librería.
+
+### Añadido
+
+- **`Navbar`.** Barra con logo, navegación y acciones, y mega menú desplegable en los ítems que
+  traen `columns`. Reúne en un solo componente los dos *component sets* de Figma —`Navbar`
+  (`Type=Default` / `Type=Active`) y `MegaMenu` (`Columns=3` / `Columns=4`)—.
+- **El número de columnas no es una prop:** sale de `columns.length`. Las dos variantes de Figma
+  son el mismo código y una tercera de 5 columnas no necesitaría tocar nada.
+- **`renderLink`,** la escotilla para el enrutador de la aplicación. Por defecto son `<a>`; en
+  Next se pasa `({ href, ...rest }) => <Link href={href} {...rest} />`. La librería no importa
+  `next/link` porque no sabe en qué framework vive.
+- **`brand`, `actions` y `promo` son slots.** Igual que los iconos de `IconButton`: la librería
+  no empaqueta assets de marca ni sabe cuántos productos hay en el carrito.
+- **Token `font.size.heading-xs` (16px) y su `line-height` (1.25).** Es el estilo `heading/xs`
+  de Figma, que la escala no tenía: el encabezado de columna del mega menú. Coincide en medida
+  con `label-l` y `body-l`, y eso es justo lo que la escala por rol permite.
+
+### Notas
+
+- **Es un componente T y el DOM es el mismo en los dos estados.** Por encima de `md` es una
+  barra horizontal con paneles que caen; por debajo, un cajón desde la hamburguesa donde cada
+  mega menú se pliega en acordeón. Solo cambia el CSS: duplicar la navegación en dos árboles
+  (`hidden md:block` junto a `md:hidden`) haría que un lector de pantalla anunciara los enlaces
+  dos veces y duplicaría el mapa del sitio para el buscador.
+- **El cajón va en flujo, no flotando.** Empuja el contenido de la página en vez de taparlo. Un
+  cajón absoluto más alto que la pantalla se sale por abajo sin forma de llegar a lo último, y
+  obliga a inventar un `max-height` en unidades de viewport que ningún token tiene.
+- **Abierto ≠ sección actual.** El subrayado del ítem dice «este menú está desplegado»
+  (`aria-expanded`) y desaparece al cerrarlo; `currentHref` marca dónde estás
+  (`aria-current="page"`) y se dibuja con peso, no con subrayado. Los dos pueden coincidir en el
+  mismo ítem, así que tienen que poder distinguirse.
+- **El encabezado de columna no es un `<h2>`.** El navbar aparece en todas las páginas del
+  sitio, y meter cuatro encabezados de sección en cada una destroza el esquema del documento.
+  Va como `<p>` y da nombre a su lista con `aria-labelledby`.
+- **El panel cerrado lleva `hidden`, no `opacity: 0`.** Sale del orden de tabulación y del árbol
+  de accesibilidad de verdad. Un panel escondido con opacidad sigue siendo tabulable, y ese es
+  el fallo clásico del mega menú.
+- **El cajón no es un diálogo modal.** No atrapa el foco ni bloquea el scroll: es una
+  divulgación (`aria-expanded` + `aria-controls`) porque es el mismo nodo que la navegación de
+  escritorio. Escape cierra de dentro hacia fuera —primero el panel, luego el cajón— y devuelve
+  el foco a lo que abrió cada cosa.
+- **El mega menú abre con hover y también con clic.** Las dos cosas, porque el hover es lo que
+  espera quien viene con ratón y el clic es lo único que existe en táctil y con teclado. El
+  hover se filtra por `pointerType === 'mouse'` y no por una media query de ancho: lo que
+  decide no es el tamaño de la pantalla sino si hay un puntero de verdad. En táctil el
+  navegador emula un `pointerenter` justo antes del `click`, y sin ese filtro el primer toque
+  abriría el panel y el clic lo cerraría acto seguido.
+- **Cierra al salir de la barra entera, no del ítem, y no hace falta retardo.** El panel cuelga
+  del `<li>` y arranca justo donde acaba la barra, así que bajar el ratón hacia los enlaces
+  nunca lo atraviesa. Si el foco está dentro del panel, el ratón no lo cierra: dejaría el foco
+  en un nodo recién desaparecido.
+- **El ancho y el `position: sticky` los pone la página.** El componente ocupa el 100% de su
+  contenedor: en Figma la barra son 1200 dentro de 1280, y esos 40 de margen son layout de
+  página, no del componente.
+
 ## [0.5.0] — 2026-08-18
 
 Las dos cosas salieron de probar el componente en Storybook, no de leerlo.

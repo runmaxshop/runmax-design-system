@@ -1,6 +1,6 @@
 {
   "name": "runmax-design-system",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "Sistema de diseño de RunMax: tokens y componentes compartidos entre la web y, a futuro, la app móvil.",
   "license": "UNLICENSED",
   "private": true,

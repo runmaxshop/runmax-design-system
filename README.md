@@ -126,7 +126,7 @@ sabe qué pesos necesita y cómo evitar el salto de layout. En Next se hace con 
 Ver [`docs/integracion-nextjs.md`](docs/integracion-nextjs.md) para el paso a paso completo,
 incluida la decisión pendiente sobre cómo se distribuye el paquete a producción.
 
-## Componentes disponibles (v0.1.0)
+## Componentes disponibles (v0.7.0)
 
 | Componente | Notas |
 | --- | --- |
@@ -137,6 +137,7 @@ incluida la decisión pendiente sobre cómo se distribuye el paquete a producci�
 | `Accordion` | Encabezados reales y `aria-controls`. Modo simple o múltiple. |
 | `Card` | Superficie contenedora. |
 | `Badge` | Etiqueta de estado. |
+| `Navbar` | Navegación con mega menú. Componente **T**: barra en escritorio, cajón en móvil. |
 | `Heading` / `Text` | Nivel semántico y tamaño visual como props separadas. |
 | `VisuallyHidden` | Contenido solo para lectores de pantalla. |
 
