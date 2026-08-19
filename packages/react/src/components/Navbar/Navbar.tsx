@@ -27,7 +27,9 @@ import {
   useRef,
   useState,
   type AnchorHTMLAttributes,
-  type PointerEvent,
+  // Con alias: sin él, el tipo de React tapa al `PointerEvent` del DOM que
+  // usa el listener nativo de más abajo y `addEventListener` deja de compilar.
+  type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from 'react'
 import { cn } from '../../lib/cn'
@@ -204,7 +206,7 @@ export function Navbar({
   // navegador emula un `pointerenter` justo antes del `click`, y sin este
   // filtro el primer toque abriría el panel y el clic lo cerraría acto
   // seguido.
-  function handleItemPointerEnter(event: PointerEvent<HTMLLIElement>, index: number, hasMenu: boolean) {
+  function handleItemPointerEnter(event: ReactPointerEvent<HTMLLIElement>, index: number, hasMenu: boolean) {
     if (event.pointerType !== 'mouse') return
     // Pasar por encima de un ítem sin menú cierra el que hubiera abierto: si
     // no, el panel de «Deportes» se quedaría colgando mientras el ratón está
@@ -215,7 +217,7 @@ export function Navbar({
   // Cierra al salir de la barra ENTERA, no del ítem. El panel cuelga del
   // `<li>` y arranca justo donde acaba la barra, así que bajar el ratón hacia
   // los enlaces nunca lo atraviesa: no hace falta ningún retardo.
-  function handleRootPointerLeave(event: PointerEvent<HTMLElement>) {
+  function handleRootPointerLeave(event: ReactPointerEvent<HTMLElement>) {
     if (event.pointerType !== 'mouse') return
     // Si alguien está dentro del panel con el teclado, el ratón no tiene
     // ninguna autoridad para cerrárselo: el foco se quedaría en un nodo que
