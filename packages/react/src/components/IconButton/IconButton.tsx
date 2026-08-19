@@ -24,6 +24,26 @@ export interface IconButtonProps
    * Lucide lo recoge; su `width` y `height` los pone el CSS según `size`.
    */
   icon: ReactNode
+  /**
+   * Convierte el botón en un interruptor de dos estados y lo anuncia con
+   * `aria-pressed`. Sin esta prop no se emite el atributo: un botón de acción
+   * que dijera `aria-pressed="false"` estaría mintiendo sobre lo que es.
+   *
+   * Es el mismo patrón que `selected` en `Chip`.
+   *
+   * OJO con la etiqueta: cuando uses `pressed`, `label` NO debe cambiar entre
+   * los dos estados. El estado ya lo comunica `aria-pressed`, y una etiqueta
+   * que además pasa de «Añadir a favoritos» a «Quitar de favoritos» hace que
+   * un lector de pantalla lo anuncie dos veces y se contradiga. Usá un nombre
+   * estable —«Favorito»— y dejá que el atributo haga su trabajo.
+   */
+  pressed?: boolean
+  /**
+   * El icono del estado marcado. Si no se pasa, se usa `icon` en los dos.
+   * Con Lucide el relleno es un atributo del propio icono, así que el par
+   * suele ser `<Heart />` y `<Heart fill="currentColor" />`.
+   */
+  iconPressed?: ReactNode
   /** Mismos nombres y mismo comportamiento que en `Button`. */
   variant?: IconButtonVariant
   /**
@@ -34,7 +54,7 @@ export interface IconButtonProps
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
-  { label, icon, variant = 'primary', size = 'm', disabled, className, type = 'button', ...rest },
+  { label, icon, iconPressed, pressed, variant = 'primary', size = 'm', disabled, className, type = 'button', ...rest },
   ref,
 ) {
   return (
@@ -44,9 +64,12 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
       type={type}
       className={cn('rmx-icon-button', `rmx-icon-button--${variant}`, `rmx-icon-button--${size}`, className)}
       aria-label={label}
+      // `undefined` no emite el atributo; `false` sí, y eso es lo correcto:
+      // un interruptor apagado tiene que anunciarse como apagado.
+      aria-pressed={pressed}
       disabled={disabled}
     >
-      {icon}
+      {pressed && iconPressed ? iconPressed : icon}
     </button>
   )
 })

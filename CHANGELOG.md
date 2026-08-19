@@ -31,9 +31,16 @@ producto y en las barras.
   aparece al hacer hover. El relleno no puede señalar el hover por sí solo —de blanco a
   `bg.subtle` hay 1.03:1 y no se percibe—. En reposo se apoya solo en su relleno, así que sobre
   una zona clara de una foto se pierde; queda anotado en `$known-gaps`, junto al de `Button`.
-- **No tiene estado propio de seleccionado.** El color del contenedor lo da la variante, igual
-  que en `Button`; para marcar un favorito se cambia de variante. Si hace falta anunciar el
-  estado, `aria-pressed` se pasa como cualquier otra prop.
+- **`pressed` lo convierte en un interruptor de dos estados** y emite `aria-pressed`. Sin la
+  prop no se emite el atributo: un botón de acción que dijera `aria-pressed="false"` mentiría
+  sobre lo que es. Es el mismo patrón que `selected` en `Chip`. `iconPressed` da el icono del
+  estado marcado — con Lucide, el par suele ser `<Heart />` y `<Heart fill="currentColor" />`.
+- **Con `pressed`, la etiqueta no debe cambiar entre estados.** El estado ya lo comunica
+  `aria-pressed`; una etiqueta que además pasa de «Añadir a favoritos» a «Quitar de favoritos»
+  hace que un lector de pantalla lo anuncie dos veces y se contradiga.
+- **En Figma el estado marcado no es un eje de variante, a propósito.** El «lleno» es una
+  propiedad del icono, no del botón, así que un eje `Pressed` se rompería en cuanto alguien
+  cambiase el icono por instance swap. El color del contenedor lo sigue dando la variante.
 - **Ni `s` (32) ni `m` (40) llegan a los 44×44 de WCAG 2.5.5.** En móvil se usa `m`.
 
 ## [0.5.0] — 2026-08-18

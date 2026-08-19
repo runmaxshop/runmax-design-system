@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { expect, within } from 'storybook/test'
+import { useState } from 'react'
+import { expect, userEvent, within } from 'storybook/test'
 import { IconButton } from './IconButton'
 
 /**
@@ -8,8 +9,8 @@ import { IconButton } from './IconButton'
  * cumpla su contrato —`stroke="currentColor"`, sin relleno, y sin `width` propio
  * para que el tamaño lo mande el botón—.
  */
-const Heart = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+const Heart = (props: { fill?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" {...props} stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
   </svg>
 )
@@ -101,4 +102,63 @@ export const SobreFoto: Story = {
 
 export const Deshabilitado: Story = {
   args: { disabled: true },
+}
+
+/**
+ * El caso que motiva `pressed`: sin él, quien abre la lista no sabe qué productos
+ * ya guardó. Fijate en tres cosas.
+ *
+ * El relleno **no es cosa del botón**: es un atributo del icono de Lucide, así
+ * que el par es `<Heart />` y `<Heart fill="currentColor" />`.
+ *
+ * La etiqueta **no cambia** entre estados. Es «Favorito» siempre, y el estado lo
+ * lleva `aria-pressed`. Si además cambiara a «Quitar de favoritos», un lector de
+ * pantalla anunciaría el estado dos veces.
+ *
+ * Y el color del contenedor lo sigue dando la variante, no una clase de estado.
+ */
+export const Favoritos: Story = {
+  args: { label: 'Favorito' },
+  render: function Favoritos(args) {
+    const [favorito, setFavorito] = useState(false)
+    return (
+      <IconButton
+        {...args}
+        icon={<Heart />}
+        iconPressed={<Heart fill="currentColor" />}
+        pressed={favorito}
+        variant={favorito ? 'primary' : 'secondary'}
+        onClick={() => setFavorito((v) => !v)}
+      />
+    )
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const boton = canvas.getByRole('button', { name: 'Favorito' })
+
+    await step('arranca apagado, y lo anuncia', async () => {
+      await expect(boton).toHaveAttribute('aria-pressed', 'false')
+    })
+
+    await step('al pulsarlo queda marcado', async () => {
+      await userEvent.click(boton)
+      await expect(boton).toHaveAttribute('aria-pressed', 'true')
+    })
+
+    await step('la etiqueta no cambia entre estados', async () => {
+      await expect(boton).toHaveAttribute('aria-label', 'Favorito')
+    })
+  },
+}
+
+/** Sin `pressed`, el botón es una acción normal y no emite `aria-pressed`. */
+export const SinEstado: Story = {
+  name: 'Sin estado',
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    await step('un botón de acción no miente diciendo que está apagado', async () => {
+      const b = canvas.getByRole('button', { name: 'Añadir a favoritos' })
+      await expect(b).not.toHaveAttribute('aria-pressed')
+    })
+  },
 }
