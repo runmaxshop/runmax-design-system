@@ -29,12 +29,13 @@ Vocabulario compartido entre componentes: `variant` es `primary | secondary | gh
 `s | m | l` (32 · 40 · 48, la escala `control.height`), `shape` es `rect | pill`. La esquina
 viva es el carácter del sistema.
 
-**El wordmark no está en el repo, y los SVG sueltos de `Documents/Runmax` NO sirven.**
-`logo.svg` y `logoBlanco.svg` son otro lockup —«RUNMAX SHOP» en lima, con el elemento «SHOP»
-debajo, proporciones 2.88:1 y 3.41:1—. El de Figma (`Logo Runmax`, `1562:5354`) es un wordmark
-monocromo, sólo «RUNMAX», de 5.41:1. No son el mismo dibujo a otra escala: usarlos es cambiar
-la marca por tu cuenta. Mientras no se pueda exportar desde Figma, el logo entra por el slot
-`brand` y en las historias va un marcador de posición — que hay que decir que lo es.
+**El wordmark es el componente `Logo`** (`Logo Runmax`, `1562:5354`), exportado de Figma:
+337.16 × 62.3437, o sea 5.41:1. Los trazos van en `currentColor`, así que las variantes
+`Color=Dark` y `Color=White` de Figma se colapsan en una sola — no hay prop de color.
+
+**Los SVG sueltos de `Documents/Runmax` NO son ese logo.** `logo.svg` y `logoBlanco.svg` son
+otro lockup: «RUNMAX SHOP» en lima, con el elemento «SHOP» debajo, proporciones 2.88:1 y
+3.41:1. No son el mismo dibujo a otra escala. Usarlos es cambiar la marca por tu cuenta.
 
 ## Figma manda
 
@@ -45,7 +46,7 @@ Foundations, y recién ahí se toca el token. Cambiar el token y dejar una nota 
 tiene que bajarlo» es hacerlo al revés.
 
 Componentes ya construidos: `Button` (`1412:550`), `Input` (`1579:530`), `IconButton`
-(`1415:532`), `Navbar` (`1427:568`) y `MegaMenu` (`1428:580`).
+(`1415:532`), `Logo` (`1562:5354`), `Navbar` (`1427:568`) y `MegaMenu` (`1428:580`).
 
 El DS vive repartido en páginas `Runmax DS · …` — Foundations, Actions, Content, Product,
 Navigation, Input—. Los estilos de texto son estilos, no variables: salen de
@@ -54,11 +55,23 @@ Navigation, Input—. Los estilos de texto son estilos, no variables: salen de
 Antes de cualquier `use_figma` hay que cargar la skill `figma-use`; para crear componentes,
 también `figma-generate-library`.
 
-**`get_design_context` está bloqueado** mientras no haya un directorio en *Dev Mode → MCP →
-Allowed directories*. Sin él no hay CSS real ni exportación de assets, y sólo quedan
-`get_metadata`, `get_variable_defs` y capturas — de los que hay que **inferir**. Eso ya produjo
-dos bugs reales en el navbar, así que si aparece la ocasión de habilitarlo, pedirlo antes de
-empezar.
+**`get_design_context` necesita un directorio en *Dev Mode → MCP → Allowed directories*.** Ya
+está habilitado `Documents/Runmax`. Si alguna vez vuelve a fallar con «Cannot write to this
+directory», es eso: sin él no hay CSS real ni exportación de assets, sólo quedan `get_metadata`,
+`get_variable_defs` y capturas — de los que hay que **inferir**—, y eso ya produjo dos bugs
+reales en el navbar. Pedir que se habilite antes de empezar, no a mitad.
+
+**Para exportar un asset, `exportAsync` y no `get_design_context`.** El segundo escribe **un SVG
+por capa**: el wordmark salieron 12 fragmentos posicionados por porcentajes, inservibles como
+logo. El dibujo entero se saca con `use_figma`:
+
+```js
+const svg = await node.exportAsync({ format: 'SVG_STRING' })
+```
+
+Ojo a que ese export **redondea el `viewBox`** — el del logo salió `0 0 338 63` cuando los
+trazos ocupan `337.16 × 62.3437`, lo que dejaba una franja muerta y torcía la proporción de
+5.409 a 5.365. Comprobar siempre con `getBBox()` contra el `viewBox` y corregirlo.
 
 Truco que sale de esos dos bugs: **comparar qué variables usa cada variante, no sólo qué
 valores tienen.** Si una variante lista `radius-m` y otra lista `radius-m` **y** `radius-none`,

@@ -33,6 +33,9 @@ export type { CardProps } from './components/Card/Card'
 export { Badge } from './components/Badge/Badge'
 export type { BadgeProps, BadgeTone } from './components/Badge/Badge'
 
+export { Logo } from './components/Logo/Logo'
+export type { LogoProps } from './components/Logo/Logo'
+
 export { Navbar } from './components/Navbar/Navbar'
 export type {
   NavbarProps,

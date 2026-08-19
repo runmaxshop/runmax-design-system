@@ -14,6 +14,12 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
   (`Type=Default` / `Type=Active`) y `MegaMenu` (`Columns=3` / `Columns=4`)—.
 - **El número de columnas no es una prop:** sale de `columns.length`. Las dos variantes de Figma
   son el mismo código y una tercera de 5 columnas no necesitaría tocar nada.
+- **`Logo`,** el wordmark de RunMax, exportado del componente de Figma (337.16 × 62.3437). Los
+  trazos van en `currentColor`, así que las variantes `Color=Dark` y `Color=White` de Figma se
+  colapsan en una sola: sobre la barra clara sale negro y sobre un bloque oscuro sale blanco sin
+  que nadie elija nada. Una variante que sólo cambia un color heredable es una variante que
+  sobra. Por defecto no lleva nombre accesible —vive dentro del enlace al inicio, que ya tiene
+  el suyo, y dos nombres anidados se anuncian dos veces—; `title` lo añade cuando va suelto.
 - **`renderLink`,** la escotilla para el enrutador de la aplicación. Por defecto son `<a>`; en
   Next se pasa `({ href, ...rest }) => <Link href={href} {...rest} />`. La librería no importa
   `next/link` porque no sabe en qué framework vive.

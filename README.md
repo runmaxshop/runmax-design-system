@@ -138,6 +138,7 @@ incluida la decisión pendiente sobre cómo se distribuye el paquete a producci�
 | `Card` | Superficie contenedora. |
 | `Badge` | Etiqueta de estado. |
 | `IconButton` | Botón circular de solo icono. `label` es obligatoria; los iconos los trae quien lo usa. |
+| `Logo` | El wordmark. Hereda el color con `currentColor`: sin prop de variante. |
 | `Navbar` | Navegación con mega menú. Componente **T**: barra en escritorio, cajón en móvil. |
 | `Heading` / `Text` | Nivel semántico y tamaño visual como props separadas. |
 | `VisuallyHidden` | Contenido solo para lectores de pantalla. |

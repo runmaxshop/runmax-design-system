@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
 import type { ReactNode } from 'react'
+import { Logo } from '../Logo/Logo'
 import { Navbar, type NavbarItem } from './Navbar'
 
 const meta: Meta<typeof Navbar> = {
@@ -19,23 +20,6 @@ const meta: Meta<typeof Navbar> = {
 
 export default meta
 type Story = StoryObj<typeof Navbar>
-
-/** El wordmark va como slot: la librería no empaqueta assets de marca. */
-function Wordmark() {
-  return (
-    <span
-      style={{
-        fontFamily: 'var(--rmx-font-family-display)',
-        fontWeight: 'var(--rmx-font-weight-extrabold)',
-        fontSize: 'var(--rmx-font-size-heading-s)',
-        fontStyle: 'italic',
-        letterSpacing: '0.02em',
-      }}
-    >
-      RUNMAX
-    </span>
-  )
-}
 
 /**
  * Los iconos los trae quien usa la librería, igual que en `IconButton`. En la
@@ -187,7 +171,9 @@ const ITEMS: readonly NavbarItem[] = [
 
 const ARGS_BASE = {
   items: ITEMS,
-  brand: <Wordmark />,
+  // 20 es el alto que tiene el wordmark en el navbar de Figma. El color lo
+  // hereda: no hay que elegir entre las variantes Dark y White.
+  brand: <Logo height={20} />,
   actions: (
     <>
       {/* lucide-react: user-round */}
