@@ -34,9 +34,16 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
   cajón absoluto más alto que la pantalla se sale por abajo sin forma de llegar a lo último, y
   obliga a inventar un `max-height` en unidades de viewport que ningún token tiene.
 - **Abierto ≠ sección actual.** El subrayado del ítem dice «este menú está desplegado»
-  (`aria-expanded`) y desaparece al cerrarlo; `currentHref` marca dónde estás
-  (`aria-current="page"`) y se dibuja con peso, no con subrayado. Los dos pueden coincidir en el
-  mismo ítem, así que tienen que poder distinguirse.
+  (`aria-expanded`) y desaparece al cerrarlo; `currentHref` marca dónde estás y se dibuja con
+  peso, no con subrayado. Los dos pueden coincidir en el mismo ítem, así que tienen que poder
+  distinguirse.
+- **`currentHref` detecta la sección también por dentro del mega menú.** Quien está en
+  `/deportes/camisetas` espera ver marcado «Deportes», y ese ítem no tiene `href` propio porque
+  es un botón: la comparación recorre además los enlaces de sus columnas.
+- **El ítem de la barra lleva `data-current`, no `aria-current="page"`.** La página actual es el
+  enlace de dentro del panel, que sí lo lleva. Marcar los dos como «page» mentiría sobre dónde
+  está la persona, y ARIA no tiene un valor para «la sección que contiene la página actual».
+  `data-current` es marca visual y nada más.
 - **El encabezado de columna no es un `<h2>`.** El navbar aparece en todas las páginas del
   sitio, y meter cuatro encabezados de sección en cada una destroza el esquema del documento.
   Va como `<p>` y da nombre a su lista con `aria-labelledby`.

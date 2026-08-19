@@ -10,7 +10,7 @@ const meta: Meta<typeof Navbar> = {
     docs: {
       description: {
         component:
-          'La navegación del sitio. Es el único componente **T** de la librería: por encima de `md` es una barra con mega menús que caen; por debajo, un cajón con acordeones. El DOM es el mismo en los dos casos —cambiá el ancho en la barra de herramientas y comprobalo con el inspector—. Que un ítem abra mega menú es una propiedad del ítem (`columns`), no una variante del componente: las variantes `Columns=3` y `Columns=4` de Figma son el mismo código.',
+          'La navegación del sitio. Es el único componente **T** de la librería: por encima de `md` es una barra con mega menús que caen; por debajo, un cajón con acordeones. El DOM es el mismo en los dos casos —cambiá el ancho en la barra de herramientas y comprobalo con el inspector—. El mega menú abre al pasar el ratón **y** al hacer clic: el hover es lo que espera quien viene con ratón, y el clic es lo único que existe en táctil y con teclado. Que un ítem abra mega menú es una propiedad del ítem (`columns`), no una variante del componente: las variantes `Columns=3` y `Columns=4` de Figma son el mismo código.',
       },
     },
   },
@@ -229,20 +229,91 @@ export const Predeterminado: Story = {
 
 /**
  * Un ítem sin `columns` es un enlace normal, no un botón. `currentHref` marca
- * dónde estás con `aria-current="page"`: es un estado distinto del menú
- * abierto y por eso se dibuja distinto —peso, no subrayado—.
+ * dónde estás: es un estado distinto del menú abierto y por eso se dibuja
+ * distinto —peso, no subrayado—.
  */
 export const SeccionActual: Story = {
   name: 'Sección actual',
   args: { ...ARGS_BASE, currentHref: '/mujeres' },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement)
-    await step('el ítem de la sección actual lo dice en el atributo', async () => {
+    await step('el enlace de la página actual lleva el atributo real', async () => {
       await expect(canvas.getByRole('link', { name: 'Mujeres' })).toHaveAttribute(
         'aria-current',
         'page',
       )
       await expect(canvas.getByRole('link', { name: 'Hombres' })).not.toHaveAttribute('aria-current')
+    })
+  },
+}
+
+/**
+ * Estando en una página de dentro del mega menú, lo que se marca es la sección
+ * que la contiene. Ese ítem es un botón y no tiene `href` propio, así que la
+ * detección va por los enlaces del panel.
+ *
+ * Y se marca con `data-current`, no con `aria-current="page"`: la página actual
+ * es el enlace de dentro, no el botón de la barra. Decir «page» en los dos
+ * sitios mentiría sobre dónde está la persona.
+ */
+export const SeccionActualDentroDelMegaMenu: Story = {
+  name: 'Sección actual · dentro del mega menú',
+  args: { ...ARGS_BASE, currentHref: '/deportes/camisetas' },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const deportes = canvas.getByRole('button', { name: 'Deportes' })
+
+    await step('la sección que contiene la página queda marcada', async () => {
+      await expect(deportes).toHaveAttribute('data-current')
+    })
+
+    await step('pero NO se anuncia como la página actual', async () => {
+      await expect(deportes).not.toHaveAttribute('aria-current')
+    })
+
+    await step('el atributo real lo lleva el enlace de dentro del panel', async () => {
+      await userEvent.click(deportes)
+      await expect(canvas.getByRole('link', { name: 'Camisetas' })).toHaveAttribute(
+        'aria-current',
+        'page',
+      )
+    })
+  },
+}
+
+/**
+ * El hover abre el panel, y salir de la barra lo cierra. El filtro es
+ * `pointerType === 'mouse'` y no una media query de ancho: lo que decide no es
+ * el tamaño de la pantalla sino si hay un puntero de verdad. En táctil el
+ * navegador emula un `pointerenter` justo antes del `click`, y sin ese filtro
+ * el primer toque abriría el panel y el clic lo cerraría acto seguido.
+ *
+ * El filtro táctil NO se comprueba aquí a propósito: React deriva
+ * `onPointerEnter` de `pointerover`, así que un `pointerenter` despachado a
+ * mano no llega al manejador y la prueba pasaría por la razón equivocada —sin
+ * tocar el `pointerType`—. Se verifica en un dispositivo táctil de verdad.
+ */
+export const Hover: Story = {
+  name: 'Apertura con el ratón',
+  args: ARGS_BASE,
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+    const deportes = canvas.getByRole('button', { name: 'Deportes' })
+    const nosotros = canvas.getByRole('link', { name: 'Nosotros' })
+
+    await step('pasar el ratón por encima abre el panel', async () => {
+      await userEvent.hover(deportes)
+      await expect(deportes).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    await step('pasar por un ítem sin menú cierra el que estaba abierto', async () => {
+      await userEvent.hover(nosotros)
+      await expect(deportes).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    await step('el clic sigue abriendo, que es lo único que hay en táctil', async () => {
+      await userEvent.click(deportes)
+      await expect(deportes).toHaveAttribute('aria-expanded', 'true')
     })
   },
 }

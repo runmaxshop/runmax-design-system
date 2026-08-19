@@ -80,6 +80,13 @@ export interface NavbarItem {
 
 export interface NavbarLinkRenderProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string
+  /**
+   * Marca visual de la sección actual. Va declarado y no colado como `data-*`
+   * suelto porque en un literal de objeto TypeScript no admite atributos
+   * arbitrarios —solo los admite en JSX—, y porque quien implemente
+   * `renderLink` tiene que saber que le llega.
+   */
+  'data-current'?: true
 }
 
 export interface NavbarProps {
@@ -99,10 +106,20 @@ export interface NavbarProps {
    */
   actions?: ReactNode
   /**
-   * La ruta actual. Marca el ítem correspondiente con `aria-current="page"`.
+   * La ruta actual. Marca el ítem de la sección donde estás, y lo detecta
+   * tanto por el `href` del ítem como por los enlaces de su mega menú: quien
+   * está en `/deportes/camisetas` espera ver marcado «Deportes», y ese ítem
+   * no tiene `href` propio porque es un botón.
+   *
+   * El `aria-current="page"` solo lo lleva el enlace que apunta a la página
+   * actual. El ítem de la barra que la contiene lleva `data-current`, que es
+   * marca visual y nada más: decir «page» en los dos sitios sería mentir sobre
+   * dónde está la persona, y ARIA no tiene un valor para «la sección que
+   * contiene la página actual».
+   *
    * OJO: no es lo mismo que el ítem abierto. El subrayado dice «este menú está
-   * desplegado» y desaparece al cerrarlo; `currentHref` dice «estás en esta
-   * sección» y no se mueve.
+   * desplegado» y desaparece al cerrarlo; esto dice «estás en esta sección» y
+   * no se mueve.
    */
   currentHref?: string
   /** Nombre accesible del `<nav>`. Si hay más de un `<nav>` en la página, cada uno necesita el suyo. */
@@ -265,7 +282,19 @@ export function Navbar({
               const triggerId = `${baseId}-t${index}`
               const panelId = `${baseId}-p${index}`
               const headingId = `${baseId}-h${index}`
-              const isCurrent = currentHref !== undefined && item.href === currentHref
+              // La seccion actual se detecta tambien por dentro del panel: quien
+              // esta en /deportes/camisetas espera ver marcado «Deportes», y ese
+              // item no tiene  propio porque es un boton, no un enlace.
+              const isCurrentSection =
+                currentHref !== undefined &&
+                (item.href === currentHref ||
+                  Boolean(
+                    item.columns?.some(
+                      (column) =>
+                        column.links.some((link) => link.href === currentHref) ||
+                        column.viewAll?.href === currentHref,
+                    ),
+                  ))
 
               return (
                 <li
@@ -284,7 +313,12 @@ export function Navbar({
                       // para dibujar el subrayado, en ese orden.
                       aria-expanded={isOpen}
                       aria-controls={panelId}
-                      aria-current={isCurrent ? 'page' : undefined}
+                      // `data-current` y no `aria-current="page"`: la página
+                      // actual es el enlace de dentro del panel, no este botón.
+                      // Marcar los dos como «page» sería mentir sobre dónde
+                      // está la persona, y ARIA no tiene un valor para «la
+                      // sección que contiene la página actual».
+                      data-current={isCurrentSection || undefined}
                       onClick={() => setOpenIndex(isOpen ? null : index)}
                     >
                       {item.label}
@@ -295,7 +329,10 @@ export function Navbar({
                       href: item.href ?? '#',
                       id: triggerId,
                       className: 'rmx-navbar__trigger',
-                      'aria-current': isCurrent ? 'page' : undefined,
+                      // Aquí sí es la página actual de verdad, así que lleva
+                      // el atributo real además de la marca visual.
+                      'aria-current': item.href === currentHref ? 'page' : undefined,
+                      'data-current': isCurrentSection || undefined,
                       onClick: closeAll,
                       children: item.label,
                     })

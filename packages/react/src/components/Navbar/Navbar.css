@@ -105,8 +105,13 @@
 }
 
 /* Sección actual: peso, no subrayado. Los dos estados pueden coincidir en el
-   mismo ítem y tienen que poder distinguirse. */
-.rmx-navbar__trigger[aria-current='page'] {
+   mismo ítem y tienen que poder distinguirse.
+
+   Cuelga de `data-current` y no de `aria-current` porque el ítem de la barra
+   puede ser la sección que CONTIENE la página actual sin ser la página actual
+   —el caso del mega menú—, y ahí `aria-current="page"` mentiría. El atributo
+   real lo lleva solo el enlace de dentro del panel. */
+.rmx-navbar__trigger[data-current] {
   font-weight: var(--rmx-font-weight-semibold);
 }
 
