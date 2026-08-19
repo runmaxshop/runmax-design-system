@@ -85,7 +85,6 @@
   gap: var(--rmx-space-8);
   padding: var(--rmx-space-8) var(--rmx-space-12);
   border: 0;
-  border-radius: var(--rmx-radius-m);
   background: none;
   font-family: var(--rmx-font-family-display);
   font-weight: var(--rmx-font-weight-medium);
@@ -95,15 +94,13 @@
   text-align: left;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
 }
 
-.rmx-navbar__trigger:hover {
-  background: var(--rmx-bg-subtle);
-}
-
-/* Abierto: subrayado. Es el estado `Type=Active` de Figma y dice «este menú
-   está desplegado», no «estás en esta sección». */
+/* Hover y abierto dibujan lo MISMO: el subrayado. No hay relleno de fondo.
+   El hover no anuncia un estado distinto del que ya vas a ver al abrir, y una
+   caja rellena bajo cada opción rompe la barra editorial —que se apoya en
+   tipografía y hairlines, no en superficies—. */
+.rmx-navbar__trigger:hover,
 .rmx-navbar__trigger[aria-expanded='true'] {
   text-decoration: underline;
   text-decoration-thickness: var(--rmx-border-width-thin);
@@ -141,6 +138,13 @@
   top: 100%;
   right: 0;
   left: 0;
+  /* EL OTRO VALOR SIN TOKEN de este fichero. El sistema no tiene escala de
+     capas, y el panel necesita una: sin `z-index` solo se garantiza que pase
+     por encima del contenido estático que le sigue, no de una card o un
+     sticky que también estén posicionados. Los tokens de sombra ya nombran
+     este mismo grupo —«megamenú, drawer, modal y toast»—, así que lo coherente
+     sería un `z-index.overlay` que acompañe a `shadow.overlay`. Queda anotado
+     como conversación de token, no resuelto a mano en cada componente. */
   z-index: 10;
   background: var(--rmx-bg-surface);
   /* La mitad de abajo de la tarjeta: cuadrada arriba, donde encaja con la
@@ -256,11 +260,17 @@
 }
 
 /* Tres barras hechas con pseudo-elementos, como el «+» del Accordion: no
-   merece un SVG, y así hereda `currentColor` sin depender de nada. */
+   merece un SVG, y así hereda `currentColor` sin depender de nada.
+
+   Las medidas salen de la `menu` de Lucide, que es el set que usa el diseño:
+   16 de ancho dentro del cuadro de 24 —no 24, que es el cuadro entero—, 2 de
+   grosor y extremos redondeados. Si no, la hamburguesa desentona al lado de
+   los iconos Lucide de verdad que entran por `actions`. */
 .rmx-navbar__burger {
   position: relative;
-  width: var(--rmx-icon-size-m);
+  width: var(--rmx-icon-size-s);
   height: var(--rmx-border-width-thick);
+  border-radius: var(--rmx-radius-full);
   background: currentColor;
   transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
 }
@@ -272,6 +282,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  border-radius: inherit;
   background: currentColor;
   transition: transform var(--rmx-duration-base) var(--rmx-easing-standard);
 }
@@ -346,7 +357,7 @@
   .rmx-navbar__items {
     flex-direction: column;
     justify-content: flex-start;
-    gap: var(--rmx-space-0);
+    gap: 0;
   }
 
   .rmx-navbar__item {
@@ -363,14 +374,9 @@
   .rmx-navbar__trigger {
     justify-content: space-between;
     width: 100%;
-    padding: var(--rmx-space-16) var(--rmx-space-0);
-    border-radius: var(--rmx-radius-none);
+    padding: var(--rmx-space-16) 0;
     font-size: var(--rmx-font-size-label-l);
     line-height: var(--rmx-font-line-height-label-l);
-  }
-
-  .rmx-navbar__trigger:hover {
-    background: none;
   }
 
   /* Dentro del cajón el subrayado del ítem abierto sobra: lo que se ve es que
@@ -385,8 +391,11 @@
     flex: none;
     width: var(--rmx-space-8);
     height: var(--rmx-space-8);
+    /* Un cuadrado girado 45° da el mismo ángulo recto que la `chevron-down`
+       de Lucide, y a 8 de lado mide 11.3 × 5.7 contra los 12 × 6 de Lucide. */
     border-right: var(--rmx-border-width-thick) solid currentColor;
     border-bottom: var(--rmx-border-width-thick) solid currentColor;
+    border-end-end-radius: var(--rmx-radius-xs);
     transform: translateY(-25%) rotate(45deg);
     transition: transform var(--rmx-duration-base) var(--rmx-easing-standard);
   }
@@ -412,7 +421,7 @@
 
   .rmx-navbar__panel-inner {
     display: block;
-    padding: var(--rmx-space-0) var(--rmx-space-0) var(--rmx-space-16);
+    padding: 0 0 var(--rmx-space-16);
   }
 
   .rmx-navbar__columns {

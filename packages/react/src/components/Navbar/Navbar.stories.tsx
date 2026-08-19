@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
+import type { ReactNode } from 'react'
 import { Navbar, type NavbarItem } from './Navbar'
 
 const meta: Meta<typeof Navbar> = {
@@ -36,8 +37,19 @@ function Wordmark() {
   )
 }
 
-/** Igual que los iconos: los trae quien usa la librería. Aquí van a mano para la historia. */
-function Icono({ label, d }: { label: string; d: string }) {
+/**
+ * Los iconos los trae quien usa la librería, igual que en `IconButton`. En la
+ * aplicación esto sería `<IconButton icon={<UserRound />} />` con
+ * `lucide-react`; aquí van dibujados a mano porque la librería no depende de
+ * ese paquete a propósito.
+ *
+ * Pero el trazado es el de Lucide **literal**, no una aproximación: son los
+ * iconos `user-round` y `shopping-cart` de `lucide-react@1.17.0`, que son los
+ * que el diseño usa en Figma —las instancias se llaman así—. Con los mismos
+ * atributos por defecto del set: cuadro de 24, `stroke-width` 2 y extremos
+ * redondeados. Si esto se dibuja «parecido», en la barra se nota.
+ */
+function IconoLucide({ label, children }: { label: string; children: ReactNode }) {
   return (
     <button
       type="button"
@@ -52,28 +64,28 @@ function Icono({ label, d }: { label: string; d: string }) {
       }}
     >
       <svg
+        xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1.5"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        <path d={d} />
+        {children}
       </svg>
     </button>
   )
 }
 
-const USUARIO = 'M18 20a6 6 0 0 0-12 0M12 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8'
-const CARRITO = 'M8 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2M19 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2M2 2h2l2.6 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6'
-
 function Promo() {
   return (
     <div
+      // Las medidas las pone quien pasa la pieza, no la librería: son los
+      // 320 × 240 que tiene en Figma. Por eso `promo` es un slot y no un `src`.
       style={{
         width: 320,
         height: 240,
@@ -178,8 +190,17 @@ const ARGS_BASE = {
   brand: <Wordmark />,
   actions: (
     <>
-      <Icono label="Mi cuenta" d={USUARIO} />
-      <Icono label="Carrito" d={CARRITO} />
+      {/* lucide-react: user-round */}
+      <IconoLucide label="Mi cuenta">
+        <circle cx="12" cy="8" r="5" />
+        <path d="M20 21a8 8 0 0 0-16 0" />
+      </IconoLucide>
+      {/* lucide-react: shopping-cart */}
+      <IconoLucide label="Carrito">
+        <circle cx="8" cy="21" r="1" />
+        <circle cx="19" cy="21" r="1" />
+        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+      </IconoLucide>
     </>
   ),
 } as const
