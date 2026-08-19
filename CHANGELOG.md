@@ -2,6 +2,40 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.6.0] — 2026-08-18
+
+Nuevo componente: `IconButton`, el botón circular de solo icono que va sobre las tarjetas de
+producto y en las barras.
+
+### Añadido
+
+- **`IconButton`.** Variantes `primary` · `secondary` · `ghost` —los mismos nombres que
+  `Button`— y tamaños `s` (32) y `m` (40), atados a `control.height`. Siempre circular.
+- **`label` es una prop obligatoria** y el componente la cablea como `aria-label`. Un botón sin
+  texto visible no tiene nombre accesible, y un lector de pantalla anunciaría solo «botón».
+  Es la razón principal por la que esto **no** es una variante de `Button`: ahí el tipo no
+  podría exigir la etiqueta solo para el caso de icono.
+- **Los iconos son de [Lucide](https://lucide.dev/icons/) y los trae quien usa la librería.**
+  No se añade `lucide-react` como dependencia: empaquetar un set de iconos dentro de una
+  librería de componentes obliga a cargarlo a todo el mundo. El icono entra por la prop `icon`,
+  el botón define `color` y el `currentColor` de Lucide lo recoge.
+- **Tokens `icon.primary` · `icon.secondary` · `icon.inverse`.** Rol propio y no un alias de
+  `text.*`, porque las dos cosas no se rigen por la misma regla: un texto necesita 4.5:1
+  (WCAG 1.4.3) y un gráfico no textual necesita 3:1 (1.4.11). Cinco pares nuevos declarados.
+- **Tokens `icon-size.s` (16) y `icon-size.m` (24)**, el cuadro del icono en cada tamaño. No
+  salen de `space` porque no son espaciado: que coincidan en valor es casualidad.
+
+### Notas
+
+- **`secondary` aquí sí lleva contorno**, a diferencia del de `Button`. Es deliberado: este
+  botón vive sobre fotos de producto, donde un círculo blanco sin contorno se pierde contra un
+  fondo claro. El token `border.strong` ya estaba descrito para esto — su descripción dice
+  «botón secundario, botón circular, chip».
+- **No tiene estado propio de seleccionado.** El color del contenedor lo da la variante, igual
+  que en `Button`; para marcar un favorito se cambia de variante. Si hace falta anunciar el
+  estado, `aria-pressed` se pasa como cualquier otra prop.
+- **Ni `s` (32) ni `m` (40) llegan a los 44×44 de WCAG 2.5.5.** En móvil se usa `m`.
+
 ## [0.5.0] — 2026-08-18
 
 Las dos cosas salieron de probar el componente en Storybook, no de leerlo.

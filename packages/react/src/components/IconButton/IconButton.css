@@ -1,0 +1,103 @@
+/* IconButton --------------------------------------------------------------- */
+
+.rmx-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* No encoge dentro de un flex: es un cuadrado y tiene que seguir siéndolo. */
+  flex: none;
+  padding: 0;
+  border: var(--rmx-border-width-thin) solid transparent;
+  border-radius: var(--rmx-radius-full);
+  cursor: pointer;
+  transition:
+    background-color var(--rmx-duration-base) var(--rmx-easing-standard),
+    color var(--rmx-duration-base) var(--rmx-easing-standard),
+    transform var(--rmx-duration-fast) var(--rmx-easing-standard);
+}
+
+/* Los iconos de Lucide son SVG de trazo con `stroke="currentColor"`, así que el
+ * color lo hereda de aquí y el tamaño se lo damos nosotros: el `width` que trae
+ * Lucide por defecto es 24 y aplastaría el tamaño `s`. */
+.rmx-icon-button > svg {
+  display: block;
+  flex: none;
+}
+
+.rmx-icon-button:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+/* Aquí el anillo es el único indicador de foco que hay: el contenedor no cambia
+ * de borde al enfocarse, como sí hace el campo de texto. */
+.rmx-icon-button:focus-visible {
+  outline: var(--rmx-focus-width) solid var(--rmx-border-focus);
+  outline-offset: var(--rmx-focus-offset-lg);
+}
+
+.rmx-icon-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Variantes — mismos nombres y mismos fondos que `Button`. El estado lo lleva
+ * el color del contenedor; este componente no tiene estado propio. */
+
+.rmx-icon-button--primary {
+  background: var(--rmx-bg-inverse);
+  color: var(--rmx-icon-inverse);
+}
+.rmx-icon-button--primary:hover:not(:disabled) {
+  background: var(--rmx-bg-inverse-hover);
+}
+
+/* A diferencia del `secondary` de Button, este SÍ lleva contorno en reposo, y a
+ * propósito: vive sobre fotos de producto, donde un círculo blanco sin contorno
+ * se pierde contra un fondo claro. `border.strong` ya estaba descrito para esto
+ * —«botón secundario, botón circular, chip»—. Por eso el hover lo señala el
+ * relleno y no el borde: el borde ya está puesto. */
+.rmx-icon-button--secondary {
+  background: var(--rmx-bg-surface);
+  border-color: var(--rmx-border-strong);
+  color: var(--rmx-icon-primary);
+}
+.rmx-icon-button--secondary:hover:not(:disabled) {
+  background: var(--rmx-bg-subtle);
+}
+
+.rmx-icon-button--ghost {
+  background: transparent;
+  color: var(--rmx-icon-primary);
+}
+.rmx-icon-button--ghost:hover:not(:disabled) {
+  background: var(--rmx-bg-subtle);
+}
+
+/* Tamaños — cuadrados, de la misma escala que el resto de controles. */
+
+.rmx-icon-button--s {
+  width: var(--rmx-control-height-s);
+  height: var(--rmx-control-height-s);
+}
+.rmx-icon-button--s > svg {
+  width: var(--rmx-icon-size-s);
+  height: var(--rmx-icon-size-s);
+}
+
+.rmx-icon-button--m {
+  width: var(--rmx-control-height-m);
+  height: var(--rmx-control-height-m);
+}
+.rmx-icon-button--m > svg {
+  width: var(--rmx-icon-size-m);
+  height: var(--rmx-icon-size-m);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rmx-icon-button {
+    transition: none;
+  }
+  .rmx-icon-button:active:not(:disabled) {
+    transform: none;
+  }
+}

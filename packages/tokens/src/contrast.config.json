@@ -37,6 +37,11 @@
     { "text": "text.warning", "background": "bg.page", "min": 4.5 },
     { "text": "text.warning", "background": "bg.warning-subtle", "min": 4.5 },
 
+    { "text": "icon.primary", "background": "bg.surface", "min": 3.0, "note": "Un icono es un gráfico no textual: le aplica el 3:1 de WCAG 1.4.11, no el 4.5:1 del texto." },
+    { "text": "icon.primary", "background": "bg.page", "min": 3.0 },
+    { "text": "icon.secondary", "background": "bg.surface", "min": 3.0 },
+    { "text": "icon.secondary", "background": "bg.page", "min": 3.0 },
+    { "text": "icon.inverse", "background": "bg.inverse", "min": 3.0, "note": "El icono del IconButton primary, blanco sobre el circulo negro." },
     { "text": "border.hover", "background": "bg.subtle", "min": 3.0, "note": "Borde del campo en hover: el reposo no llega al 3:1 y este sí, así que el hover es el primer estado con contorno verificable." },
     { "text": "border.hover", "background": "bg.surface", "min": 3.0, "note": "El borde que aparece al hacer hover sobre el botón `secondary`, que en reposo no tiene contorno." },
     { "text": "border.focus", "background": "bg.page", "min": 3.0, "note": "Indicador de foco: WCAG 1.4.11 pide 3:1 contra lo que lo rodea." },

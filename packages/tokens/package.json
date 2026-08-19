@@ -1,6 +1,6 @@
 {
   "name": "@runmaxshop/tokens",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Design tokens de RunMax. Fuente única de color, tipografía, espaciado y movimiento, compilada a CSS, TypeScript y React Native.",
   "license": "UNLICENSED",
   "type": "module",
