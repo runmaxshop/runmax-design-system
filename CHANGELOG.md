@@ -40,7 +40,11 @@ producto y en las barras.
   hace que un lector de pantalla lo anuncie dos veces y se contradiga.
 - **En Figma el estado marcado no es un eje de variante, a propósito.** El «lleno» es una
   propiedad del icono, no del botón, así que un eje `Pressed` se rompería en cuanto alguien
-  cambiase el icono por instance swap. El color del contenedor lo sigue dando la variante.
+  cambiase el icono por instance swap.
+- **El botón no cambia de color al marcarse.** `pressed` no toca ninguna variante: lo único
+  que cambia es el relleno del icono. Marcar un favorito no es cambiar de jerarquía visual, y
+  si el contenedor cambiase de color, en una parrilla las tarjetas guardadas parecerían ofrecer
+  una acción distinta a las demás.
 - **Ni `s` (32) ni `m` (40) llegan a los 44×44 de WCAG 2.5.5.** En móvil se usa `m`.
 
 ## [0.5.0] — 2026-08-18

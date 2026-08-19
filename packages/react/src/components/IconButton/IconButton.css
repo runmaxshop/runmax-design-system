@@ -40,8 +40,11 @@
   cursor: not-allowed;
 }
 
-/* Variantes — mismos nombres y mismos fondos que `Button`. El estado lo lleva
- * el color del contenedor; este componente no tiene estado propio. */
+/* Variantes — mismos nombres y mismos fondos que `Button`.
+ *
+ * Ninguna reacciona a `pressed`, y es deliberado: marcar un favorito no cambia
+ * la jerarquía visual del botón. Lo único que cambia entre marcado y sin marcar
+ * es el relleno del icono. */
 
 .rmx-icon-button--primary {
   background: var(--rmx-bg-inverse);

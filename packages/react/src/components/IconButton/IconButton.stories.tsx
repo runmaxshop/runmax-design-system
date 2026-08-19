@@ -115,10 +115,13 @@ export const Deshabilitado: Story = {
  * lleva `aria-pressed`. Si además cambiara a «Quitar de favoritos», un lector de
  * pantalla anunciaría el estado dos veces.
  *
- * Y el color del contenedor lo sigue dando la variante, no una clase de estado.
+ * Y el botón **no cambia de color al marcarse**: la variante es la que sea y se
+ * queda como está. Marcar un favorito no es cambiar de jerarquía visual, y si el
+ * contenedor cambiase de color, en una parrilla de productos las tarjetas
+ * guardadas parecerían tener una acción distinta a las demás.
  */
 export const Favoritos: Story = {
-  args: { label: 'Favorito' },
+  args: { label: 'Favorito', variant: 'secondary' },
   render: function Favoritos(args) {
     const [favorito, setFavorito] = useState(false)
     return (
@@ -127,7 +130,6 @@ export const Favoritos: Story = {
         icon={<Heart />}
         iconPressed={<Heart fill="currentColor" />}
         pressed={favorito}
-        variant={favorito ? 'primary' : 'secondary'}
         onClick={() => setFavorito((v) => !v)}
       />
     )
@@ -140,9 +142,17 @@ export const Favoritos: Story = {
       await expect(boton).toHaveAttribute('aria-pressed', 'false')
     })
 
+    // Se mide el color real y no la clase: la prueba comprueba lo que se ve,
+    // y no se rompe al renombrar una clase.
+    const fondoAntes = getComputedStyle(boton).backgroundColor
+
     await step('al pulsarlo queda marcado', async () => {
       await userEvent.click(boton)
       await expect(boton).toHaveAttribute('aria-pressed', 'true')
+    })
+
+    await step('pero el fondo del botón no cambia al marcarlo', async () => {
+      await expect(getComputedStyle(boton).backgroundColor).toBe(fondoAntes)
     })
 
     await step('la etiqueta no cambia entre estados', async () => {
