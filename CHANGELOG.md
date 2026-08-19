@@ -25,6 +25,18 @@ producto y en las barras.
 - **Tokens `icon-size.s` (16) y `icon-size.m` (24)**, el cuadro del icono en cada tamaño. No
   salen de `space` porque no son espaciado: que coincidan en valor es casualidad.
 
+### Cambiado
+
+- **Ningún `secondary` lleva contorno ya, en ningún estado.** El borde que aparecía al hacer
+  hover —añadido en 0.4.0— se retira también, en `Button` y en `IconButton`.
+- **Lo que señala el hover del `secondary` pasa a ser el relleno:** de `bg.subtle` a
+  `bg.field-hover`. Contra el blanco del reposo, el salto pasa de 1.03:1 a 1.29:1 — en
+  luminancia, de 0.045 a 0.236, unas cinco veces más.
+- **`bg.field-hover` entra declarada como superficie de texto y de icono**, porque ahora lo es:
+  `text.primary` da 16.22:1 e `icon.primary` lo mismo. Se retira el par `border.hover` sobre
+  `bg.surface`, que existía solo por el borde de hover que ya no está — `border.hover` sigue
+  en uso en el campo de texto.
+
 ### Notas
 
 - **`secondary` se comporta igual que el de `Button`**: sin contorno en reposo, y el contorno
