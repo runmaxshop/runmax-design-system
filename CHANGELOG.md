@@ -23,9 +23,9 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
   del mega menú, un rol que la escala no tenía. Coincide en medida con `label-m`, `body-m` y
   `overline-m`, y eso es justo lo que la escala por rol permite: pueden separarse mañana sin
   renombrar nada. El `line-height` es 1.29 y no 1.25 para que a 14px caiga en 18 exactos en vez
-  de 17.5.
-  **OJO:** el estilo `heading/xs` de Figma todavía dice 16. El que manda es el token, y Figma
-  tiene que bajarlo — si no, el siguiente que sincronice desde Figma lo «arregla» de vuelta.
+  de 17.5. El cambio se hizo primero en Figma —el estilo `heading/xs` y su etiqueta de
+  especificación en la mesa de Foundations— y de ahí bajó al token, que es el orden que manda
+  en este repositorio.
 
 ### Notas
 
