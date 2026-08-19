@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
 import type { ReactNode } from 'react'
+import { IconButton } from '../IconButton/IconButton'
 import { Logo } from '../Logo/Logo'
 import { Navbar, type NavbarItem } from './Navbar'
 
@@ -22,10 +23,15 @@ export default meta
 type Story = StoryObj<typeof Navbar>
 
 /**
- * Los iconos los trae quien usa la librería, igual que en `IconButton`. En la
- * aplicación esto sería `<IconButton icon={<UserRound />} />` con
- * `lucide-react`; aquí van dibujados a mano porque la librería no depende de
- * ese paquete a propósito.
+ * Los iconos los trae quien usa la librería. El botón que los envuelve es
+ * `IconButton` de la propia librería, en `ghost`: de ahí sale el hover
+ * circular, y por eso el navbar no dibuja ninguno — su slot `actions` recibe
+ * controles ya hechos.
+ *
+ * En la aplicación esto sería `icon={<UserRound />}` con `lucide-react`; aquí
+ * el SVG va a mano porque la librería no depende de ese paquete a propósito.
+ * `IconButton` le pone el tamaño (`icon-size.s`), así que el `width`/`height`
+ * del propio SVG sobra.
  *
  * Pero el trazado es el de Lucide **literal**, no una aproximación: son los
  * iconos `user-round` y `shopping-cart` de `lucide-react@1.17.0`, que son los
@@ -33,35 +39,20 @@ type Story = StoryObj<typeof Navbar>
  * atributos por defecto del set: cuadro de 24, `stroke-width` 2 y extremos
  * redondeados. Si esto se dibuja «parecido», en la barra se nota.
  */
-function IconoLucide({ label, children }: { label: string; children: ReactNode }) {
+function IconoLucide({ children }: { children: ReactNode }) {
   return (
-    <button
-      type="button"
-      aria-label={label}
-      style={{
-        display: 'flex',
-        border: 0,
-        padding: 0,
-        background: 'none',
-        color: 'var(--rmx-icon-primary)',
-        cursor: 'pointer',
-      }}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        {children}
-      </svg>
-    </button>
+      {children}
+    </svg>
   )
 }
 
@@ -174,19 +165,36 @@ const ARGS_BASE = {
   // 20 es el alto que tiene el wordmark en el navbar de Figma. El color lo
   // hereda: no hay que elegir entre las variantes Dark y White.
   brand: <Logo height={20} />,
+  // `size="s"` y no `m`: el control de 40 haría crecer la barra de 50 a 56,
+  // porque abraza el alto de su hijo más alto. Es la misma decisión que está
+  // tomada en Figma.
   actions: (
     <>
-      {/* lucide-react: user-round */}
-      <IconoLucide label="Mi cuenta">
-        <circle cx="12" cy="8" r="5" />
-        <path d="M20 21a8 8 0 0 0-16 0" />
-      </IconoLucide>
-      {/* lucide-react: shopping-cart */}
-      <IconoLucide label="Carrito">
-        <circle cx="8" cy="21" r="1" />
-        <circle cx="19" cy="21" r="1" />
-        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-      </IconoLucide>
+      <IconButton
+        variant="ghost"
+        size="s"
+        label="Mi cuenta"
+        icon={
+          /* lucide-react: user-round */
+          <IconoLucide>
+            <circle cx="12" cy="8" r="5" />
+            <path d="M20 21a8 8 0 0 0-16 0" />
+          </IconoLucide>
+        }
+      />
+      <IconButton
+        variant="ghost"
+        size="s"
+        label="Carrito"
+        icon={
+          /* lucide-react: shopping-cart */
+          <IconoLucide>
+            <circle cx="8" cy="21" r="1" />
+            <circle cx="19" cy="21" r="1" />
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+          </IconoLucide>
+        }
+      />
     </>
   ),
 } as const

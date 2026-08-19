@@ -222,12 +222,22 @@
   text-underline-offset: var(--rmx-space-4);
 }
 
+/* En reposo se comporta como un enlace más de la columna: mismo color, sin
+   subrayado. Lo que lo distingue es la tipografía —condensada, Medium— y el
+   aire que lleva encima, no un tratamiento de énfasis. */
 .rmx-navbar__view-all {
   display: inline-block;
   font-family: var(--rmx-font-family-display);
   font-weight: var(--rmx-font-weight-medium);
   font-size: var(--rmx-font-size-label-m);
   line-height: var(--rmx-font-line-height-label-m);
+  color: var(--rmx-text-secondary);
+  text-decoration: none;
+}
+
+/* Y reacciona igual que ellos: ahora que se ve como un enlace del panel,
+   sería el único que no responde al ratón. */
+.rmx-navbar__view-all:hover {
   color: var(--rmx-text-primary);
   text-decoration: underline;
   text-decoration-thickness: var(--rmx-border-width-thin);

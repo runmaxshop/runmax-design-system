@@ -20,6 +20,14 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
   que nadie elija nada. Una variante que sólo cambia un color heredable es una variante que
   sobra. Por defecto no lleva nombre accesible —vive dentro del enlace al inicio, que ya tiene
   el suyo, y dos nombres anidados se anuncian dos veces—; `title` lo añade cuando va suelto.
+- **Los iconos de la barra son `IconButton` en `ghost`,** no dibujos sueltos. De ahí sale el
+  hover circular, y por eso el navbar no dibuja ninguno: su slot `actions` recibe controles ya
+  hechos. Va en `size="s"` (32) y no `m` (40) porque la barra abraza el alto de su hijo más
+  alto, y el control de 40 la haría crecer de 50 a 56.
+- **El «Ver todo» de cada columna se ve como un enlace más:** `text.secondary` y sin subrayado.
+  Lo que lo distingue es la tipografía —condensada, Medium— y el aire que lleva encima, no un
+  tratamiento de énfasis. En hover reacciona igual que los demás enlaces del panel; si no,
+  sería el único que no responde al ratón.
 - **`renderLink`,** la escotilla para el enrutador de la aplicación. Por defecto son `<a>`; en
   Next se pasa `({ href, ...rest }) => <Link href={href} {...rest} />`. La librería no importa
   `next/link` porque no sabe en qué framework vive.
