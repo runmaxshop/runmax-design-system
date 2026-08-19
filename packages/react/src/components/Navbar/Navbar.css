@@ -287,6 +287,14 @@
     flex-wrap: wrap;
   }
 
+  /* En escritorio quien separa el logo de los iconos es la navegación, que
+     ocupa el hueco de en medio. Al bajar a móvil la navegación se va a su
+     propia fila y deja de empujar, así que el hueco lo tiene que abrir el
+     logo o si no se apelotona todo a la izquierda. */
+  .rmx-navbar__brand {
+    margin-inline-end: auto;
+  }
+
   /* La navegación deja de ser un elemento de la barra y pasa a ser el cajón.
      Mismo nodo, misma lista, otro sitio.
 
