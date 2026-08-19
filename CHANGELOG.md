@@ -2,6 +2,99 @@
 
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/), versionado [SemVer](https://semver.org/lang/es/).
 
+## [0.7.0] — 2026-08-19
+
+Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **T**
+(transformacional) de la librería.
+
+### Añadido
+
+- **`Navbar`.** Barra con logo, navegación y acciones, y mega menú desplegable en los ítems que
+  traen `columns`. Reúne en un solo componente los dos *component sets* de Figma —`Navbar`
+  (`Type=Default` / `Type=Active`) y `MegaMenu` (`Columns=3` / `Columns=4`)—.
+- **El número de columnas no es una prop:** sale de `columns.length`. Las dos variantes de Figma
+  son el mismo código y una tercera de 5 columnas no necesitaría tocar nada.
+- **`Logo`,** el wordmark de RunMax, exportado del componente de Figma (337.16 × 62.3437). Los
+  trazos van en `currentColor`, así que las variantes `Color=Dark` y `Color=White` de Figma se
+  colapsan en una sola: sobre la barra clara sale negro y sobre un bloque oscuro sale blanco sin
+  que nadie elija nada. Una variante que sólo cambia un color heredable es una variante que
+  sobra. Por defecto no lleva nombre accesible —vive dentro del enlace al inicio, que ya tiene
+  el suyo, y dos nombres anidados se anuncian dos veces—; `title` lo añade cuando va suelto.
+- **Los iconos de la barra son `IconButton` en `ghost`,** no dibujos sueltos. De ahí sale el
+  hover circular, y por eso el navbar no dibuja ninguno: su slot `actions` recibe controles ya
+  hechos. Va en `size="s"` (32) y no `m` (40) porque la barra abraza el alto de su hijo más
+  alto, y el control de 40 la haría crecer de 50 a 56.
+- **El «Ver todo» de cada columna se ve como un enlace más:** `text.secondary` y sin subrayado.
+  Lo que lo distingue es la tipografía —condensada, Medium— y el aire que lleva encima, no un
+  tratamiento de énfasis. En hover reacciona igual que los demás enlaces del panel; si no,
+  sería el único que no responde al ratón.
+- **`renderLink`,** la escotilla para el enrutador de la aplicación. Por defecto son `<a>`; en
+  Next se pasa `({ href, ...rest }) => <Link href={href} {...rest} />`. La librería no importa
+  `next/link` porque no sabe en qué framework vive.
+- **`brand`, `actions` y `promo` son slots.** Igual que los iconos de `IconButton`: la librería
+  no empaqueta assets de marca ni sabe cuántos productos hay en el carrito.
+- **Token `font.size.heading-xs` (14px) y su `line-height` (1.29).** El encabezado de columna
+  del mega menú, un rol que la escala no tenía. Coincide en medida con `label-m`, `body-m` y
+  `overline-m`, y eso es justo lo que la escala por rol permite: pueden separarse mañana sin
+  renombrar nada. El `line-height` es 1.29 y no 1.25 para que a 14px caiga en 18 exactos en vez
+  de 17.5. El cambio se hizo primero en Figma —el estilo `heading/xs` y su etiqueta de
+  especificación en la mesa de Foundations— y de ahí bajó al token, que es el orden que manda
+  en este repositorio.
+
+### Notas
+
+- **La barra y el panel son UNA tarjeta redondeada de 8 que se parte en dos.** Cerrada, la
+  barra tiene sus cuatro esquinas; al abrirse pierde las de abajo y el panel completa la
+  tarjeta con las suyas. Es lo que dicen las variantes de Figma: `Type=Default` usa solo
+  `radius.m`, mientras que `Type=Active` y el mega menú usan `radius.m` **y** `radius.none`.
+  En móvil no se parte, porque ahí el cajón va dentro de la barra y sigue siendo una sola caja.
+- **La sombra del panel se recorta a ras de su borde superior.** `shadow.overlay` es
+  `0 8px 24px`: un desenfoque de 24 se extiende 12 hacia todos lados y el desplazamiento en Y
+  solo es de 8, así que asomaban 4px por encima del panel y velaban el borde inferior de la
+  barra. La barra dejaba de ser `#ffffff` justo en la costura, que es donde más se nota.
+- **Es un componente T y el DOM es el mismo en los dos estados.** Por encima de `md` es una
+  barra horizontal con paneles que caen; por debajo, un cajón desde la hamburguesa donde cada
+  mega menú se pliega en acordeón. Solo cambia el CSS: duplicar la navegación en dos árboles
+  (`hidden md:block` junto a `md:hidden`) haría que un lector de pantalla anunciara los enlaces
+  dos veces y duplicaría el mapa del sitio para el buscador.
+- **El cajón va en flujo, no flotando.** Empuja el contenido de la página en vez de taparlo. Un
+  cajón absoluto más alto que la pantalla se sale por abajo sin forma de llegar a lo último, y
+  obliga a inventar un `max-height` en unidades de viewport que ningún token tiene.
+- **Abierto ≠ sección actual.** El subrayado del ítem dice «este menú está desplegado»
+  (`aria-expanded`) y desaparece al cerrarlo; `currentHref` marca dónde estás y se dibuja con
+  peso, no con subrayado. Los dos pueden coincidir en el mismo ítem, así que tienen que poder
+  distinguirse.
+- **`currentHref` detecta la sección también por dentro del mega menú.** Quien está en
+  `/deportes/camisetas` espera ver marcado «Deportes», y ese ítem no tiene `href` propio porque
+  es un botón: la comparación recorre además los enlaces de sus columnas.
+- **El ítem de la barra lleva `data-current`, no `aria-current="page"`.** La página actual es el
+  enlace de dentro del panel, que sí lo lleva. Marcar los dos como «page» mentiría sobre dónde
+  está la persona, y ARIA no tiene un valor para «la sección que contiene la página actual».
+  `data-current` es marca visual y nada más.
+- **El encabezado de columna no es un `<h2>`.** El navbar aparece en todas las páginas del
+  sitio, y meter cuatro encabezados de sección en cada una destroza el esquema del documento.
+  Va como `<p>` y da nombre a su lista con `aria-labelledby`.
+- **El panel cerrado lleva `hidden`, no `opacity: 0`.** Sale del orden de tabulación y del árbol
+  de accesibilidad de verdad. Un panel escondido con opacidad sigue siendo tabulable, y ese es
+  el fallo clásico del mega menú.
+- **El cajón no es un diálogo modal.** No atrapa el foco ni bloquea el scroll: es una
+  divulgación (`aria-expanded` + `aria-controls`) porque es el mismo nodo que la navegación de
+  escritorio. Escape cierra de dentro hacia fuera —primero el panel, luego el cajón— y devuelve
+  el foco a lo que abrió cada cosa.
+- **El mega menú abre con hover y también con clic.** Las dos cosas, porque el hover es lo que
+  espera quien viene con ratón y el clic es lo único que existe en táctil y con teclado. El
+  hover se filtra por `pointerType === 'mouse'` y no por una media query de ancho: lo que
+  decide no es el tamaño de la pantalla sino si hay un puntero de verdad. En táctil el
+  navegador emula un `pointerenter` justo antes del `click`, y sin ese filtro el primer toque
+  abriría el panel y el clic lo cerraría acto seguido.
+- **Cierra al salir de la barra entera, no del ítem, y no hace falta retardo.** El panel cuelga
+  del `<li>` y arranca justo donde acaba la barra, así que bajar el ratón hacia los enlaces
+  nunca lo atraviesa. Si el foco está dentro del panel, el ratón no lo cierra: dejaría el foco
+  en un nodo recién desaparecido.
+- **El ancho y el `position: sticky` los pone la página.** El componente ocupa el 100% de su
+  contenedor: en Figma la barra son 1200 dentro de 1280, y esos 40 de margen son layout de
+  página, no del componente.
+
 ## [0.6.0] — 2026-08-18
 
 Nuevo componente: `IconButton`, el botón circular de solo icono que va sobre las tarjetas de

@@ -1,0 +1,9 @@
+/* Logo -------------------------------------------------------------------- */
+
+/* El ancho sale de la proporción del `viewBox`; sólo se fija el alto. `block`
+   evita el hueco que deja la línea base cuando un SVG se trata como texto. */
+.rmx-logo {
+  display: block;
+  width: auto;
+  color: var(--rmx-text-primary);
+}
