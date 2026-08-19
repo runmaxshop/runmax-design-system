@@ -282,6 +282,12 @@
 
 /* Cajón ------------------------------------------------------------------- */
 
+/* El ÚNICO literal de este fichero, y no hay forma de evitarlo: las variables
+   CSS no se pueden usar dentro de una media query —se resuelven en el árbol de
+   elementos, y una media query se evalúa antes de que exista ese árbol—, así
+   que `var(--rmx-breakpoint-md)` aquí no compila. El valor es el de ese token
+   (768px) menos un pelo, para no solaparse con un `min-width: 768px`. Si el
+   token cambia, esta línea hay que cambiarla a mano. */
 @media (max-width: 767.98px) {
   .rmx-navbar__toggle {
     display: flex;
