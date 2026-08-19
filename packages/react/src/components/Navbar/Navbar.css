@@ -13,12 +13,18 @@
 .rmx-navbar {
   position: relative;
   background: var(--rmx-bg-page);
+  border-radius: var(--rmx-radius-m);
   transition: background-color var(--rmx-duration-fast) var(--rmx-easing-standard);
 }
 
-/* Se vuelve blanca al abrir para fundirse con el panel que le cae debajo. */
+/* Al abrir se vuelve blanca para fundirse con el panel que le cae debajo, y
+   pierde las esquinas de abajo. Las dos cosas son lo mismo: la barra y el
+   panel son UNA tarjeta redondeada de 8 que se parte en dos. Si la barra
+   conservara sus esquinas inferiores, se vería la costura. */
 .rmx-navbar[data-open] {
   background: var(--rmx-bg-surface);
+  border-end-end-radius: var(--rmx-radius-none);
+  border-end-start-radius: var(--rmx-radius-none);
 }
 
 .rmx-navbar__bar {
@@ -137,10 +143,22 @@
   left: 0;
   z-index: 10;
   background: var(--rmx-bg-surface);
-  border-radius: var(--rmx-radius-none);
+  /* La mitad de abajo de la tarjeta: cuadrada arriba, donde encaja con la
+     barra, y redondeada abajo. */
+  border-start-start-radius: var(--rmx-radius-none);
+  border-start-end-radius: var(--rmx-radius-none);
+  border-end-end-radius: var(--rmx-radius-m);
+  border-end-start-radius: var(--rmx-radius-m);
   /* La única sombra del sistema, y está escrita para justo esto: algo que
      flota sobre el contenido de la página. */
   box-shadow: var(--rmx-shadow-overlay);
+  /* Pero la sombra también sube: un desenfoque de 24 se extiende 12 hacia
+     todos lados y el desplazamiento en Y solo es de 8, así que asomaban 4px
+     por encima del panel y velaban el borde inferior de la barra. La barra
+     dejaba de ser #ffffff justo en la costura, que es donde más se nota.
+     El recorte la corta a ras del borde superior y la deja salir por los
+     otros tres lados. */
+  clip-path: inset(0 -100% -100% -100%);
 }
 
 /* `hidden` lo pone el navegador con menos peso que una clase de autor, así
@@ -377,10 +395,19 @@
     transform: translateY(25%) rotate(-135deg);
   }
 
-  /* El panel deja de flotar: es el contenido del acordeón. */
+  /* Aquí la tarjeta NO se parte: el cajón va dentro de la barra, así que la
+     barra sigue siendo una sola caja y conserva sus cuatro esquinas. */
+  .rmx-navbar[data-open] {
+    border-end-end-radius: var(--rmx-radius-m);
+    border-end-start-radius: var(--rmx-radius-m);
+  }
+
+  /* El panel deja de flotar: es el contenido del acordeón. Sin caja propia no
+     tiene esquinas que redondear. */
   .rmx-navbar__panel {
     position: static;
     box-shadow: var(--rmx-shadow-none);
+    border-radius: var(--rmx-radius-none);
   }
 
   .rmx-navbar__panel-inner {

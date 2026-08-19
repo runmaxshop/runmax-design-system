@@ -25,6 +25,15 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
 
 ### Notas
 
+- **La barra y el panel son UNA tarjeta redondeada de 8 que se parte en dos.** Cerrada, la
+  barra tiene sus cuatro esquinas; al abrirse pierde las de abajo y el panel completa la
+  tarjeta con las suyas. Es lo que dicen las variantes de Figma: `Type=Default` usa solo
+  `radius.m`, mientras que `Type=Active` y el mega menú usan `radius.m` **y** `radius.none`.
+  En móvil no se parte, porque ahí el cajón va dentro de la barra y sigue siendo una sola caja.
+- **La sombra del panel se recorta a ras de su borde superior.** `shadow.overlay` es
+  `0 8px 24px`: un desenfoque de 24 se extiende 12 hacia todos lados y el desplazamiento en Y
+  solo es de 8, así que asomaban 4px por encima del panel y velaban el borde inferior de la
+  barra. La barra dejaba de ser `#ffffff` justo en la costura, que es donde más se nota.
 - **Es un componente T y el DOM es el mismo en los dos estados.** Por encima de `md` es una
   barra horizontal con paneles que caen; por debajo, un cajón desde la hamburguesa donde cada
   mega menú se pliega en acordeón. Solo cambia el CSS: duplicar la navegación en dos árboles
