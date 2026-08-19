@@ -137,6 +137,7 @@ incluida la decisión pendiente sobre cómo se distribuye el paquete a producci�
 | `Accordion` | Encabezados reales y `aria-controls`. Modo simple o múltiple. |
 | `Card` | Superficie contenedora. |
 | `Badge` | Etiqueta de estado. |
+| `IconButton` | Botón circular de solo icono. `label` es obligatoria; los iconos los trae quien lo usa. |
 | `Navbar` | Navegación con mega menú. Componente **T**: barra en escritorio, cajón en móvil. |
 | `Heading` / `Text` | Nivel semántico y tamaño visual como props separadas. |
 | `VisuallyHidden` | Contenido solo para lectores de pantalla. |

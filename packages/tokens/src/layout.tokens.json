@@ -37,6 +37,12 @@
     }
   },
 
+  "icon-size": {
+    "$description": "Tamaño del cuadro del icono. Son los dos que usa IconButton: 16 en el control de 32 y 24 en el de 40. No salen de `space` porque no son espaciado — que compartan valor con `space.16` y `space.24` es coincidencia, no relación. Va aquí y no junto a `icon.*` de color porque el compilador exige claves de raíz únicas entre ficheros.",
+    "s": { "$type": "dimension", "$value": "16px" },
+    "m": { "$type": "dimension", "$value": "24px" }
+  },
+
   "border-width": {
     "thin": { "$type": "dimension", "$value": "1px", "$description": "Todo por defecto — 16 usos observados." },
     "thick": { "$type": "dimension", "$value": "2px", "$description": "Énfasis y estado activo — 2 usos observados." }

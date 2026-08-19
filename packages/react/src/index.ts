@@ -12,6 +12,9 @@ export type { ButtonProps, ButtonVariant, ButtonSize, ButtonShape } from './comp
 export { TextField, Input } from './components/TextField/TextField'
 export type { TextFieldProps, InputProps } from './components/TextField/TextField'
 
+export { IconButton } from './components/IconButton/IconButton'
+export type { IconButtonProps, IconButtonVariant, IconButtonSize } from './components/IconButton/IconButton'
+
 export { Chip, ChipGroup } from './components/Chip/Chip'
 export type { ChipProps } from './components/Chip/Chip'
 

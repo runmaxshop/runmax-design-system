@@ -76,6 +76,13 @@
     "warning": { "$type": "color", "$value": "{color.warning.500}" }
   },
 
+  "icon": {
+    "$description": "Color de icono. Es un rol propio y no un alias de `text.*` porque las dos cosas no se rigen por la misma regla: un texto necesita 4.5:1 (WCAG 1.4.3) y un gráfico no textual necesita 3:1 (1.4.11). Tener un token por rol permite mover uno sin arrastrar el otro. Los iconos son de Lucide —SVG de trazo—, así que esto se aplica con `color` y el SVG lo recoge por `currentColor`.",
+    "primary": { "$type": "color", "$value": "{color.neutral.1000}", "$description": "Icono sobre claro." },
+    "secondary": { "$type": "color", "$value": "{color.neutral.600}", "$description": "Icono de apoyo o inactivo." },
+    "inverse": { "$type": "color", "$value": "{color.neutral.0}", "$description": "Icono sobre oscuro o sobre foto." }
+  },
+
   "border": {
     "subtle": { "$type": "color", "$value": "{color.neutral.200}", "$description": "Divisores internos de card." },
     "default": { "$type": "color", "$value": "{color.neutral.300}", "$description": "Inputs, contenedores." },
