@@ -19,9 +19,13 @@ Nuevo componente: `Navbar`, la navegación del sitio. Es el primer componente **
   `next/link` porque no sabe en qué framework vive.
 - **`brand`, `actions` y `promo` son slots.** Igual que los iconos de `IconButton`: la librería
   no empaqueta assets de marca ni sabe cuántos productos hay en el carrito.
-- **Token `font.size.heading-xs` (16px) y su `line-height` (1.25).** Es el estilo `heading/xs`
-  de Figma, que la escala no tenía: el encabezado de columna del mega menú. Coincide en medida
-  con `label-l` y `body-l`, y eso es justo lo que la escala por rol permite.
+- **Token `font.size.heading-xs` (14px) y su `line-height` (1.29).** El encabezado de columna
+  del mega menú, un rol que la escala no tenía. Coincide en medida con `label-m`, `body-m` y
+  `overline-m`, y eso es justo lo que la escala por rol permite: pueden separarse mañana sin
+  renombrar nada. El `line-height` es 1.29 y no 1.25 para que a 14px caiga en 18 exactos en vez
+  de 17.5.
+  **OJO:** el estilo `heading/xs` de Figma todavía dice 16. El que manda es el token, y Figma
+  tiene que bajarlo — si no, el siguiente que sincronice desde Figma lo «arregla» de vuelta.
 
 ### Notas
 
