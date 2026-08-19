@@ -54,20 +54,18 @@
   background: var(--rmx-bg-inverse-hover);
 }
 
-/* Igual que el `secondary` de Button: sin contorno en reposo, y el contorno
- * aparece al hacer hover. El relleno no puede señalarlo solo —de blanco a
- * `bg.subtle` hay 1.03:1 y no se percibe—, y el borde transparente de la clase
- * base ya reserva el 1px, así que no hay salto de layout.
+/* Igual que el `secondary` de Button: nunca lleva contorno, y el hover lo
+ * señala un relleno claramente más oscuro (`bg.field-hover`, 1.29:1 contra el
+ * blanco del reposo).
  *
- * En reposo se apoya solo en su relleno: sobre una zona clara de una foto de
- * producto se pierde. Está anotado en `$known-gaps`. */
+ * Se apoya solo en su relleno: sobre una zona clara de una foto de producto se
+ * pierde. Está anotado en `$known-gaps`. */
 .rmx-icon-button--secondary {
   background: var(--rmx-bg-surface);
   color: var(--rmx-icon-primary);
 }
 .rmx-icon-button--secondary:hover:not(:disabled) {
-  background: var(--rmx-bg-subtle);
-  border-color: var(--rmx-border-hover);
+  background: var(--rmx-bg-field-hover);
 }
 
 .rmx-icon-button--ghost {

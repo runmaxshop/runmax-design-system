@@ -54,13 +54,12 @@
   background: var(--rmx-bg-surface);
   color: var(--rmx-text-primary);
 }
-/* Sin contorno en reposo, el relleno no puede señalar el hover: de blanco a
- * `bg.subtle` hay 1.03:1 y no se percibe. Quien lo señala es el borde, que
- * aparece —la clase base ya reserva 1px transparente, así que no hay salto—.
- * 5.68:1 sobre blanco. */
+/* Nunca lleva contorno, ni en reposo ni en hover. Lo que señala el hover es un
+ * relleno claramente más oscuro: de blanco a `bg.subtle` había 1.03:1 y no se
+ * percibía; a `bg.field-hover` hay 1.29:1, un salto de luminancia unas cinco
+ * veces mayor. */
 .rmx-button--secondary:hover:not(:disabled) {
-  background: var(--rmx-bg-subtle);
-  border-color: var(--rmx-border-hover);
+  background: var(--rmx-bg-field-hover);
 }
 
 .rmx-button--ghost {
