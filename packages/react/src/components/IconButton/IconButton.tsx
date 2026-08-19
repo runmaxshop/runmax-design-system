@@ -24,7 +24,7 @@ export interface IconButtonProps
    * Lucide lo recoge; su `width` y `height` los pone el CSS según `size`.
    */
   icon: ReactNode
-  /** Mismos nombres que `Button`. `secondary` aquí sí lleva contorno —ver el CSS—. */
+  /** Mismos nombres y mismo comportamiento que en `Button`. */
   variant?: IconButtonVariant
   /**
    * `s` son 32px y `m` 40. Ninguno llega a los 44×44 de WCAG 2.5.5, así que en

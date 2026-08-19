@@ -72,9 +72,11 @@ export const Tamanos: Story = {
 }
 
 /**
- * El caso de uso real: sobre la foto de una tarjeta de producto. Es la razón por
- * la que aquí `secondary` sí lleva contorno y en `Button` no — contra una zona
- * clara de la foto, un círculo blanco pelado desaparece.
+ * El caso de uso real: sobre la foto de una tarjeta de producto. Fijate en el
+ * `secondary`: en reposo es un círculo blanco sin contorno y contra la zona
+ * clara del degradado casi desaparece. Pasale el ratón por encima y el borde
+ * aparece. Es el mismo compromiso que el `secondary` de `Button`, y está
+ * anotado en `$known-gaps`.
  */
 export const SobreFoto: Story = {
   name: 'Sobre foto',

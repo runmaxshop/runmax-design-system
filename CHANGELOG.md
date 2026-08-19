@@ -27,10 +27,10 @@ producto y en las barras.
 
 ### Notas
 
-- **`secondary` aquí sí lleva contorno**, a diferencia del de `Button`. Es deliberado: este
-  botón vive sobre fotos de producto, donde un círculo blanco sin contorno se pierde contra un
-  fondo claro. El token `border.strong` ya estaba descrito para esto — su descripción dice
-  «botón secundario, botón circular, chip».
+- **`secondary` se comporta igual que el de `Button`**: sin contorno en reposo, y el contorno
+  aparece al hacer hover. El relleno no puede señalar el hover por sí solo —de blanco a
+  `bg.subtle` hay 1.03:1 y no se percibe—. En reposo se apoya solo en su relleno, así que sobre
+  una zona clara de una foto se pierde; queda anotado en `$known-gaps`, junto al de `Button`.
 - **No tiene estado propio de seleccionado.** El color del contenedor lo da la variante, igual
   que en `Button`; para marcar un favorito se cambia de variante. Si hace falta anunciar el
   estado, `aria-pressed` se pasa como cualquier otra prop.
